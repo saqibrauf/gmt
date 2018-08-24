@@ -27,7 +27,7 @@
     <h2>Mobile Phone Brands</h2>  
     <ul class="is-marginless" style="list-style: none;">
         {%for b in sidebar_brands%}
-            <li class="notification is-primary is-radiusless sidebar-list is-size-7"><a href="{% url 'brand' slug=b.brand_slug location=sidebar_location.location_slug  %}">{{b.brand_name|title}} Mobile Prices In {{sidebar_location.location_name|title}}</a></li>
+            <li class="notification is-primary is-radiusless sidebar-list"><a href="{% url 'brand' slug=b.brand_slug location=sidebar_location.location_slug  %}">{{b.brand_name|title}} Mobile Prices In {{sidebar_location.location_name|title}}</a></li>
         {%endfor%}
     </ul>
     <hr>

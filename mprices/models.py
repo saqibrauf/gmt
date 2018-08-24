@@ -52,11 +52,6 @@ class Phone(models.Model):
 	sim = models.CharField(max_length=50, blank=True)
 	colors = models.CharField(max_length=100, blank=True)
 
-	#Frequency
-	#gg_band = models.CharField(max_length=50, blank=True, default='GSM 850 / 900 / 1800 / 1900')
-	#ggg_band = models.CharField(max_length=100, blank=True)
-	#gggg_band = models.CharField(max_length=250, blank=True)
-
 	#Processor
 	cpu = models.CharField(max_length=150, blank=True)
 	chipset = models.CharField(max_length=100, blank=True)
@@ -78,21 +73,8 @@ class Phone(models.Model):
 	features = models.CharField(max_length=250, blank=True)
 	front_camera = models.CharField(max_length=250, blank=True)
 
-	#Connectivity
-	#wlan = models.CharField(max_length=100, blank=True)
-	#bluetooth = models.CharField(max_length=100, blank=True)
-	#gps = models.CharField(max_length=150, blank=True)
-	#usb = models.CharField(max_length=100, blank=True)
-	#nfc = models.CharField(max_length=50, blank=True)
-	#data = models.CharField(max_length=200, blank=True)
-
 	#Features
 	sensors = models.CharField(max_length=250, blank=True)
-	#audio = models.CharField(max_length=250, blank=True)
-	#browser = models.CharField(max_length=50, blank=True)
-	#messaging = models.CharField(max_length=100, blank=True)
-	#games = models.CharField(max_length=100, blank=True)
-	#torch = models.CharField(max_length=20, blank=True)
 	extra = models.CharField(max_length=250, blank=True)
 
 	#Battery
