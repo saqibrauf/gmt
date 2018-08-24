@@ -1,0 +1,10 @@
+*.pyc
+*~
+__pycache__
+db.sqlite3
+/static
+/assets
+/gmt-bulma
+/media
+.env
+.DS_Store

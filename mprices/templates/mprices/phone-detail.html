@@ -1,0 +1,173 @@
+{% extends 'base.html' %}
+{% load humanize %}
+{% block 'title' %}{{ phone.phone_model|title }} Price In {{sidebar_location.location_name|title}} - GET MOBILE PRICES{% endblock %}
+{% block 'description' %}Checkout the latest {{ phone.phone_model|title }} Price In {{sidebar_location.location_name|title}}, updated on daily basis by taking information from online ecommerce stores and retailers in the country{% endblock %}
+{% block 'canonical' %}<link rel="canonical" href="{{request.build_absolute_uri}}" />{% endblock %}
+
+{% block 'content' %}
+	
+	<div class="columns is-desktop">
+		<div class="column is-narrow">
+			<div class="box is-radiusless is-marginless has-text-centered">				
+				<img src="{{phone.phone_image.url}}"" alt="{{phone.phone_model|title}}">						
+			</div>
+			<div class="box is-radiusless has-background-white-ter has-text-centered">
+				<h2 class="is-marginless is-size-5 has-text-black">{{phone.phone_model}}</h2>
+				<p class="is-size-4 has-text-weight-bold has-text-primary">Rs {{phone.price|intcomma}}</p>
+			</div>		
+		</div>
+		<div class="column">
+			<h1>{{ phone.phone_model|title }} Price In {{sidebar_location.location_name|title}}</h1>
+			<table class="table is-bordered is-fullwidth is-uppercase is-size-5">
+				<tbody>
+					<tr>
+						<th class="has-background-primary has-text-white">Price</th>
+						<td class="has-background-black has-text-white">Rs {{phone.price|intcomma}}</td>
+					</tr>
+					<tr>
+						<th>Share this</th>
+						<td><div class="addthis_inline_share_toolbox"></div></td>
+					</tr>
+				</tbody>				
+			</table>
+			<h2>{{ phone.phone_model}} Build</h2>
+			<table class="table is-bordered is-narrow is-fullwidth is-uppercase">
+				<tbody>
+					<tr>
+						<th class="is-uppercase">Os</th>
+						<td>{{phone.os}}</td>
+					</tr>
+					<tr>
+						<th class="is-uppercase">Dimensions</th>
+						<td>{{phone.dimensions}}</td>
+					</tr>
+					<tr>
+						<th class="is-uppercase">Weight</th>
+						<td>{{phone.weight}}</td>
+					</tr>
+					<tr>
+						<th class="is-uppercase">Sim</th>
+						<td>{{phone.sim}}</td>
+					</tr>
+					<tr>
+						<th class="is-uppercase">Colors</th>
+						<td>{{phone.colors}}</td>
+					</tr>
+				</tbody>				
+			</table>
+			<h2>{{ phone.phone_model}} Processor</h2>
+			<table class="table is-bordered is-narrow is-fullwidth is-uppercase">
+				<tbody>
+					<tr>
+						<th class="is-uppercase">Cpu</th>
+						<td>{{phone.cpu}}</td>
+					</tr>
+					<tr>
+						<th class="is-uppercase">Chipset</th>
+						<td>{{phone.chipset}}</td>
+					</tr>
+					<tr>
+						<th class="is-uppercase">Gpu</th>
+						<td>{{phone.gpu}}</td>
+					</tr>
+				</tbody>				
+			</table>
+			<h2>{{ phone.phone_model}} Display</h2>
+			<table class="table is-bordered is-narrow is-fullwidth is-uppercase">
+				<tbody>
+					<tr>
+						<th class="is-uppercase">Technology</th>
+						<td>{{phone.technology}}</td>
+					</tr>
+					<tr>
+						<th class="is-uppercase">Size</th>
+						<td>{{phone.size}}</td>
+					</tr>
+					<tr>
+						<th class="is-uppercase">Resolution</th>
+						<td>{{phone.resolution}}</td>
+					</tr>
+					<tr>
+						<th class="is-uppercase">Protection</th>
+						<td>{{phone.protection}}</td>
+					</tr>
+					<tr>
+						<th class="is-uppercase">Extra Features</th>
+						<td>{{phone.extra_display}}</td>
+					</tr>
+				</tbody>				
+			</table>
+			<h2>{{ phone.phone_model}} Memory</h2>
+			<table class="table is-bordered is-narrow is-fullwidth is-uppercase">
+				<tbody>
+					<tr>
+						<th class="is-uppercase">Built IN</th>
+						<td>{{phone.builtin}}</td>
+					</tr>
+					<tr>
+						<th class="is-uppercase">Card</th>
+						<td>{{phone.card}}</td>
+					</tr>
+				</tbody>				
+			</table>
+			<h2>{{ phone.phone_model}} Camera</h2>
+			<table class="table is-bordered is-narrow is-fullwidth is-uppercase">
+				<tbody>
+					<tr>
+						<th class="is-uppercase">Main</th>
+						<td>{{phone.main_camera}}</td>
+					</tr>
+					<tr>
+						<th class="is-uppercase">Features</th>
+						<td>{{phone.features}}</td>
+					</tr>
+					<tr>
+						<th class="is-uppercase">Front</th>
+						<td>{{phone.front_camera}}</td>
+					</tr>
+				</tbody>				
+			</table>
+			<h2>{{ phone.phone_model}} Other Features</h2>
+			<table class="table is-bordered is-narrow is-fullwidth is-uppercase">
+				<tbody>
+					<tr>
+						<th class="is-uppercase">Sensors</th>
+						<td>{{phone.sensors}}</td>
+					</tr>
+					<tr>
+						<th class="is-uppercase">Extra</th>
+						<td>{{phone.extra}}</td>
+					</tr>
+					<tr>
+						<th class="is-uppercase">Battery</th>
+						<td>{{phone.battery}}</td>
+					</tr>
+				</tbody>				
+			</table>
+			<h2>{{ phone.phone_model}} Description</h2>
+			<div>{{ phone.description|safe }}</div>
+			<hr>
+			<div class="addthis_inline_share_toolbox"></div>
+			<hr>
+			<h3>Disclaimer</h3>
+			<p class="is-size-7">We are not responsible for any errors or omissions, or for the results obtained from the use of this information. All information on this site is provided “as is,” with no guarantee of completeness, accuracy, timeliness or the results obtained from the use of this information.</p>
+		</div>
+	</div>
+	
+{% endblock %}
+
+{% block 'sidebar' %}
+    <h2>Mobile Phone Brands</h2>  
+    <ul class="is-marginless" style="list-style: none;">
+        {%for b in sidebar_brands%}
+            <li class="notification is-primary is-radiusless sidebar-list is-size-7"><a href="{% url 'brand' slug=b.brand_slug location=sidebar_location.location_slug  %}">{{b.brand_name|title}} Mobile Prices In {{sidebar_location|title}}</a></li>
+        {%endfor%}
+    </ul>
+    <h2>{{brand|title}} Mobiles in {{ sidebar_location|title }}</h2>
+    <ul class="is-marginless" style="list-style: none;">
+        {%for p in sidebar_phones%}
+            <li class="notification is-primary is-radiusless sidebar-list is-size-7"><a href="{% url 'phone' slug=p.phone_model_slug location=sidebar_location.location_slug  %}">{{p.phone_model|title}} Price In {{sidebar_location.location_name|title}}</a></li>
+        {%endfor%}
+    </ul>
+
+{% endblock %}
