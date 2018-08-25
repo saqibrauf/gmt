@@ -41,6 +41,7 @@ class Phone(models.Model):
 	release = models.DateField(default=datetime.today)
 	phone_model_slug = models.CharField(max_length=100, blank=True, editable=False)
 	phone_image = models.ImageField(upload_to='uploads/images')
+	phone_video = models.CharField(max_length=255, blank=True)
 
 	#Specifications
 	description = models.TextField(blank=True)

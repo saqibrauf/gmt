@@ -24,12 +24,13 @@
 						<th class="has-background-primary has-text-white">Price</th>
 						<td class="has-background-black has-text-white">Rs {{phone.price|intcomma}}</td>
 					</tr>
-					<tr class="is-hidden">
-						<th></th>
-						<td><div class="addthis_inline_share_toolbox"></div></td>
-					</tr>
 				</tbody>				
 			</table>
+			{% if phone.phone_video %}
+				<div class="video-container">
+					<iframe width="853" height="480" src="{{phone.phone_video}}" frameborder="0" allowfullscreen></iframe>
+				</div>
+			{% endif %}
 			<div class="addthis_inline_share_toolbox"></div>
 			<h2>{{ phone.phone_model}} Build</h2>
 			<table class="table is-bordered is-narrow is-fullwidth is-uppercase">
@@ -161,13 +162,13 @@
     <h2>Mobile Phone Brands</h2>  
     <ul class="is-marginless" style="list-style: none;">
         {%for b in sidebar_brands%}
-            <li class="notification is-primary is-radiusless sidebar-list"><a href="{% url 'brand' slug=b.brand_slug location=sidebar_location.location_slug  %}">{{b.brand_name|title}} Mobile Prices In {{sidebar_location|title}}</a></li>
+            <li class="notification is-light is-radiusless sidebar-list"><a href="{% url 'brand' slug=b.brand_slug location=sidebar_location.location_slug  %}">{{b.brand_name|title}} Mobile Prices In {{sidebar_location|title}}</a></li>
         {%endfor%}
     </ul>
     <h2>{{brand|title}} Mobiles in {{ sidebar_location|title }}</h2>
     <ul class="is-marginless" style="list-style: none;">
         {%for p in sidebar_phones%}
-            <li class="notification is-primary is-radiusless sidebar-list"><a href="{% url 'phone' slug=p.phone_model_slug location=sidebar_location.location_slug  %}">{{p.phone_model|title}} Price In {{sidebar_location.location_name|title}}</a></li>
+            <li class="notification is-light is-radiusless sidebar-list"><a href="{% url 'phone' slug=p.phone_model_slug location=sidebar_location.location_slug  %}">{{p.phone_model|title}} Price In {{sidebar_location.location_name|title}}</a></li>
         {%endfor%}
     </ul>
 

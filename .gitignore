@@ -1,8 +1,8 @@
 *.pyc
 *~
 __pycache__
-db.sqlite3
 /static
 /gmt-bulma
+/media
 .env
 .DS_Store
