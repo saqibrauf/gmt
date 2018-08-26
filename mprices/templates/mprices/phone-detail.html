@@ -5,7 +5,7 @@
 {% block 'canonical' %}<link rel="canonical" href="{{request.build_absolute_uri}}" />{% endblock %}
 
 {% block 'content' %}
-	
+	<h1>{{ phone.phone_model|title }} Price In {{sidebar_location.location_name|title}}</h1>
 	<div class="columns is-desktop">
 		<div class="column is-narrow">
 			<div class="box is-radiusless is-marginless has-text-centered">				
@@ -16,8 +16,7 @@
 				<p class="is-size-4 has-text-weight-bold has-text-primary">Rs {{phone.price|intcomma}}</p>
 			</div>		
 		</div>
-		<div class="column">
-			<h1>{{ phone.phone_model|title }} Price In {{sidebar_location.location_name|title}}</h1>
+		<div class="column">			
 			<table class="table is-fullwidth is-uppercase is-size-5">
 				<tbody>
 					<tr>
