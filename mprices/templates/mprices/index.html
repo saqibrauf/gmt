@@ -9,16 +9,21 @@
 	<p>Checkout the latest mobile prices in Pakistan, updated on daily basis by taking information from online ecommerce stores and retailers in the country</p>
 	<div class="columns is-multiline">
 		{% for p in phones %}
-			<div class="column is-4-desktop is-6-tablet">
+			<div class="column is-4-desktop is-6-tablet" itemscope itemtype="http://schema.org/Product">
 				<a href="{% url 'phone' slug=p.phone_model_slug location='pakistan' %}">
 					<div class="box is-radiusless is-marginless has-text-centered">				
-						<img src="{{p.phone_image.url}}" alt="{{p.phone_model|title}}">						
+						<img itemprop="image" src="{{p.phone_image.url}}" alt="{{p.phone_model|title}}">						
 					</div>
 					<div class="box is-radiusless has-background-white-ter has-text-centered">
-						<h2 class="is-marginless is-size-5 has-text-black">{{p.phone_model}}</h2>
-						<p class="is-size-4 has-text-weight-bold has-text-primary">Rs {{p.price|intcomma}}</p>
+						<h2 itemprop="name" class="is-marginless is-size-5 has-text-black">{{p.phone_model|title}}</h2>
+						<p itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="is-size-4 has-text-weight-bold has-text-primary">
+							<span>Rs {{p.price|intcomma}}</span>
+							<meta itemprop="price" content="{{p.price}}" />
+							<meta itemprop="priceCurrency" content="PKR" />
+						</p>
 					</div>
 				</a>
+				<meta itemprop="brand" content="{{p.brand_name|title}}" />
 			</div>
 		{% endfor %}
 	</div>
