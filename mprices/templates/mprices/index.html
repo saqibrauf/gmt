@@ -7,16 +7,20 @@
 {% block 'content' %}
 	<h1>Mobile Prices In Pakistan</h1>
 	<p>Checkout the latest mobile prices in Pakistan, updated on daily basis by taking information from online ecommerce stores and retailers in the country</p>
+	<hr>
 	<div class="columns is-multiline">
 		{% for p in phones %}
-			<div class="column is-4-desktop is-6-tablet" itemscope itemtype="http://schema.org/Product">
+			<div class="column is-4-desktop is-6-tablet" style="position: relative;" itemscope itemtype="http://schema.org/Product">
+				{% if p.status == 'Coming Soon' %}
+					<p class="tag is-info is-medium is-radiusless" style="position: absolute; top: 10px; left: 10px;">{{p.status|title}}</p>
+				{% endif %}
 				<a href="{% url 'phone' slug=p.phone_model_slug location='pakistan' %}">
-					<div class="box is-radiusless is-marginless has-text-centered">				
+					<div class="box is-radiusless is-marginless has-text-centered" style="padding-top: 2.5rem;">				
 						<img itemprop="image" src="{{p.phone_image.url}}" alt="{{p.phone_model|title}}">						
 					</div>
 					<div class="box is-radiusless has-background-white-ter has-text-centered">
 						<h2 itemprop="name" class="is-marginless is-size-5 has-text-black">{{p.phone_model|title}}</h2>
-						<p itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="is-size-4 has-text-weight-bold has-text-primary">
+						<p itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="is-size-4 has-text-weight-bold has-text-info">
 							<span>Rs {{p.price|intcomma}}</span>
 							<meta itemprop="price" content="{{p.price}}" />
 							<meta itemprop="priceCurrency" content="PKR" />

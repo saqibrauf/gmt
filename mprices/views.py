@@ -2,7 +2,16 @@ from django.shortcuts import render
 from .models import Location, Brand, Phone
 
 def index(request):
-	phones = Phone.objects.all().order_by('-release')
+	phones = Phone.objects.filter(price__gt=0).order_by('-price')
+	sidebar_brands = Brand.objects.all().order_by('brand_name')
+	context = {
+		'phones' : phones,
+		'sidebar_brands' : sidebar_brands,
+	}
+	return render(request, 'mprices/index.html', context)
+
+def coming_soon(request):
+	phones = Phone.objects.filter(status='Coming Soon').order_by('-price', 'brand_name')
 	sidebar_brands = Brand.objects.all().order_by('brand_name')
 	context = {
 		'phones' : phones,
@@ -12,7 +21,7 @@ def index(request):
 
 def brand(request, slug, location):
 	brand = Brand.objects.get(brand_slug=slug)
-	phones = brand.phone_set.all().order_by('-release')
+	phones = brand.phone_set.all().order_by('-price')
 	sidebar_brands = Brand.objects.all().order_by('brand_name')
 	sidebar_location = Location.objects.get(location_slug=location)
 	context = {

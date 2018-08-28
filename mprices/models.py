@@ -37,6 +37,11 @@ class Brand(models.Model):
 class Phone(models.Model):
 	brand_name = models.ForeignKey(Brand, on_delete=models.CASCADE)
 	phone_model = models.CharField(max_length=100, unique=True)
+	P_STATUS = (
+		("Available", "Available"),
+		("Coming Soon", "Coming Soon"),
+	)
+	status = models.CharField(max_length=12, choices=P_STATUS, default='Available')
 	price = models.IntegerField(blank=True, default=0)
 	release = models.DateField(default=datetime.today)
 	phone_model_slug = models.CharField(max_length=100, blank=True, editable=False)

@@ -33,7 +33,7 @@
                 {% block 'content' %}{% endblock %}
             </main>
         </div>
-        <div class="column is-3-desktop is-paddingless is-marginless has-background-white-bis">
+        <div class="column is-3-desktop is-paddingless is-marginless has-background-grey-lighter">
             <aside class="section">
                 {% block 'sidebar' %}
                 {% endblock %}
@@ -44,9 +44,9 @@
 
 {% block 'below_content' %}{% endblock %}
 
-<footer class="footer has-background-dark">
+<footer class="footer has-background-black">
     <div class="container content has-text-centered">
-        <p class="title is-3 has-text-grey">Get Mobile Price</p>
+        <p class="title is-3 has-text-grey"><a class="has-text-grey" href="{% url 'index' %}">Get Mobile Price</a></p>
         <p class="subtitle is-6 heading has-text-grey">© 2018 Copyright</p>
     </div>
 </footer>

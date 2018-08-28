@@ -1,6 +1,6 @@
 {% load static %}
 
-<div class="hero is-black">
+<div class="hero is-info">
     <div class="hero-head">
         <nav class="navbar">
             <div class="container is-fluid">
@@ -15,14 +15,14 @@
                             <div class="column is-marginless">
                                 {% url 'index' as home_url %}
                                 {% if request.get_full_path == home_url %}
-                                    <h1 class="title is-marginless is-4 is-uppercase has-text-white">Get Mobile Price</h1>
+                                    <h1 class="title is-marginless is-4 is-uppercase">Get Mobile Price</h1>
                                 {% else %}
-                                    <p class="title is-marginless is-4 is-uppercase has-text-white">Get Mobile Price</p>
+                                    <p class="title is-marginless is-4 is-uppercase">Get Mobile Price</p>
                                 {% endif %}
                             </div>
                         </div>
                     </a>
-                    <div class="navbar-burger burger is-hidden" data-target="navMain">
+                    <div class="navbar-burger burger" data-target="navMain">
                         <span></span>
                         <span></span>
                         <span></span>
@@ -30,7 +30,7 @@
                 </div>
                 <div id="navMain" class="navbar-menu">
                     <div class="navbar-end">
-                        
+                        <a class="navbar-item is-uppercase has-text-weight-bold" href="{% url 'coming_soon' %}">Coming Soon</a>
                     </div>
                 </div>
             </div>
