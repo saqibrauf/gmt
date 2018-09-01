@@ -1,8 +1,8 @@
 {% load static %}
 
-<div class="hero is-info">
+<div class="hero is-light">
     <div class="hero-head">
-        <nav class="navbar">
+        <nav class="navbar has-shadow">
             <div class="container is-fluid">
                 <div class="navbar-brand">
                     <a class="navbar-item" href="{% url 'index' %}">
@@ -15,9 +15,9 @@
                             <div class="column is-marginless">
                                 {% url 'index' as home_url %}
                                 {% if request.get_full_path == home_url %}
-                                    <h1 class="title is-marginless is-4 is-uppercase">Get Mobile Price</h1>
+                                    <h1 class="title is-marginless is-4" style="text-transform: uppercase;">Get Mobile Price</h1>
                                 {% else %}
-                                    <p class="title is-marginless is-4 is-uppercase">Get Mobile Price</p>
+                                    <p class="title is-marginless is-4" style="text-transform: uppercase;">Get Mobile Price</p>
                                 {% endif %}
                             </div>
                         </div>
@@ -30,7 +30,6 @@
                 </div>
                 <div id="navMain" class="navbar-menu">
                     <div class="navbar-end">
-                        <a class="navbar-item is-uppercase has-text-weight-bold" href="{% url 'coming_soon' %}">Coming Soon</a>
                     </div>
                 </div>
             </div>

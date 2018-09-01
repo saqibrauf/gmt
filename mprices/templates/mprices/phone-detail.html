@@ -5,7 +5,7 @@
 {% block 'canonical' %}<link rel="canonical" href="{{request.build_absolute_uri}}" />{% endblock %}
 
 {% block 'content' %}
-	<h1>{{ phone.phone_model|title }} Price In {{sidebar_location.location_name|title}}</h1>
+	<h1 class="notification">{{ phone.phone_model|title }} Price In {{sidebar_location.location_name|title}}</h1>
 	<div class="columns is-desktop" itemscope itemtype="http://schema.org/Product">
 		<meta itemprop="brand" content="{{phone.brand_name|title}}" />
 		<div class="column is-narrow">
@@ -18,11 +18,11 @@
 			</div>		
 		</div>
 		<div class="column">			
-			<table class="table is-fullwidth is-uppercase is-size-5">
-				<tbody>
+			<table class="table is-bordered is-fullwidth is-uppercase is-size-5">
+				<tbody class="is-size-3-desktop">
 					<tr itemprop="offers" itemscope itemtype="http://schema.org/Offer">
-						<th class="has-background-info has-text-white">Price</th>
-						<td class="has-background-black has-text-white">Rs <span>{{phone.price|intcomma}}</span><meta itemprop="priceCurrency" content="PKR" /><meta itemprop="price" content="{{phone.price}}" /></td>
+						<th class="">Price</th>
+						<td class="">Rs <span>{{phone.price|intcomma}}</span><meta itemprop="priceCurrency" content="PKR" /><meta itemprop="price" content="{{phone.price}}" /></td>
 					</tr>
 				</tbody>				
 			</table>
@@ -93,10 +93,6 @@
 						<th class="is-uppercase">Protection</th>
 						<td>{{phone.protection}}</td>
 					</tr>
-					<tr>
-						<th class="is-uppercase">Extra Features</th>
-						<td>{{phone.extra_display}}</td>
-					</tr>
 				</tbody>				
 			</table>
 			<h2>{{ phone.phone_model}} Memory</h2>
@@ -137,10 +133,6 @@
 						<td>{{phone.sensors}}</td>
 					</tr>
 					<tr>
-						<th class="is-uppercase">Extra</th>
-						<td>{{phone.extra}}</td>
-					</tr>
-					<tr>
 						<th class="is-uppercase">Battery</th>
 						<td>{{phone.battery}}</td>
 					</tr>
@@ -162,13 +154,13 @@
     <h2>Mobile Phone Brands</h2>  
     <ul class="is-marginless" style="list-style: none;">
         {%for b in sidebar_brands%}
-            <li class="notification is-light is-radiusless sidebar-list"><a href="{% url 'brand' slug=b.brand_slug location=sidebar_location.location_slug  %}">{{b.brand_name|title}} Mobile Prices In {{sidebar_location|title}}</a></li>
+            <li class="sidebar-list"><a href="{% url 'brand' slug=b.brand_slug location=sidebar_location.location_slug  %}">{{b.brand_name|title}} Mobile Prices In {{sidebar_location|title}}</a></li>
         {%endfor%}
     </ul>
     <h2>{{brand|title}} Mobiles in {{ sidebar_location|title }}</h2>
     <ul class="is-marginless" style="list-style: none;">
         {%for p in sidebar_phones%}
-            <li class="notification is-light is-radiusless sidebar-list"><a href="{% url 'phone' slug=p.phone_model_slug location=sidebar_location.location_slug  %}">{{p.phone_model|title}} Price In {{sidebar_location.location_name|title}}</a></li>
+            <li class="sidebar-list"><a href="{% url 'phone' slug=p.phone_model_slug location=sidebar_location.location_slug  %}">{{p.phone_model|title}} Price In {{sidebar_location.location_name|title}}</a></li>
         {%endfor%}
     </ul>
 

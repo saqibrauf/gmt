@@ -11,7 +11,7 @@
     <title>{% block 'title' %}Mobile Phone Prices{% endblock %}</title>
     <meta name="news_keywords" content="{% block 'news' %}{% endblock %}">
     <meta name="description" content="{% block 'description' %}{% endblock %}">
-    <link href="https://fonts.googleapis.com/css?family=Ubuntu:400,700|Saira+Extra+Condensed:600" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Anton:400" rel="stylesheet">
     <!--link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous"-->
     <link rel="icon" href="{% static 'images/smartphone.png' %}" type="image/png">
     <link rel="stylesheet" href="{% static 'css/bulma.css' %}">
@@ -33,9 +33,10 @@
                 {% block 'content' %}{% endblock %}
             </main>
         </div>
-        <div class="column is-3-desktop is-paddingless is-marginless has-background-grey-lighter">
+        <div class="column is-3-desktop is-paddingless is-marginless">
             <aside class="section">
                 {% block 'sidebar' %}
+                    
                 {% endblock %}
             </aside>
         </div>     
@@ -46,7 +47,7 @@
 
 <footer class="footer has-background-black">
     <div class="container content has-text-centered">
-        <p class="title is-3 has-text-grey"><a class="has-text-grey" href="{% url 'index' %}">Get Mobile Price</a></p>
+        <p class="title is-3 has-text-grey"><a class="has-text-grey" href="{% url 'index' %}" style="text-transform: uppercase;">Get Mobile Price</a></p>
         <p class="subtitle is-6 heading has-text-grey">© 2018 Copyright</p>
     </div>
 </footer>

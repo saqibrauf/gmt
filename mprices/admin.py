@@ -9,6 +9,6 @@ admin.site.register(Brand)
 
 class PhoneAdmin(SummernoteModelAdmin):
     summernote_fields = '__all__'    
-    list_display = ('phone_model', 'price', 'brand_name')
+    list_display = ('phone_model', 'price', 'release', 'brand_name')
 
 admin.site.register(Phone, PhoneAdmin)

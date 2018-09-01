@@ -5,15 +5,14 @@
 {% block 'canonical' %}<link rel="canonical" href="{{request.build_absolute_uri}}" />{% endblock %}
 
 {% block 'content' %}
-	<h1>Mobile Prices In Pakistan</h1>
-	<p>Checkout the latest mobile prices in Pakistan, updated on daily basis by taking information from online ecommerce stores and retailers in the country</p>
-	<hr>
+	<div class="notification is-radiusless">
+		<h1>Mobile Prices In Pakistan</h1>
+		<p>Checkout the latest mobile prices in Pakistan, updated on daily basis by taking information from online ecommerce stores and retailers in the country</p>
+	</div>
+	
 	<div class="columns is-multiline">
 		{% for p in phones %}
-			<div class="column is-4-desktop is-6-tablet" style="position: relative;" itemscope itemtype="http://schema.org/Product">
-				{% if p.status == 'Coming Soon' %}
-					<p class="tag is-info is-medium is-radiusless" style="position: absolute; top: 10px; left: 10px;">{{p.status|title}}</p>
-				{% endif %}
+			<div class="column is-4-desktop is-6-tablet" itemscope itemtype="http://schema.org/Product">
 				<a href="{% url 'phone' slug=p.phone_model_slug location='pakistan' %}">
 					<div class="box is-radiusless is-marginless has-text-centered" style="padding-top: 2.5rem;">				
 						<img itemprop="image" src="{{p.phone_image.url}}" alt="{{p.phone_model|title}}">						
@@ -34,10 +33,10 @@
 {% endblock %}
 
 {% block 'sidebar' %}
-	<h2>Mobile Phone Brands</h2>  
+	<h3>Mobile Phone Brands</h2>  
     <ul class="is-marginless" style="list-style: none;">
         {%for b in sidebar_brands%}
-            <li class="notification is-light is-radiusless sidebar-list"><a href="{% url 'brand' slug=b.brand_slug location='pakistan'  %}">{{b.brand_name|title}} Mobile Prices In Pakistan</a></li>
+            <li class="sidebar-list"><a href="{% url 'brand' slug=b.brand_slug location='pakistan'  %}">{{b.brand_name|title}} Mobile Prices In Pakistan</a></li>
         {%endfor%}
     </ul> 
     <hr>

@@ -1,6 +1,7 @@
 from django.db import models
 from django.template.defaultfilters import slugify
 from datetime import datetime
+from django.urls import reverse
 
 class Location(models.Model):
 	location_name = models.CharField(max_length=50, unique=True)
@@ -37,29 +38,24 @@ class Brand(models.Model):
 class Phone(models.Model):
 	brand_name = models.ForeignKey(Brand, on_delete=models.CASCADE)
 	phone_model = models.CharField(max_length=100, unique=True)
-	P_STATUS = (
-		("Available", "Available"),
-		("Coming Soon", "Coming Soon"),
-	)
-	status = models.CharField(max_length=12, choices=P_STATUS, default='Available')
 	price = models.IntegerField(blank=True, default=0)
-	release = models.DateField(default=datetime.today)
+	gsm_arena = models.CharField(max_length=255, blank=True)
+	release = models.DateTimeField(default=datetime.today, editable=False)
 	phone_model_slug = models.CharField(max_length=100, blank=True, editable=False)
 	phone_image = models.ImageField(upload_to='uploads/images')
-	phone_video = models.CharField(max_length=255, blank=True)
 
 	#Specifications
 	description = models.TextField(blank=True)
 
 	#Build
-	os = models.CharField(max_length=50, blank=True)
+	os = models.CharField(max_length=100, blank=True)
 	dimensions = models.CharField(max_length=100, blank=True)
-	weight = models.CharField(max_length=20, blank=True)	
-	sim = models.CharField(max_length=50, blank=True)
+	weight = models.CharField(max_length=50, blank=True)	
+	sim = models.CharField(max_length=100, blank=True)
 	colors = models.CharField(max_length=100, blank=True)
 
 	#Processor
-	cpu = models.CharField(max_length=150, blank=True)
+	cpu = models.CharField(max_length=200, blank=True)
 	chipset = models.CharField(max_length=100, blank=True)
 	gpu = models.CharField(max_length=100, blank=True)
 
@@ -68,7 +64,6 @@ class Phone(models.Model):
 	size = models.CharField(max_length=100, blank=True)
 	resolution = models.CharField(max_length=100, blank=True)
 	protection = models.CharField(max_length=100, blank=True)
-	extra_display = models.CharField(max_length=100, blank=True)
 
 	#Memory
 	builtin = models.CharField(max_length=100, blank=True)
@@ -81,12 +76,9 @@ class Phone(models.Model):
 
 	#Features
 	sensors = models.CharField(max_length=250, blank=True)
-	extra = models.CharField(max_length=250, blank=True)
 
 	#Battery
 	battery = models.CharField(max_length=100, blank=True)
-
-
 
 
 	def __str__(self):
@@ -96,6 +88,9 @@ class Phone(models.Model):
 		self.phone_model = self.phone_model.lower()
 		self.phone_model_slug = slugify(self.phone_model)
 		super().save(*args, **kwargs)
+
+	def get_absolute_url(self):
+		return reverse('phone', args=[str(self.phone_model_slug), 'pakistan'])
 
 	class Meta:
 		ordering = ['-release']
