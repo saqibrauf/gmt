@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load humanize %}
 {% block 'title' %}{{ phone.phone_model|title }} Price In {{sidebar_location.location_name|title}} - GET MOBILE PRICES{% endblock %}
-{% block 'description' %}Checkout the latest {{ phone.phone_model|title }} Price In {{sidebar_location.location_name|title}}, updated on daily basis by taking information from online ecommerce stores and retailers in the country{% endblock %}
+{% block 'description' %}Checkout the latest {{ phone.phone_model|title }} Price In {{sidebar_location.location_name|title}}, updated on daily basis by taking information from online ecommerce stores and retailers in the country.{% endblock %}
 {% block 'canonical' %}<link rel="canonical" href="{{request.build_absolute_uri}}" />{% endblock %}
 
 {% block 'content' %}

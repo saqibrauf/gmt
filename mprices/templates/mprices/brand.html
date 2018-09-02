@@ -10,8 +10,8 @@
 		{% for p in phones %}
 			<div class="column is-6" itemscope itemtype="http://schema.org/Product">
 				<a class="box is-radiusless" href="{% url 'phone' slug=p.phone_model_slug location='pakistan' %}">
-					<div class="columns is-mobile">
-						<div class="column is-narrow">
+					<div class="columns">
+						<div class="column is-narrow has-text-centered">
 							<img itemprop="image" src="{{p.phone_image.url}}" alt="{{p.phone_model|title}}">	
 						</div>
 						<div class="column">
