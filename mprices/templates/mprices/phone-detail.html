@@ -5,7 +5,7 @@
 {% block 'canonical' %}<link rel="canonical" href="{{request.build_absolute_uri}}" />{% endblock %}
 
 {% block 'content' %}
-	<h1 class="notification">{{ phone.phone_model|title }} Price In {{sidebar_location.location_name|title}}</h1>
+	<h1 class="notification is-radiusless">{{ phone.phone_model|title }} Price In {{sidebar_location.location_name|title}}</h1>
 	<div class="columns is-desktop" itemscope itemtype="http://schema.org/Product">
 		<meta itemprop="brand" content="{{phone.brand_name|title}}" />
 		<div class="column is-narrow">

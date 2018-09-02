@@ -8,18 +8,21 @@
 	<h1 class="notification">{{brand.brand_name|title}} Mobile Prices In {{sidebar_location.location_name|title}}</h1>
 	<div class="columns is-multiline">
 		{% for p in phones %}
-			<div class="column is-4-desktop is-6-tablet" itemscope itemtype="http://schema.org/Product">
-				<a href="{% url 'phone' slug=p.phone_model_slug location='pakistan' %}">
-					<div class="box is-radiusless is-marginless has-text-centered" style="padding-top: 2.5rem;">				
-						<img itemprop="image" src="{{p.phone_image.url}}" alt="{{p.phone_model|title}}">						
-					</div>
-					<div class="box is-radiusless has-background-white-ter has-text-centered">
-						<h2 itemprop="name" class="is-marginless is-size-5 has-text-black">{{p.phone_model|title}}</h2>
-						<p itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="is-size-4 has-text-weight-bold has-text-info">
-							<span>Rs {{p.price|intcomma}}</span>
-							<meta itemprop="price" content="{{p.price}}" />
-							<meta itemprop="priceCurrency" content="PKR" />
-						</p>
+			<div class="column is-6" itemscope itemtype="http://schema.org/Product">
+				<a class="box is-radiusless" href="{% url 'phone' slug=p.phone_model_slug location='pakistan' %}">
+					<div class="columns is-mobile">
+						<div class="column is-narrow">
+							<img itemprop="image" src="{{p.phone_image.url}}" alt="{{p.phone_model|title}}">	
+						</div>
+						<div class="column">
+							<h2 itemprop="name" class="is-marginless is-size-5 has-text-black">{{p.phone_model|title}}</h2>
+							<p itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="is-size-4 has-text-weight-bold has-text-info">
+								<span>Rs {{p.price|intcomma}}</span>
+								<meta itemprop="price" content="{{p.price}}" />
+								<meta itemprop="priceCurrency" content="PKR" />
+							</p>
+							<div class="has-text-black is-size-7" itemprop="description">{{p.description|truncatewords:50|safe}}</div>
+						</div>
 					</div>
 				</a>
 				<meta itemprop="brand" content="{{p.brand_name|title}}" />
