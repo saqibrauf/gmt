@@ -25,7 +25,9 @@
 						</div>
 					</div>
 				</a>
-				<meta itemprop="brand" content="{{p.brand_name|title}}" />
+				<div itemprop="brand" class="is-hidden" itemscope itemtype="http://schema.org/Organization">
+					<p itemprop="name">{{p.brand_name|title}}</p>
+				</div>
 			</div>
 		{% endfor %}
 	</div>

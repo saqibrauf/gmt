@@ -5,14 +5,14 @@
 .content h4, h4,
 .content h5, h5,
 .content h6, h6 {
-	font-family: 'Encode Sans Condensed', sans-serif !important;
+	font-family: 'Asap Condensed', sans-serif !important;
 	font-weight: 700 !important;
 	text-transform: capitalize;
 	color: black;
 }
 
 body {
-	font-family: 'Open Sans', sans-serif !important;
+	font-family: 'Asap', sans-serif !important;
 	font-weight: 400 !important;
 }
 
@@ -24,13 +24,17 @@ a {
 	color: #00d1b2;
 }
 
+b, strong {
+	font-weight: 600;
+}
+
 .sidebar-list {
 	margin-bottom: .5rem !important;
 }
 
 .sidebar-list a {
-	text-decoration: none !important;
-	font-weight: 700;
+	text-decoration: underline !important;
+	font-weight: 600;
 	color: #444;
 }
 
