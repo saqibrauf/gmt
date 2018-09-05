@@ -1,6 +1,7 @@
 from django.urls import path
 from . import views
 from django.contrib.sitemaps import views as sm_views
+from django.views.generic import TemplateView
 from .sitemaps import BrandSitemap, PhoneSitemap
 
 sitemaps = {
@@ -15,5 +16,6 @@ urlpatterns = [
 	#General
     path('', views.index, name='index'),
     path('<slug>-mobile-prices-in-<location>/', views.brand, name='brand'),
-    path('<slug>-price-in-<location>/', views.phone, name='phone')
+    path('<slug>-price-in-<location>/', views.phone, name='phone'),
+    path('robots.txt/', TemplateView.as_view(template_name='robots.txt'), name="robot"),
 ]
