@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load humanize %}
-{% block 'title' %}{{ phone.phone_model|title }} Price In {{sidebar_location.location_name|title}}, Specification And Features - GET MOBILE PRICES{% endblock %}
+{% block 'title' %}{{ phone.phone_model|title }} Price in {{sidebar_location.location_name|title}}, {{ phone.phone_model|title }} Specification and Features - GET MOBILE PRICES{% endblock %}
 {% block 'description' %}Checkout the latest {{ phone.phone_model|title }} Price In {{sidebar_location.location_name|title}}. Get {{ phone.phone_model|title }} specification and features. Updated on daily basis by taking information from online e-commerce stores and retailers in {{sidebar_location.location_name|title}}.{% endblock %}
 {% block 'canonical' %}<link rel="canonical" href="{{request.build_absolute_uri}}" />{% endblock %}
 
