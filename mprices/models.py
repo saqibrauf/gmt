@@ -93,5 +93,5 @@ class Phone(models.Model):
 		return reverse('phone', args=[str(self.phone_model_slug), 'pakistan'])
 
 	class Meta:
-		ordering = ['-release']
+		ordering = ['-release', '-price']
 
