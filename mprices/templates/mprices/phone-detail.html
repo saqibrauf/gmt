@@ -1,11 +1,15 @@
 {% extends 'base.html' %}
 {% load humanize %}
 {% block 'title' %}{{ phone.phone_model|title }} Price in {{sidebar_location.location_name|title}}, {{ phone.phone_model|title }} Specification and Features - GET MOBILE PRICES{% endblock %}
-{% block 'description' %}Checkout the latest {{ phone.phone_model|title }} Price In {{sidebar_location.location_name|title}}. Get {{ phone.phone_model|title }} specification and features. Updated on daily basis by taking information from online e-commerce stores and retailers in {{sidebar_location.location_name|title}}.{% endblock %}
+{% block 'description' %}Checkout the latest {{ phone.phone_model|title }} Price in {{sidebar_location.location_name|title}}. Get {{ phone.phone_model|title }} specification and features. Updated on daily basis by taking information from online e-commerce stores and retailers in {{sidebar_location.location_name|title}}.{% endblock %}
 {% block 'canonical' %}<link rel="canonical" href="{{request.build_absolute_uri}}" />{% endblock %}
 
 {% block 'content' %}
-	<h1 class="notification is-radiusless">{{ phone.phone_model|title }} Price In {{sidebar_location.location_name|title}}</h1>
+	<div class="content">
+		<h1>{{ phone.phone_model|title }} Price In {{sidebar_location.location_name|title}}</h1>
+		<p>Checkout the latest <strong>{{ phone.phone_model|title }} Price in {{sidebar_location.location_name|title}}.</strong> Get <strong>{{ phone.phone_model|title }} specification and features.</strong> Updated on daily basis by taking information from online e-commerce stores and retailers in <strong>{{sidebar_location.location_name|title}}.</strong></p>
+	</div>
+	
 	<div class="columns is-desktop" itemscope itemtype="http://schema.org/Product">
 		<div itemprop="brand" class="is-hidden" itemscope itemtype="http://schema.org/Organization">
 			<p itemprop="name">{{phone.brand_name|title}}</p>
@@ -21,7 +25,7 @@
 		</div>
 		<div class="column">			
 			<table class="table is-bordered is-fullwidth is-uppercase is-size-5">
-				<tbody class="is-size-3-desktop">
+				<tbody class="is-size-5-desktop has-background-white-ter">
 					<tr itemprop="offers" itemscope itemtype="http://schema.org/Offer">
 						<th class="">Price</th>
 						<td class="">Rs <span>{{phone.price|intcomma}}</span><meta itemprop="priceCurrency" content="PKR" /><meta itemprop="price" content="{{phone.price}}" /></td>
