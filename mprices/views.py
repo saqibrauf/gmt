@@ -4,10 +4,11 @@ from .models import Location, Brand, Phone
 
 def index(request):
 	if request.POST:
-		minPrice = request.POST.get('min-price', '10000')
-		maxPrice = request.POST.get('max-price', '30000')
-		phones = Phone.objects.filter(price__gte=minPrice, price__lte=maxPrice).order_by('-price')
-		message = 'Search result for mobiles between ' + minPrice + ' to ' + maxPrice
+		min_price = request.POST.get('min-price', '10000')
+		max_price = request.POST.get('max-price', '30000')
+		phones = Phone.objects.filter(price__gte=min_price, price__lte=max_price).order_by('-price')
+		total = str(phones.count())
+		message = total + ' Search result for mobiles between ' + min_price + ' to ' + max_price
 	else:
 		phones = Phone.objects.filter(price__gt=0).order_by('-release', '-price')
 		message = ''

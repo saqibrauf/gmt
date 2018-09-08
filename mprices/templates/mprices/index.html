@@ -11,7 +11,7 @@
 	</div>
 	<hr>
 	<div class="notifications is-radiusless">
-		<h2 class="is-size-6">Search by price</h2>
+		<h2 class="is-size-4">Search by price</h2>
 		<form class="field" action="{% url 'index' %}" method="POST">
 			{% csrf_token %}
 			<div class="field has-addons">
@@ -61,7 +61,7 @@
 			</div>
 		</form>	
 		{% if message %}
-			<p class="heading is-size-6 has-text-info" style="margin: .5rem 0;" >{{ message }}</p>
+			<p class="heading is-size-6" style="margin: .5rem 0;" ><strong>{{ message }}</strong></p>
 			{% if not phones %}
 				<p class="has-text-danger heading is-marginless">There is nothing to match your search results.</p>
 			{% endif %}
@@ -75,7 +75,7 @@
 				<a class="box is-radiusless" href="{% url 'phone' slug=p.phone_model_slug location='pakistan' %}">
 					<div class="columns">
 						<div class="column is-narrow has-text-centered">
-							<img itemprop="image" src="{{p.phone_image.url}}" alt="{{p.phone_model|title}}">	
+							<img itemprop="image" src="{{p.phone_image.url}}" alt="{{p.phone_model|title}}" height="350">	
 						</div>
 						<div class="column">
 							<h2 itemprop="name" class="is-marginless is-size-5 has-text-black">{{p.phone_model|title}}</h2>
