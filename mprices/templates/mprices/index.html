@@ -9,7 +9,8 @@
 		<h1>Mobile Prices In Pakistan</h1>
 		<p>Checkout the latest mobile prices in Pakistan, updated on daily basis by taking information from online ecommerce stores and retailers in the country</p>		
 	</div>
-	<div class="notification is-radiusless">
+	<hr>
+	<div class="notifications is-radiusless">
 		<h2 class="is-size-6">Search by price</h2>
 		<form class="field" action="{% url 'index' %}" method="POST">
 			{% csrf_token %}
@@ -66,6 +67,7 @@
 			{% endif %}
 		{% endif %}
 	</div>
+	<hr>
 
 	<div class="columns is-multiline">
 		{% for p in phones %}

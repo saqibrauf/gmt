@@ -1,1 +1,34 @@
-Not Found
+{% extends 'base.html' %}
+{% load static %}
+{% block 'above_content' %}
+
+<div class="hero is-light" style="min-height: calc(100vh - 67px);">
+	<div class="hero-body" style="display: flex; align-items: center;">
+		<div class="container">
+			<div class="columns">
+				<div class="column is-8 is-offset-2">
+					<div class="columns">
+						<div class="column has-text-centered is-narrow">
+							<img src="{% static 'images/frame.png' %}" width="300" >
+						</div>
+						<div class="column">
+							<h1 class="title is-1">Oops,<br><small>Something went wrong!</small></h1>
+							<a class="button is-large is-grey" href="{% url 'index' %}">Go To Home</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endblock %}
+
+{% block 'scripts' %}
+
+<script type="text/javascript">
+	$( "#content" ).hide();
+	$( "#footer" ).hide();
+</script>
+
+{% endblock %}
