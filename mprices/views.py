@@ -23,7 +23,7 @@ def index(request):
 
 def brand(request, slug, location):
 	brand = get_object_or_404(Brand, brand_slug=slug)
-	phones = brand.phone_set.all().order_by('-price')
+	phones = brand.phone_set.all().order_by('-price', '-release')
 	sidebar_brands = Brand.objects.all().order_by('brand_name')
 	sidebar_location = get_object_or_404(Location, location_slug=location)
 	context = {
