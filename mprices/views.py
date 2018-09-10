@@ -6,7 +6,7 @@ def index(request):
 	if request.POST:
 		min_price = request.POST.get('min-price', '10000')
 		max_price = request.POST.get('max-price', '30000')
-		phones = Phone.objects.filter(price__gte=min_price, price__lte=max_price).order_by('-price')
+		phones = Phone.objects.filter(price__gte=min_price, price__lte=max_price).order_by('-release', '-price')
 		total = str(phones.count())
 		message = total + ' Search result for mobiles between ' + min_price + ' to ' + max_price
 	else:
@@ -23,7 +23,7 @@ def index(request):
 
 def brand(request, slug, location):
 	brand = get_object_or_404(Brand, brand_slug=slug)
-	phones = brand.phone_set.all().order_by('-price', '-release')
+	phones = brand.phone_set.all().order_by('-release', '-price')
 	sidebar_brands = Brand.objects.all().order_by('brand_name')
 	sidebar_location = get_object_or_404(Location, location_slug=location)
 	context = {

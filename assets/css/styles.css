@@ -34,7 +34,7 @@ b, strong {
 
 .sidebar-list a {
 	text-decoration: underline !important;
-	font-weight: 600;
+	font-weight: 400;
 	color: #444;
 }
 
@@ -61,4 +61,12 @@ b, strong {
 	    margin-right: 0px;
 	    padding: 0 1rem;
 	}
+}
+
+@media screen and (min-width: 768px) {
+	.desc {
+		max-height: 215px;
+		overflow: hidden;
+	}
+
 }

@@ -42,7 +42,7 @@ class Phone(models.Model):
 	gsm_arena = models.CharField(max_length=255, blank=True)
 	release = models.DateTimeField(default=datetime.today, editable=False)
 	phone_model_slug = models.CharField(max_length=100, blank=True, editable=False)
-	phone_image = models.ImageField(upload_to='uploads/images')
+	phone_image = models.ImageField(upload_to='uploads/images', blank=True)	
 
 	#Specifications
 	description = models.TextField(blank=True)

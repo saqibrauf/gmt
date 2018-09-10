@@ -56,7 +56,7 @@
 					</div>
 				</div>
 				<div class="control">
-					<input type="submit" class="button is-grey" value="Search">
+					<input type="submit" class="button is-primary" value="Search">
 				</div>
 			</div>
 		</form>	
@@ -77,14 +77,14 @@
 						<div class="column is-narrow has-text-centered">
 							<img itemprop="image" src="{{p.phone_image.url}}" alt="{{p.phone_model|title}}" height="350">	
 						</div>
-						<div class="column">
+						<div class="column desc">
 							<h2 itemprop="name" class="is-marginless is-size-5 has-text-black">{{p.phone_model|title}}</h2>
-							<p itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="is-size-4 has-text-weight-bold has-text-info">
+							<p itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="is-size-4 has-text-weight-bold has-text-primary">
 								<span>Rs {{p.price|intcomma}}</span>
 								<meta itemprop="price" content="{{p.price}}" />
 								<meta itemprop="priceCurrency" content="PKR" />
 							</p>
-							<div class="has-text-black is-size-7" itemprop="description">{{p.description|truncatewords:60|safe}}</div>
+							<div class="has-text-black is-size-7" itemprop="description">{{p.description|truncatewords:150|safe}}</div>
 						</div>
 					</div>
 				</a>
@@ -100,7 +100,7 @@
 	<h3>Mobile Phone Brands</h2>  
     <ul class="is-marginless" style="list-style: none;">
         {%for b in sidebar_brands%}
-            <li class="sidebar-list"><a href="{% url 'brand' slug=b.brand_slug location='pakistan'  %}">{{b.brand_name|title}} Mobile Prices In Pakistan</a></li>
+            <li class="sidebar-list"><a href="{% url 'brand' slug=b.brand_slug location='pakistan'  %}">{{b.brand_name|title}} Mobile Prices in Pakistan</a></li>
         {%endfor%}
     </ul> 
     <hr>

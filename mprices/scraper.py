@@ -49,7 +49,7 @@ for p in phones:
 
 		release = soup.find(attrs={"data-spec": "year"}).next_element.strip()
 		release = datetime.strptime(release,'%Y, %B')
-
+		
 		"""
 		try:
 			image = soup.find('div', class_='specs-photo-main')
