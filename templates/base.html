@@ -16,6 +16,7 @@
     <link href="https://fonts.googleapis.com/css?family=Asap:400,600|Asap+Condensed:700" rel="stylesheet">
     <!--link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous"-->
     <link rel="icon" href="{% static 'images/frame.png' %}" type="image/png">
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
     <link rel="stylesheet" href="{% static 'css/bulma.css' %}">
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
     <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -26,6 +27,13 @@
       gtag('js', new Date());
 
       gtag('config', 'UA-47699964-5');
+    </script>
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-7688661235566872",
+        enable_page_level_ads: true
+      });
     </script>
     <script type="application/ld+json">
         {
@@ -41,6 +49,13 @@
 
 
 {% include 'navbar.html' %}
+
+<div class="notification is-black is-radiusless is-marginless is-hidden" style="padding: 1.25rem !important">
+    <div class="ui-widget control">
+      <label class="label is-hidden" for="phones">Places: </label>
+      <input class="input is-large" id="phones" placeholder="Search For Mobile Model">
+    </div>
+</div>
 
 <header>{% block 'above_content' %}{% endblock %}</header>
 
@@ -72,8 +87,29 @@
 </footer>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
 <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b7eae997ddf8392"></script>
+
+<script>
+
+    $(function() {
+        $("#phones").autocomplete({
+            source: "/get_phone/",
+            select: function (event, ui) { 
+                AutoCompleteSelectHandler(event, ui)
+             },
+            minLength: 2,
+        });
+    });
+
+  function AutoCompleteSelectHandler(event, ui)
+      {
+        var selectedObj = ui.item;
+    }
+
+</script>
+
 {% block 'scripts' %}{% endblock %}
 </body>
 </html>

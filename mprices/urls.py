@@ -17,5 +17,8 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('<slug>-mobile-prices-in-<location>/', views.brand, name='brand'),
     path('<slug>-price-in-<location>/', views.phone, name='phone'),
+    #AJAX Phone Search
+    path('get_phone/', views.get_phone, name='get_phone'),
+    #Robot
     path('robots.txt/', TemplateView.as_view(template_name='robots.txt'), name="robot"),
 ]

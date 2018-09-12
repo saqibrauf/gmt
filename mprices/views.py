@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, HttpResponse
 from django.shortcuts import get_object_or_404
 from .models import Location, Brand, Phone
 
@@ -48,3 +48,21 @@ def phone(request, slug, location):
 		'sidebar_phones' : sidebar_phones,
 	}
 	return render(request, 'mprices/phone-detail.html', context)
+
+#AJAX Call for Phone Model
+import json
+
+def get_phone(request):
+	if request.GET:
+		query = request.GET.get('term', '')
+		p_model = Phone.objects.filter(phone_model__icontains=query)
+		results = []
+		for p in p_model:
+			model_json = {}
+			model_json = p.phone_model
+			results.append(model_json)
+		data = json.dumps(results)
+	else:
+		data = 'fail'
+	mimetype = 'application/json'
+	return HttpResponse(data, mimetype)
