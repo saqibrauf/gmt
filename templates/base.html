@@ -14,7 +14,6 @@
     <meta name="news_keywords" content="{% block 'news' %}{% endblock %}">
     <meta name="description" content="{% block 'description' %}{% endblock %}">
     <link href="https://fonts.googleapis.com/css?family=Asap:400,600|Asap+Condensed:700" rel="stylesheet">
-    <!--link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous"-->
     <link rel="icon" href="{% static 'images/frame.png' %}" type="image/png">
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
     <link rel="stylesheet" href="{% static 'css/bulma.css' %}">
@@ -27,56 +26,58 @@
       gtag('js', new Date());
 
       gtag('config', 'UA-47699964-5');
-    </script>
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <script>
+  </script>
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script>
       (adsbygoogle = window.adsbygoogle || []).push({
         google_ad_client: "ca-pub-7688661235566872",
         enable_page_level_ads: true
-      });
-    </script>
-    <script type="application/ld+json">
-        {
-          "@context": "http://schema.org",
-          "@type": "Organization",
-          "url": "http://www.getmobileprice.com",
-          "logo": "http://www.getmobileprice.com/static/images/frame.png"
-        }
-    </script>
+    });
+</script>
+<script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Organization",
+      "url": "http://www.getmobileprice.com",
+      "logo": "http://www.getmobileprice.com/static/images/frame.png"
+  }
+</script>
 </head>
 
-<body class="content has-background-white">
+<body class="content has-background-white is-marginless">
 
 
-{% include 'navbar.html' %}
+    {% include 'navbar.html' %}
 
-<div class="notification is-black is-radiusless is-marginless is-hidden" style="padding: 1.25rem !important">
-    <div class="ui-widget control">
-      <label class="label is-hidden" for="phones">Places: </label>
-      <input class="input is-large" id="phones" placeholder="Search For Mobile Model">
-    </div>
-</div>
+    <header>{% block 'above_content' %}{% endblock %}</header>
 
-<header>{% block 'above_content' %}{% endblock %}</header>
+    <div id="content" class="container is-fluid" style="padding: 0;">
+        <div class="columns is-desktop is-paddingless is-marginless">
+            <div class="column is-9-desktop is-paddingless is-marginless">
+                <div class="box is-radiusless is-marginless" style="position: relative;">
+                    <div class="control">
+                        <input class="input is-large" id="phones" placeholder="Search For Mobile Model" style="border-radius: 0;">
+                    </div>   
+                    <div id="search" class="notification is-radiusless is-hidden" style="position: absolute; z-index: 99; right: 1.25rem; left: 1.25rem;">
+                        <button class="delete is-large"></button>
+                        
+                    </div>   
+                </div>
 
+                <main class="section">
+                    {% block 'content' %}{% endblock %}
+                </main>
+            </div>
+            <div class="column is-3-desktop is-paddingless is-marginless has-background-light">
+                <aside class="section">
+                    {% block 'sidebar' %}
 
-<div id="content" class="container is-fluid" style="padding: 0;">
-    <div class="columns is-desktop is-paddingless is-marginless">
-        <div class="column is-9-desktop is-paddingless is-marginless">
-            <main class="section">
-                {% block 'content' %}{% endblock %}
-            </main>
+                    {% endblock %}
+                </aside>
+            </div>     
         </div>
-        <div class="column is-3-desktop is-paddingless is-marginless has-background-light">
-            <aside class="section">
-                {% block 'sidebar' %}
-                    
-                {% endblock %}
-            </aside>
-        </div>     
     </div>
-</div>
-
+    <a href="#" class="scrollToTop button is-medium is-primary">Scroll To Top</a>
 {% block 'below_content' %}{% endblock %}
 
 <footer id="footer" class="footer has-background-black">
@@ -87,29 +88,59 @@
 </footer>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
 <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b7eae997ddf8392"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
 
-<script>
-
-    $(function() {
-        $("#phones").autocomplete({
-            source: "/get_phone/",
-            select: function (event, ui) { 
-                AutoCompleteSelectHandler(event, ui)
-             },
-            minLength: 2,
+        //Ajax call to search phone models
+        $('#phones').keyup(function(){       
+            var term = $('#phones').val();
+            $.get({
+                url: '{% url 'get_phone' %}',
+                data: {
+                  'term': term
+                },
+                dataType: 'json',
+                success: function (data) {
+                    if (data != 'none') {
+                        $('#search p').empty();
+                        $('#search').removeClass('is-hidden');
+                        $.each(data, function(i, v) {
+                            var html = '<p class="is-marginless"><a href="' + v.url + '">' + v.model + '</a></p>'
+                            $('#search').append(html);
+                        });
+                    } else {
+                        $('#search').addClass('is-hidden');
+                    }                    
+                }
+            });
         });
+
+        //Check to see if the window is top if not then display button
+        $(window).scroll(function(){
+            if ($(this).scrollTop() > 100) {
+                $('.scrollToTop').fadeIn();
+            } else {
+                $('.scrollToTop').fadeOut();
+            }
+        });
+
+        //Click event to scroll to top
+        $('.scrollToTop').click(function(){
+            $('html, body').animate({scrollTop : 0},800);
+            return false;
+        });
+
+        $('.delete').click(function(){
+            $('#search').addClass('is-hidden');
+            $('#search p').empty();
+            $('#phones').val('');
+        });
+
     });
-
-  function AutoCompleteSelectHandler(event, ui)
-      {
-        var selectedObj = ui.item;
-    }
-
 </script>
 
-{% block 'scripts' %}{% endblock %}
+  {% block 'scripts' %}{% endblock %}
 </body>
 </html>

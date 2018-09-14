@@ -1,6 +1,7 @@
 from django.shortcuts import render, HttpResponse
 from django.shortcuts import get_object_or_404
 from .models import Location, Brand, Phone
+from django.urls import reverse
 
 def index(request):
 	if request.POST:
@@ -50,19 +51,24 @@ def phone(request, slug, location):
 	return render(request, 'mprices/phone-detail.html', context)
 
 #AJAX Call for Phone Model
-import json
-
+from django.http import JsonResponse
 def get_phone(request):
+	results = []
 	if request.GET:
-		query = request.GET.get('term', '')
-		p_model = Phone.objects.filter(phone_model__icontains=query)
-		results = []
-		for p in p_model:
-			model_json = {}
-			model_json = p.phone_model
-			results.append(model_json)
-		data = json.dumps(results)
+		query = request.GET.get('term')
+		if query:
+			p_model = Phone.objects.filter(phone_model__icontains=query)
+			
+			for p in p_model:
+				url = reverse('phone', kwargs={'slug': p.phone_model_slug, 'location': 'pakistan'})
+				model_json = {
+					'url' : url,
+					'model' : p.phone_model,
+				}
+				results.append(model_json)
+
+	data = results
+	if data:
+		return JsonResponse(data,safe=False)		
 	else:
-		data = 'fail'
-	mimetype = 'application/json'
-	return HttpResponse(data, mimetype)
+		return JsonResponse('none', safe=False)

@@ -55,6 +55,13 @@ b, strong {
 	height: 100%;
 }
 
+.scrollToTop{
+    position:fixed;
+    bottom:25px;
+    right:25px;
+    display:none;
+}
+
 @media screen and (min-width: 1088px) {
 	.container.is-fluid {
 	    margin-left: 0px;
