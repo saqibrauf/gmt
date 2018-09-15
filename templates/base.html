@@ -60,7 +60,7 @@
                     </div>   
                     <div id="search" class="notification is-radiusless is-hidden" style="position: absolute; z-index: 99; right: 1.25rem; left: 1.25rem;">
                         <button class="delete is-large"></button>
-                        
+                        <div></div>
                     </div>   
                 </div>
 
@@ -104,11 +104,11 @@
                 dataType: 'json',
                 success: function (data) {
                     if (data != 'none') {
-                        $('#search p').empty();
+                        $('#search div').empty();
                         $('#search').removeClass('is-hidden');
                         $.each(data, function(i, v) {
-                            var html = '<p class="is-marginless"><a href="' + v.url + '">' + v.model + '</a></p>'
-                            $('#search').append(html);
+                            var html = '<p class="is-uppercase has-background-white"><a class="is-block" href="' + v.url + '">' + v.model + '</a></p>'
+                            $('#search div').append(html);
                         });
                     } else {
                         $('#search').addClass('is-hidden');

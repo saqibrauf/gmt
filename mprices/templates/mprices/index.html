@@ -9,14 +9,13 @@
 		<h1>Mobile Prices In Pakistan</h1>
 		<p>Checkout the latest mobile prices in Pakistan, updated on daily basis by taking information from online ecommerce stores and retailers in the country</p>		
 	</div>
-	<hr>
-	<div class="notifications is-radiusless">
-		<h2 class="is-size-4">Search by price</h2>
+	<div class="notification is-primary is-radiusless">
+		<h2 class="is-size-4 has-text-white">Search by price</h2>
 		<form class="field" action="{% url 'index' %}" method="POST">
 			{% csrf_token %}
-			<div class="field has-addons">
-				<div class="control">
-					<div class="select">
+			<div class="field columns">
+				<div class="control column">
+					<div class="select is-fullwidth">
 						<select name="min-price">
 							<option class="is-capitalized" value="0">Rs 0</option>
 							<option class="is-capitalized" value="5000">Rs 5000</option>
@@ -35,8 +34,8 @@
 						</select>
 					</div>
 				</div>
-				<div class="control">
-					<div class="select">
+				<div class="control column">
+					<div class="select is-fullwidth">
 						<select name="max-price">
 							<option class="is-capitalized" value="5000">Rs 5000</option>
 							<option class="is-capitalized" value="10000">Rs 10000</option>
@@ -55,8 +54,8 @@
 						</select>
 					</div>
 				</div>
-				<div class="control">
-					<input type="submit" class="button is-primary" value="Search">
+				<div class="control column is-narrow">
+					<input type="submit" class="button is-white" value="Search">
 				</div>
 			</div>
 		</form>	
@@ -67,7 +66,6 @@
 			{% endif %}
 		{% endif %}
 	</div>
-	<hr>
 
 	<div class="columns is-multiline">
 		{% for p in phones %}
