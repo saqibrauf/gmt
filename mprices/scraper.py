@@ -47,10 +47,9 @@ for p in phones:
 		sensors = soup.find(attrs={"data-spec": "sensors"}).next_element.strip()
 		battery = soup.find(attrs={"data-spec": "batdescription1"}).next_element.strip()
 
+		"""
 		release = soup.find(attrs={"data-spec": "year"}).next_element.strip()
 		release = datetime.strptime(release,'%Y, %B')
-		
-		"""
 		try:
 			image = soup.find('div', class_='specs-photo-main')
 			image = image.find('img')
@@ -60,7 +59,7 @@ for p in phones:
 			print(image)
 		"""
 
-		list = (os, dimensions, weight, sim, colors, cpu, chipset, gpu, technology, size, resolution, protection, builtin, card, main_camera, features, front_camera, sensors, battery, release)
+		list = (os, dimensions, weight, sim, colors, cpu, chipset, gpu, technology, size, resolution, protection, builtin, card, main_camera, features, front_camera, sensors, battery)
 
 		p.os = list[0]
 		p.dimensions = list[1]
@@ -81,7 +80,6 @@ for p in phones:
 		p.front_camera = list[16]
 		p.sensors = list[17]
 		p.battery = list[18]
-		p.release = list[19]
 		p.gsm_arena = ''
 
 		p.save()
