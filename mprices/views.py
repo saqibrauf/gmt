@@ -22,11 +22,14 @@ def index(request):
 	}
 	return render(request, 'mprices/index.html', context)
 
-def brand(request, slug, location):
+def brand(request, slug, location=''):
 	brand = get_object_or_404(Brand, brand_slug=slug)
 	phones = brand.phone_set.all().order_by('-release', '-price')
 	sidebar_brands = Brand.objects.all().order_by('brand_name')
-	sidebar_location = get_object_or_404(Location, location_slug=location)
+	if location:
+		sidebar_location = get_object_or_404(Location, location_slug=location)
+	else:
+		sidebar_location = ''
 	context = {
 		'brand' : brand,
 		'phones' : phones,
@@ -35,12 +38,15 @@ def brand(request, slug, location):
 	}
 	return render(request, 'mprices/brand.html', context)
 
-def phone(request, slug, location):
+def phone(request, slug, location=''):
 	phone = get_object_or_404(Phone, phone_model_slug=slug)
 	sidebar_brands = Brand.objects.all().order_by('brand_name')
 	brand = phone.brand_name
 	sidebar_phones = Phone.objects.filter(brand_name=brand)
-	sidebar_location = get_object_or_404(Location, location_slug=location)
+	if location:
+		sidebar_location = get_object_or_404(Location, location_slug=location)
+	else:
+		sidebar_location = ''
 	context = {
 		'phone' : phone,
 		'brand' : brand,
@@ -60,7 +66,7 @@ def get_phone(request):
 			p_model = Phone.objects.filter(phone_model__icontains=query)
 			
 			for p in p_model:
-				url = reverse('phone', kwargs={'slug': p.phone_model_slug, 'location': 'pakistan'})
+				url = reverse('phone', kwargs={'slug': p.phone_model_slug})
 				model_json = {
 					'url' : url,
 					'model' : p.phone_model,

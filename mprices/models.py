@@ -31,6 +31,9 @@ class Brand(models.Model):
 		self.brand_slug = slugify(self.brand_name)
 		super().save(*args, **kwargs)
 
+	def get_absolute_url(self):
+		return reverse('brand', args=[str(self.brand_slug),])
+
 	class Meta:
 		ordering = ['brand_name']
 
@@ -90,7 +93,7 @@ class Phone(models.Model):
 		super().save(*args, **kwargs)
 
 	def get_absolute_url(self):
-		return reverse('phone', args=[str(self.phone_model_slug), 'pakistan'])
+		return reverse('phone', args=[str(self.phone_model_slug),])
 
 	class Meta:
 		ordering = ['-release', '-price']

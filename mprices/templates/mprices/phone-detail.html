@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
 {% load humanize %}
-{% block 'title' %}{{ phone.phone_model|title }} Price in {{sidebar_location.location_name|title}}, {{ phone.phone_model|title }} Specification and Features - GET MOBILE PRICES{% endblock %}
-{% block 'description' %}Checkout the latest {{ phone.phone_model|title }} Price in {{sidebar_location.location_name|title}}. Get {{ phone.phone_model|title }} specification and features. Updated on daily basis by taking information from online e-commerce stores and retailers in {{sidebar_location.location_name|title}}.{% endblock %}
+{% block 'title' %}{{ phone.phone_model|title }} Price{% if sidebar_location %} in {{sidebar_location.location_name|title}}{% endif %}, {{ phone.phone_model|title }} Specification and Features - GET MOBILE PRICES{% endblock %}
+{% block 'description' %}Checkout the latest {{ phone.phone_model|title }} Price{% if sidebar_location %} in {{sidebar_location.location_name|title}}{% endif %}. Get {{ phone.phone_model|title }} specification and features. Updated on daily basis by taking information from online e-commerce stores and retailers{% if sidebar_location %} in {{sidebar_location.location_name|title}}{% endif %}.{% endblock %}
 {% block 'canonical' %}<link rel="canonical" href="{{request.build_absolute_uri}}" />{% endblock %}
 
 {% block 'content' %}
 	<div class="content">
-		<h1>{{ phone.phone_model|title }} Price In {{sidebar_location.location_name|title}}</h1>
-		<p>Checkout the latest <strong>{{ phone.phone_model|title }} Price in {{sidebar_location.location_name|title}}.</strong> Get <strong>{{ phone.phone_model|title }} specification and features.</strong> Updated on daily basis by taking information from online e-commerce stores and retailers in <strong>{{sidebar_location.location_name|title}}.</strong></p>
+		<h1>{{ phone.phone_model|title }} Price{% if sidebar_location %} in {{sidebar_location.location_name|title}}{% endif %}</h1>
+		<p>Checkout the latest <strong>{{ phone.phone_model|title }} Price{% if sidebar_location %} in {{sidebar_location.location_name|title}}{% endif %}.</strong> Get <strong>{{ phone.phone_model|title }} specification and features.</strong> Updated on daily basis by taking information from online e-commerce stores and retailers{% if sidebar_location %} in {{sidebar_location.location_name|title}}{% endif %}.</strong></p>
 	</div>
 	
 	<div class="columns is-desktop" itemscope itemtype="http://schema.org/Product">
@@ -160,13 +160,26 @@
     <h2>Mobile Phone Brands</h2>  
     <ul class="is-marginless" style="list-style: none;">
         {%for b in sidebar_brands%}
-            <li class="sidebar-list"><a href="{% url 'brand' slug=b.brand_slug location=sidebar_location.location_slug  %}">{{b.brand_name|title}} Mobile Prices in {{sidebar_location|title}}</a></li>
+        	{% if sidebar_location %}
+				{% with location=sidebar_location.location_name %}
+					<li class="sidebar-list"><a href="{% url 'brand' slug=b.brand_slug location=location  %}">{{b.brand_name|title}} Mobile Prices{% if sidebar_location %} in {{sidebar_location.location_name|title}}{% endif %}</a></li>
+				{% endwith %}
+			{% else %}
+				<li class="sidebar-list"><a href="{% url 'brand' slug=b.brand_slug  %}">{{b.brand_name|title}} Mobile Prices</a></li>
+			{% endif %}            
         {%endfor%}
     </ul>
     <h2>{{brand|title}} Mobiles in {{ sidebar_location|title }}</h2>
     <ul class="is-marginless" style="list-style: none;">
         {%for p in sidebar_phones%}
-            <li class="sidebar-list"><a href="{% url 'phone' slug=p.phone_model_slug location=sidebar_location.location_slug  %}">{{p.phone_model|title}} Price in {{sidebar_location.location_name|title}}</a></li>
+        	{% if sidebar_location %}
+				{% with location=sidebar_location.location_name %}
+					<li class="sidebar-list"><a href="{% url 'phone' slug=p.phone_model_slug location=location  %}">{{p.phone_model|title}} Price in {{sidebar_location.location_name|title}}</a></li>
+				{% endwith %}
+			{% else %}
+				<li class="sidebar-list"><a href="{% url 'phone' slug=p.phone_model_slug  %}">{{p.phone_model|title}} Price</a></li>
+			{% endif %}
+            
         {%endfor%}
     </ul>
 

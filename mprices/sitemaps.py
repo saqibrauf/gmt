@@ -36,3 +36,15 @@ class PhoneSitemap(Sitemap):
 
 	def location(self, item):
 		return item
+
+class BrandSimple(Sitemap):
+    def items(self):
+        return Brand.objects.all()
+    changefreq = "daily"
+    priority = 0.5
+
+class PhoneSimple(Sitemap):
+    def items(self):
+        return Phone.objects.all()
+    changefreq = "daily"
+    priority = 0.5

@@ -1,20 +1,26 @@
 {% extends 'base.html' %}
 {% load humanize %}
-{% block 'title' %}{{brand.brand_name|title}} Mobile Prices in {{sidebar_location.location_name|title}}, Specifaction and Features - GET MOBILE PRICES{% endblock %}
-{% block 'description' %}Checkout the latest {{brand.brand_name|title}} Mobile Prices in {{sidebar_location.location_name|title}}. Latest {{brand.brand_name|title}} mobiles, {{brand.brand_name|title}} mobiles specification and features. Updated on daily basis by taking information from online ecommerce stores and retailers in {{sidebar_location.location_name|title}}.{% endblock %}
+{% block 'title' %}{{brand.brand_name|title}} Mobile Prices{% if sidebar_location %} in {{sidebar_location.location_name|title}}{% endif %}, Specifaction and Features - GET MOBILE PRICES{% endblock %}
+{% block 'description' %}Checkout the latest {{brand.brand_name|title}} Mobile Prices in {{sidebar_location.location_name|title}}. Latest {{brand.brand_name|title}} mobiles, {{brand.brand_name|title}} mobiles specification and features. Updated on daily basis by taking information from online ecommerce stores and retailers{% if sidebar_location %} in {{sidebar_location.location_name|title}}{% endif %}.{% endblock %}
 {% block 'canonical' %}<link rel="canonical" href="{{request.build_absolute_uri}}" />{% endblock %}
 
 {%block 'content'%}
 	<div class="content">
-		<h1>{{brand.brand_name|title}} Mobile Prices In {{sidebar_location.location_name|title}}</h1>
-		<p>Checkout the latest <strong>{{brand.brand_name|title}} Mobile Prices in {{sidebar_location.location_name|title}}</strong>. Latest <strong>{{brand.brand_name|title}} mobiles, {{brand.brand_name|title}} mobiles specification and features.</strong> Updated on daily basis by taking information from online ecommerce stores and retailers in <strong>{{sidebar_location.location_name|title}}.</strong></p>
+		<h1>{{brand.brand_name|title}} Mobile Prices{% if sidebar_location %} in {{sidebar_location.location_name|title}}{% endif %}</h1>
+		<p>Checkout the latest <strong>{{brand.brand_name|title}} Mobile Prices{% if sidebar_location %} in {{sidebar_location.location_name|title}}{% endif %}</strong>. Latest <strong>{{brand.brand_name|title}} mobiles, {{brand.brand_name|title}} mobiles specification and features.</strong> Updated on daily basis by taking information from online ecommerce stores and retailers{% if sidebar_location %} in {{sidebar_location.location_name|title}}{% endif %}.</strong></p>
 	</div>
 
 	
 	<div class="columns is-multiline">
 		{% for p in phones %}
 			<div class="column is-6" itemscope itemtype="http://schema.org/Product">
-				<a class="box is-radiusless" href="{% url 'phone' slug=p.phone_model_slug location='pakistan' %}">
+				{% if sidebar_location %}
+				{% with location=sidebar_location.location_name %}
+				<a class="box is-radiusless" href="{% url 'phone' slug=p.phone_model_slug location=location %}">
+				{% endwith %}
+				{% else %}
+				<a class="box is-radiusless" href="{% url 'phone' slug=p.phone_model_slug %}">
+				{% endif %}
 					<div class="columns">
 						<div class="column is-narrow has-text-centered">
 							<img itemprop="image" src="{{p.phone_image.url}}" alt="{{p.phone_model|title}}" height="350">	
@@ -42,7 +48,13 @@
     <h2>Mobile Phone Brands</h2>  
     <ul class="is-marginless" style="list-style: none;">
         {%for b in sidebar_brands%}
-            <li class="sidebar-list"><a href="{% url 'brand' slug=b.brand_slug location=sidebar_location.location_slug  %}">{{b.brand_name|title}} Mobile Prices in {{sidebar_location.location_name|title}}</a></li>
+        	{% if sidebar_location %}
+				{% with location=sidebar_location.location_name %}
+					<li class="sidebar-list"><a href="{% url 'brand' slug=b.brand_slug location=location  %}">{{b.brand_name|title}} Mobile Prices{% if sidebar_location %} in {{sidebar_location.location_name|title}}{% endif %}</a></li>
+				{% endwith %}
+			{% else %}
+				<li class="sidebar-list"><a href="{% url 'brand' slug=b.brand_slug  %}">{{b.brand_name|title}} Mobile Prices</a></li>
+			{% endif %}            
         {%endfor%}
     </ul>
     <hr>

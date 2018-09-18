@@ -8,7 +8,6 @@ phones = Phone.objects.exclude(gsm_arena__isnull=True).exclude(gsm_arena__exact=
 for p in phones:
 
 	try:
-
 		url = p.gsm_arena
 		response = requests.get(url)
 		html = response.content
@@ -48,8 +47,13 @@ for p in phones:
 		battery = soup.find(attrs={"data-spec": "batdescription1"}).next_element.strip()
 
 		"""
+		This date code is fuctional and working
+
 		release = soup.find(attrs={"data-spec": "year"}).next_element.strip()
 		release = datetime.strptime(release,'%Y, %B')
+
+		This code snippet for image is not tested
+
 		try:
 			image = soup.find('div', class_='specs-photo-main')
 			image = image.find('img')
@@ -81,10 +85,10 @@ for p in phones:
 		p.sensors = list[17]
 		p.battery = list[18]
 		p.gsm_arena = ''
-
 		p.save()
 
-		print('Record Saved')
-
+		model = p.phone_model.title()
+		print(model + 'Data Saved')
 	except:
-		print('Not Found')
+		model = p.phone_model.title()
+		print(model + 'Data Not Found')

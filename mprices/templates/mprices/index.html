@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
 {% load humanize %}
-{% block 'title' %}Latest and Updated Mobile Prices in Pakistan, Mobile Phones Specifications and Features - GET MOBILE PRICES{% endblock %}
-{% block 'description' %}Checkout the latest mobile prices in Pakistan. We are a trusted source to know mobile phones prices, specification and features. We provide you updated information on daily basis by taking information from online ecommerce stores and retailers in Pakistan.{% endblock %}
+{% block 'title' %}Latest and Updated Mobile Phone Prices, Specifications and Features - GET MOBILE PRICES{% endblock %}
+{% block 'description' %}Checkout the latest mobiles phones, specifications and features. We are a trusted source to get all mobile phone prices, specification and features. We provide you updated information on daily basis by taking information from online ecommerce stores and retailers in country.{% endblock %}
 {% block 'canonical' %}<link rel="canonical" href="{{request.build_absolute_uri}}" />{% endblock %}
 
 {% block 'content' %}
 	<div class="content">
-		<h1>Mobile Prices In Pakistan</h1>
-		<p>Checkout the latest mobile prices in Pakistan, updated on daily basis by taking information from online ecommerce stores and retailers in the country</p>		
+		<h1>Latest and Updated Mobile Phone Prices, Specs and Features</h1>
+		<p>Checkout the latest mobile prices, specifications and features. Updated on daily basis by taking information from online ecommerce stores and retailers in the country.</p>		
 	</div>
 	<div class="notification is-primary is-radiusless" style="padding: 1rem;">
 		<h2 class="is-size-4 has-text-white">Search by price</h2>
@@ -70,7 +70,7 @@
 	<div class="columns is-multiline">
 		{% for p in phones %}
 			<div class="column is-6" itemscope itemtype="http://schema.org/Product">
-				<a class="box is-radiusless" href="{% url 'phone' slug=p.phone_model_slug location='pakistan' %}">
+				<a class="box is-radiusless" href="{% url 'phone' slug=p.phone_model_slug %}">
 					<div class="columns">
 						<div class="column is-narrow has-text-centered">
 							<img itemprop="image" src="{{p.phone_image.url}}" alt="{{p.phone_model|title}}" height="350">	
@@ -98,7 +98,7 @@
 	<h3>Mobile Phone Brands</h2>  
     <ul class="is-marginless" style="list-style: none;">
         {%for b in sidebar_brands%}
-            <li class="sidebar-list"><a href="{% url 'brand' slug=b.brand_slug location='pakistan'  %}">{{b.brand_name|title}} Mobile Prices in Pakistan</a></li>
+            <li class="sidebar-list"><a href="{% url 'brand' slug=b.brand_slug  %}">{{b.brand_name|title}} Mobile Prices</a></li>
         {%endfor%}
     </ul> 
     <hr>
