@@ -16,7 +16,7 @@
 		</div>
 		<div class="column is-narrow">
 			<div class="box is-radiusless is-marginless has-text-centered">				
-				<img src="{{phone.phone_image.url}}"" alt="{{phone.phone_model|title}}" itemprop="image" height="350">						
+				<img src="{{phone.phone_image.url}}"" alt="{{phone.phone_model|title}}" itemprop="image" height="212">						
 			</div>
 			<div class="box is-radiusless has-background-white-ter has-text-centered">
 				<h2 class="is-marginless is-size-5 has-text-black" itemprop="name">{{phone.phone_model|title}}</h2>
@@ -149,8 +149,38 @@
 			<hr>
 			<div class="addthis_inline_share_toolbox"></div>
 			<hr>
-			<h3>Disclaimer</h3>
-			<p class="is-size-7">We are not responsible for any errors or omissions, or for the results obtained from the use of this information. All information on this site is provided “as is,” with no guarantee of completeness, accuracy, timeliness or the results obtained from the use of this information.</p>
+			{% if sidebar_phones %}
+				<h2>Other Mobiles From {{brand}}</h2>
+				{% for p in sidebar_phones|slice:':10' %}
+				<div itemscope itemtype="http://schema.org/Product">
+					{% if sidebar_location %}
+					{% with location=sidebar_location.location_name %}
+					<a class="box is-radiusless" href="{% url 'phone' slug=p.phone_model_slug location=location %}">
+					{% endwith %}
+					{% else %}
+					<a class="box is-radiusless" href="{% url 'phone' slug=p.phone_model_slug %}">
+					{% endif %}
+						<div class="columns">
+							<div class="column is-narrow has-text-centered">
+								<img itemprop="image" src="{{p.phone_image.url}}" alt="{{p.phone_model|title}}" height="212">	
+							</div>
+							<div class="column desc">
+								<h2 itemprop="name" class="is-marginless is-size-5 has-text-black">{{p.phone_model|title}}</h2>
+								<p itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="is-size-4 has-text-weight-bold has-text-primary">
+									<span>Rs {{p.price|intcomma}}</span>
+									<meta itemprop="price" content="{{p.price}}" />
+									<meta itemprop="priceCurrency" content="PKR" />
+								</p>
+								<div class="has-text-black is-size-7" itemprop="description">{{p.description|truncatewords:300|safe}}</div>
+							</div>
+						</div>
+					</a>
+					<div itemprop="brand" class="is-hidden" itemscope itemtype="http://schema.org/Thing">
+						<p itemprop="name">{{p.brand_name|title}}</p>
+					</div>
+				</div>
+				{% endfor %}
+			{% endif %}			
 		</div>
 	</div>
 	
@@ -169,12 +199,12 @@
 			{% endif %}            
         {%endfor%}
     </ul>
-    <h2>{{brand|title}} Mobiles in {{ sidebar_location|title }}</h2>
+    <h2>{{brand|title}} Mobiles{% if sidebar_location %} in {{sidebar_location.location_name|title}}{% endif %}</h2>
     <ul class="is-marginless" style="list-style: none;">
         {%for p in sidebar_phones%}
         	{% if sidebar_location %}
 				{% with location=sidebar_location.location_name %}
-					<li class="sidebar-list"><a href="{% url 'phone' slug=p.phone_model_slug location=location  %}">{{p.phone_model|title}} Price in {{sidebar_location.location_name|title}}</a></li>
+					<li class="sidebar-list"><a href="{% url 'phone' slug=p.phone_model_slug location=location  %}">{{p.phone_model|title}} Price in {{sidebar_location.location_name|title}}</a></li>					
 				{% endwith %}
 			{% else %}
 				<li class="sidebar-list"><a href="{% url 'phone' slug=p.phone_model_slug  %}">{{p.phone_model|title}} Price</a></li>
@@ -182,5 +212,10 @@
             
         {%endfor%}
     </ul>
+    <hr>
+    <div class="notifications is-primary is-radiusless">
+		<h3>Disclaimer</h3>
+		<p class="is-size-7">We are not responsible for any errors or omissions, or for the results obtained from the use of this information. All information on this site is provided “as is,” with no guarantee of completeness, accuracy, timeliness or the results obtained from the use of this information.</p>
+	</div>
 
 {% endblock %}

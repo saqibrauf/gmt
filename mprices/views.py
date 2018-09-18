@@ -42,7 +42,7 @@ def phone(request, slug, location=''):
 	phone = get_object_or_404(Phone, phone_model_slug=slug)
 	sidebar_brands = Brand.objects.all().order_by('brand_name')
 	brand = phone.brand_name
-	sidebar_phones = Phone.objects.filter(brand_name=brand)
+	sidebar_phones = Phone.objects.filter(brand_name=brand).exclude(id=phone.id).order_by('-release', '-price')
 	if location:
 		sidebar_location = get_object_or_404(Location, location_slug=location)
 	else:
