@@ -88,7 +88,7 @@ for p in phones:
 		p.save()
 
 		model = p.phone_model.title()
-		print(model + 'Data Saved')
+		print(model + '   ======= Data Saved')
 	except:
 		model = p.phone_model.title()
-		print(model + 'Data Not Found')
+		print(model + '   ======= Data Not Found')

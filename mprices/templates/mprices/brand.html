@@ -1,12 +1,12 @@
 {% extends 'base.html' %}
 {% load humanize %}
-{% block 'title' %}{{brand.brand_name|title}} Mobile Prices{% if sidebar_location %} in {{sidebar_location.location_name|title}}{% endif %}, Specifaction and Features - GET MOBILE PRICES{% endblock %}
-{% block 'description' %}Checkout the latest {{brand.brand_name|title}} Mobile Prices in {{sidebar_location.location_name|title}}. Latest {{brand.brand_name|title}} mobiles, {{brand.brand_name|title}} mobiles specification and features. Updated on daily basis by taking information from online ecommerce stores and retailers{% if sidebar_location %} in {{sidebar_location.location_name|title}}{% endif %}.{% endblock %}
+{% block 'title' %}{{brand.brand_name|title}} Mobiles Prices{% if sidebar_location %} in {{sidebar_location.location_name|title}}{% endif %}, Specifaction and Features - GET MOBILE PRICES{% endblock %}
+{% block 'description' %}Checkout the latest {{brand.brand_name|title}} Mobiles Prices in {{sidebar_location.location_name|title}}. Latest {{brand.brand_name|title}} mobiles, {{brand.brand_name|title}} mobiles specification and features. Updated on daily basis by taking information from online ecommerce stores and retailers{% if sidebar_location %} in {{sidebar_location.location_name|title}}{% endif %}.{% endblock %}
 {% block 'canonical' %}<link rel="canonical" href="{{request.build_absolute_uri}}" />{% endblock %}
 
 {%block 'content'%}
 	<div class="content">
-		<h1>{{brand.brand_name|title}} Mobile Prices{% if sidebar_location %} in {{sidebar_location.location_name|title}}{% endif %}</h1>
+		<h1>{{brand.brand_name|title}} Mobiles Prices{% if sidebar_location %} in {{sidebar_location.location_name|title}}{% endif %}</h1>
 		<p>Checkout the latest <strong>{{brand.brand_name|title}} Mobile Prices{% if sidebar_location %} in {{sidebar_location.location_name|title}}{% endif %}</strong>. Latest <strong>{{brand.brand_name|title}} mobiles, {{brand.brand_name|title}} mobiles specification and features.</strong> Updated on daily basis by taking information from online ecommerce stores and retailers{% if sidebar_location %} in {{sidebar_location.location_name|title}}{% endif %}.</strong></p>
 	</div>
 
@@ -27,7 +27,7 @@
 						</div>
 						<div class="column desc">
 							<h2 itemprop="name" class="is-marginless is-size-5 has-text-black">{{p.phone_model|title}}</h2>
-							<p itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="is-size-4 has-text-weight-bold has-text-primary">
+							<p itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="is-size-3 is-marginless has-text-weight-bold has-text-primary">
 								<span>Rs {{p.price|intcomma}}</span>
 								<meta itemprop="price" content="{{p.price}}" />
 								<meta itemprop="priceCurrency" content="PKR" />
