@@ -12,7 +12,7 @@
 	<div class="notification is-primary is-radiusless" style="padding: 1rem;">
 		<h2 class="is-size-4 has-text-white">Search by price</h2>
 		<form class="field" action="{% url 'index' %}" method="POST">
-			
+			{% csrf_token %}
 			<div class="field columns">
 				<div class="control column">
 					<div class="select is-fullwidth">
