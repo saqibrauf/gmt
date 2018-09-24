@@ -11,8 +11,8 @@
 	</div>
 	<div class="notification is-primary is-radiusless" style="padding: 1rem;">
 		<h2 class="is-size-4 has-text-white">Search by price</h2>
-		<form class="field" action="{% url 'index' %}" method="POST">
-			{% csrf_token %}
+		<form class="field" action="{% url 'index' %}" method="GET">
+			
 			<div class="field columns">
 				<div class="control column">
 					<div class="select is-fullwidth">
@@ -92,6 +92,30 @@
 			</div>
 		{% endfor %}
 	</div>
+	{% if phones.has_other_pages %}
+		<nav class="box is-radiusless pagination is-centered">
+			{% if phones.has_previous %}
+				<a rel="prev" class="pagination-previous" href="?page={{ phones.previous_page_number }}">Previous</a>
+			{% else %}
+				<a class="pagination-previous" disabled>Previous</a>
+			{% endif %}
+			{% if phones.has_next %}
+				<a rel="next" class="pagination-next" href="?page={{ phones.next_page_number }}">Next</a>
+			{% else %}
+				<a class="pagination-next" disabled>Next</a>
+			{% endif %}
+
+			<ul class="pagination-list" style="list-style: none; margin: 0;">
+				{% for i in phones.paginator.page_range %}
+					{% if phones.number == i %}
+						<li><a class="pagination-link is-current">{{ i }}</a></li>
+					{% else %}
+						<li><a class="pagination-link" href="?page={{ i }}">{{ i }}</a></li>
+					{% endif %}
+				{% endfor %}
+			</ul>
+		</nav>
+	{% endif %}
 {% endblock %}
 
 {% block 'sidebar' %}

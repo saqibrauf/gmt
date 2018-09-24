@@ -2,17 +2,29 @@ from django.shortcuts import render, HttpResponse
 from django.shortcuts import get_object_or_404
 from .models import Location, Brand, Phone
 from django.urls import reverse
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 def index(request):
-	if request.POST:
-		min_price = request.POST.get('min-price', '10000')
-		max_price = request.POST.get('max-price', '30000')
+	if request.GET:
+		min_price = request.GET.get('min-price', '10000')
+		max_price = request.GET.get('max-price', '30000')
 		phones = Phone.objects.filter(price__gte=min_price, price__lte=max_price).order_by('-release', '-price')
 		total = str(phones.count())
 		message = total + ' Search result for mobiles between ' + min_price + ' to ' + max_price
+
 	else:
 		phones = Phone.objects.filter(price__gt=0).order_by('-release', '-price')
 		message = ''
+
+		page = request.GET.get('page', 1)
+		paginator = Paginator(phones, 30)
+		try:
+			phones = paginator.page(page)
+		except PageNotAnInteger:
+			phones = paginator.page(1)
+		except EmptyPage:
+			phones = paginator.page(paginator.num_pages)
+	
 
 	sidebar_brands = Brand.objects.all().order_by('brand_name')
 	context = {
@@ -30,6 +42,17 @@ def brand(request, slug, location=''):
 		sidebar_location = get_object_or_404(Location, location_slug=location)
 	else:
 		sidebar_location = ''
+
+	page = request.GET.get('page', 1)
+	paginator = Paginator(phones, 30)
+	try:
+		phones = paginator.page(page)
+	except PageNotAnInteger:
+		phones = paginator.page(1)
+	except EmptyPage:
+		phones = paginator.page(paginator.num_pages)
+
+
 	context = {
 		'brand' : brand,
 		'phones' : phones,

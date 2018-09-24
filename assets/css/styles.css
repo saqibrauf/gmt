@@ -38,6 +38,10 @@ b, strong {
 	color: #444;
 }
 
+.content li + li {
+    margin-top: 0;
+}
+
 .video-container {
 	position: relative;
 	padding-bottom: 56.25%;
