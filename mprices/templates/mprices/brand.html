@@ -43,7 +43,7 @@
 		{% endfor %}
 	</div>
 	{% if phones.has_other_pages %}
-		<nav class="box is-radiusless pagination is-centered">
+		<nav class="box is-radiusless pagination is-centered is-medium">
 			{% if phones.has_previous %}
 				<a rel="prev" class="pagination-previous" href="?page={{ phones.previous_page_number }}">Previous</a>
 			{% else %}
@@ -69,6 +69,7 @@
 {%endblock%}
 
 {% block 'sidebar' %}
+	{{ block.super }}
     <h2>Mobile Phone Brands</h2>  
     <ul class="is-marginless" style="list-style: none;">
         {%for b in sidebar_brands%}

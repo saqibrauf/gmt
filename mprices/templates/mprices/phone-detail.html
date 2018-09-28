@@ -187,6 +187,7 @@
 {% endblock %}
 
 {% block 'sidebar' %}
+	{{ block.super }}
     <h2>Mobile Phone Brands</h2>  
     <ul class="is-marginless" style="list-style: none;">
         {%for b in sidebar_brands%}

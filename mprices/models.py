@@ -1,6 +1,6 @@
 from django.db import models
 from django.template.defaultfilters import slugify
-from datetime import datetime
+from datetime import date
 from django.urls import reverse
 
 class Location(models.Model):
@@ -43,7 +43,7 @@ class Phone(models.Model):
 	phone_model = models.CharField(max_length=100, unique=True)
 	price = models.IntegerField(blank=True, default=0)
 	gsm_arena = models.CharField(max_length=255, blank=True)
-	release = models.DateTimeField(default=datetime.today)
+	release = models.DateField(default=date.today)
 	phone_model_slug = models.CharField(max_length=100, blank=True, editable=False)
 	phone_image = models.ImageField(upload_to='uploads/images', blank=True)	
 

@@ -2,7 +2,7 @@
 {% load static %}
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
     <meta charset="utf-8">
@@ -54,22 +54,72 @@
     <div id="content" class="container is-fluid" style="padding: 0;">
         <div class="columns is-desktop is-paddingless is-marginless">
             <div class="column is-9-desktop is-paddingless is-marginless">
-                <div class="box is-radiusless is-marginless" style="position: relative;">
-                    <div class="control">
-                        <input class="input is-medium" id="phones" placeholder="Search For Mobile Model" style="border-radius: 0;">
-                    </div>   
-                    <div id="search" class="notification is-radiusless is-hidden" style="position: absolute; z-index: 99; right: 1.25rem; left: 1.25rem;">
-                        <button class="delete is-large"></button>
-                        <div></div>
-                    </div>   
-                </div>
-
                 <main class="section">
                     {% block 'content' %}{% endblock %}
                 </main>
             </div>
-            <div class="column is-3-desktop is-paddingless is-marginless has-background-light">
+            <div class="column is-3-desktop is-paddingless is-marginless has-background-light">                 
                 <aside class="section">
+                    <div>
+                        <h2 class="is-size-4">Search by price</h2>
+                        <form action="{% url 'search' %}" method="GET">
+                            <div class="field">
+                                <div class="control">
+                                    <div class="select is-medium is-fullwidth">
+                                        <select name="minprice">
+                                            <option class="is-capitalized" value="0">Rs 0</option>
+                                            <option class="is-capitalized" value="5000">Rs 5000</option>
+                                            <option class="is-capitalized" value="10000" selected>Rs 10000</option>
+                                            <option class="is-capitalized" value="15000">Rs 15000</option>
+                                            <option class="is-capitalized" value="20000">Rs 20000</option>
+                                            <option class="is-capitalized" value="30000">Rs 30000</option>
+                                            <option class="is-capitalized" value="40000">Rs 40000</option>
+                                            <option class="is-capitalized" value="50000">Rs 50000</option>
+                                            <option class="is-capitalized" value="60000">Rs 60000</option>
+                                            <option class="is-capitalized" value="70000">Rs 70000</option>
+                                            <option class="is-capitalized" value="80000">Rs 80000</option>
+                                            <option class="is-capitalized" value="90000">Rs 90000</option>
+                                            <option class="is-capitalized" value="100000">Rs 100000</option>
+                                            <option class="is-capitalized" value="125000">Rs 125000</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="control">
+                                    <div class="select is-medium is-fullwidth">
+                                        <select name="maxprice">
+                                            <option class="is-capitalized" value="5000">Rs 5000</option>
+                                            <option class="is-capitalized" value="10000">Rs 10000</option>
+                                            <option class="is-capitalized" value="15000">Rs 15000</option>
+                                            <option class="is-capitalized" value="20000">Rs 20000</option>
+                                            <option class="is-capitalized" value="30000" selected>Rs 30000</option>
+                                            <option class="is-capitalized" value="40000">Rs 40000</option>
+                                            <option class="is-capitalized" value="50000">Rs 50000</option>
+                                            <option class="is-capitalized" value="60000">Rs 60000</option>
+                                            <option class="is-capitalized" value="70000">Rs 70000</option>
+                                            <option class="is-capitalized" value="80000">Rs 80000</option>
+                                            <option class="is-capitalized" value="90000">Rs 90000</option>
+                                            <option class="is-capitalized" value="100000">Rs 100000</option>
+                                            <option class="is-capitalized" value="125000">Rs 125000</option>
+                                            <option class="is-capitalized" value="150000">Rs 150000</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="control">
+                                    <input type="submit" class="button is-medium is-primary" value="Search">
+                                </div>
+                            </div>
+                        </form> 
+                        {% if message %}
+                            <p class="heading is-size-6" style="margin: .5rem 0;" ><strong>{{ message }}</strong></p>
+                            {% if not phones %}
+                                <p class="has-text-danger heading is-marginless">There is nothing to match your search results.</p>
+                            {% endif %}
+                        {% endif %}
+                    </div>
                     {% block 'sidebar' %}
 
                     {% endblock %}
@@ -107,7 +157,7 @@
                         $('#search div').empty();
                         $('#search').removeClass('is-hidden');
                         $.each(data, function(i, v) {
-                            var html = '<p class="is-uppercase has-background-white"><a class="is-block" href="' + v.url + '">' + v.model + '</a></p>'
+                            var html = '<p class="is-uppercase"><a class="is-block" href="' + v.url + '">' + v.model + '</a></p>'
                             $('#search div').append(html);
                         });
                     } else {

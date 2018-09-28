@@ -17,6 +17,7 @@ urlpatterns = [
 	path('sitemap-<section>.xml/', sm_views.sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
 	#General
     path('', views.index, name='index'),
+    path('search/', views.search, name='search'),
     path('<slug>-mobile-prices/', views.brand, name='brand'),
     path('<slug>-mobile-prices-in-<location>/', views.brand, name='brand'),
     path('<slug>-price/', views.phone, name='phone'),

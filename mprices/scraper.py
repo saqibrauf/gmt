@@ -14,38 +14,93 @@ for p in phones:
 		soup = BeautifulSoup(html, 'html.parser')
 
 		#Table Fields
-		os = soup.find(attrs={"data-spec": "os"}).next_element.strip()
-		dimensions = soup.find(attrs={"data-spec": "dimensions"}).next_element.strip()
-		weight = soup.find(attrs={"data-spec": "weight"}).next_element.strip()
-		sim = soup.find(attrs={"data-spec": "sim"}).next_element.strip()
-		colors = soup.find(attrs={"data-spec": "colors"}).next_element.strip()
-		cpu = soup.find(attrs={"data-spec": "cpu"}).next_element.strip()
-		chipset = soup.find(attrs={"data-spec": "chipset"}).next_element.strip()
-		gpu = soup.find(attrs={"data-spec": "gpu"}).next_element.strip()
-		technology = soup.find(attrs={"data-spec": "displaytype"}).next_element.strip()
-		size = soup.find(attrs={"data-spec": "displaysize"}).next_element.strip()
-		resolution = soup.find(attrs={"data-spec": "displayresolution"}).next_element.strip()
-
+		try:
+			os = soup.find(attrs={"data-spec": "os"}).next_element.strip()
+		except:
+			os = ''
+		try:
+			dimensions = soup.find(attrs={"data-spec": "dimensions"}).next_element.strip()
+		except:
+			dimensions = ''
+		try:
+			weight = soup.find(attrs={"data-spec": "weight"}).next_element.strip()
+		except:
+			weight = ''
+		try:
+			sim = soup.find(attrs={"data-spec": "sim"}).next_element.strip()
+		except:
+			sim = ''
+		try:
+			colors = soup.find(attrs={"data-spec": "colors"}).next_element.strip()
+		except:
+			colors = ''
+		try:
+			cpu = soup.find(attrs={"data-spec": "cpu"}).next_element.strip()
+		except:
+			cpu = ''
+		try:
+			chipset = soup.find(attrs={"data-spec": "chipset"}).next_element.strip()
+		except:
+			chipset = ''
+		try:
+			gpu = soup.find(attrs={"data-spec": "gpu"}).next_element.strip()
+		except:
+			gpu = ''
+		try:
+			technology = soup.find(attrs={"data-spec": "displaytype"}).next_element.strip()
+		except:
+			technology = ''
+		try:
+			size = soup.find(attrs={"data-spec": "displaysize"}).next_element.strip()
+		except:
+			size = ''
+		try:
+			resolution = soup.find(attrs={"data-spec": "displayresolution"}).next_element.strip()
+		except:
+			resolution = ''
 		try:
 			protection = soup.find(attrs={"data-spec": "displayprotection"}).next_element.strip()
 		except:
 			protection = ''
-
-		builtin = soup.find(attrs={"data-spec": "internalmemory"}).next_element.strip()
-		card = soup.find(attrs={"data-spec": "memoryslot"}).next_element.strip()
-
-		main_camera = soup.find(attrs={"data-spec": "cam1modules"}).next_element.strip()
-		c_qty = soup.find(attrs={"data-spec": "cam1modules"}).find_previous_sibling().get_text()
+		try:
+			builtin = soup.find(attrs={"data-spec": "internalmemory"}).next_element.strip()
+		except:
+			builtin = ''
+		try:
+			card = soup.find(attrs={"data-spec": "memoryslot"}).next_element.strip()
+		except:
+			card = ''
+		try:
+			main_camera = soup.find(attrs={"data-spec": "cam1modules"}).next_element.strip()
+		except:
+			main_camera = ''
+		try:
+			c_qty = soup.find(attrs={"data-spec": "cam1modules"}).find_previous_sibling().get_text()
+		except:
+			c_qty = ''
 		main_camera = c_qty + ', ' + main_camera
-
-		features = soup.find(attrs={"data-spec": "cam1features"}).next_element.strip()
-		video = soup.find(attrs={"data-spec": "cam1video"}).next_element.strip()
+		try:
+			features = soup.find(attrs={"data-spec": "cam1features"}).next_element.strip()
+		except:
+			features = ''
+		try:
+			video = soup.find(attrs={"data-spec": "cam1video"}).next_element.strip()
+		except:
+			video = ''
 		features = features + ', ' + video
-
-		front_camera = soup.find(attrs={"data-spec": "cam2modules"}).next_element.strip()
-		sensors = soup.find(attrs={"data-spec": "sensors"}).next_element.strip()
-		battery = soup.find(attrs={"data-spec": "batdescription1"}).next_element.strip()
-
+		try:
+			front_camera = soup.find(attrs={"data-spec": "cam2modules"}).next_element.strip()
+		except:
+			front_camera = ''
+		try:
+			sensors = soup.find(attrs={"data-spec": "sensors"}).next_element.strip()
+		except:
+			sensors = ''
+		try:
+			battery = soup.find(attrs={"data-spec": "batdescription1"}).next_element.strip()
+		except:
+			battery = ''
+			
 		"""
 		This date code is fuctional and working
 

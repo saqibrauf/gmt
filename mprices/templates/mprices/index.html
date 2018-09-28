@@ -9,63 +9,6 @@
 		<h1>Latest and Updated Mobile Phone Prices, Specs and Features</h1>
 		<p>Checkout the latest mobile prices, specifications and features. Updated on daily basis by taking information from online ecommerce stores and retailers in the country.</p>		
 	</div>
-	<div class="notification is-primary is-radiusless" style="padding: 1rem;">
-		<h2 class="is-size-4 has-text-white">Search by price</h2>
-		<form class="field" action="{% url 'index' %}" method="POST">
-			{% csrf_token %}
-			<div class="field columns">
-				<div class="control column">
-					<div class="select is-fullwidth">
-						<select name="min-price">
-							<option class="is-capitalized" value="0">Rs 0</option>
-							<option class="is-capitalized" value="5000">Rs 5000</option>
-							<option class="is-capitalized" value="10000" selected>Rs 10000</option>
-							<option class="is-capitalized" value="15000">Rs 15000</option>
-							<option class="is-capitalized" value="20000">Rs 20000</option>
-							<option class="is-capitalized" value="30000">Rs 30000</option>
-							<option class="is-capitalized" value="40000">Rs 40000</option>
-							<option class="is-capitalized" value="50000">Rs 50000</option>
-							<option class="is-capitalized" value="60000">Rs 60000</option>
-							<option class="is-capitalized" value="70000">Rs 70000</option>
-							<option class="is-capitalized" value="80000">Rs 80000</option>
-							<option class="is-capitalized" value="90000">Rs 90000</option>
-							<option class="is-capitalized" value="100000">Rs 100000</option>
-							<option class="is-capitalized" value="125000">Rs 125000</option>
-						</select>
-					</div>
-				</div>
-				<div class="control column">
-					<div class="select is-fullwidth">
-						<select name="max-price">
-							<option class="is-capitalized" value="5000">Rs 5000</option>
-							<option class="is-capitalized" value="10000">Rs 10000</option>
-							<option class="is-capitalized" value="15000">Rs 15000</option>
-							<option class="is-capitalized" value="20000">Rs 20000</option>
-							<option class="is-capitalized" value="30000" selected>Rs 30000</option>
-							<option class="is-capitalized" value="40000">Rs 40000</option>
-							<option class="is-capitalized" value="50000">Rs 50000</option>
-							<option class="is-capitalized" value="60000">Rs 60000</option>
-							<option class="is-capitalized" value="70000">Rs 70000</option>
-							<option class="is-capitalized" value="80000">Rs 80000</option>
-							<option class="is-capitalized" value="90000">Rs 90000</option>
-							<option class="is-capitalized" value="100000">Rs 100000</option>
-							<option class="is-capitalized" value="125000">Rs 125000</option>
-							<option class="is-capitalized" value="150000">Rs 150000</option>
-						</select>
-					</div>
-				</div>
-				<div class="control column is-narrow">
-					<input type="submit" class="button is-white" value="Search">
-				</div>
-			</div>
-		</form>	
-		{% if message %}
-			<p class="heading is-size-6" style="margin: .5rem 0;" ><strong>{{ message }}</strong></p>
-			{% if not phones %}
-				<p class="has-text-danger heading is-marginless">There is nothing to match your search results.</p>
-			{% endif %}
-		{% endif %}
-	</div>
 
 	<div class="columns is-multiline">
 		{% for p in phones %}
@@ -92,8 +35,9 @@
 			</div>
 		{% endfor %}
 	</div>
+
 	{% if phones.has_other_pages %}
-		<nav class="box is-radiusless pagination is-centered">
+		<nav class="box is-radiusless pagination is-centered is-medium">
 			{% if phones.has_previous %}
 				<a rel="prev" class="pagination-previous" href="?page={{ phones.previous_page_number }}">Previous</a>
 			{% else %}
@@ -116,9 +60,11 @@
 			</ul>
 		</nav>
 	{% endif %}
+	
 {% endblock %}
 
 {% block 'sidebar' %}
+	{{ block.super }}
 	<h3>Mobile Phone Brands</h2>  
     <ul class="is-marginless" style="list-style: none;">
         {%for b in sidebar_brands%}

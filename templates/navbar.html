@@ -1,8 +1,8 @@
 {% load static %}
 
-<div class="hero is-primary">
+<div class="hero is-dark">
     <div class="hero-head">
-        <nav class="navbar">
+        <nav class="navbar is-spaced">
             <div class="container is-fluid">
                 <div class="navbar-brand">
                     <a class="navbar-item" href="{% url 'index' %}">
@@ -15,7 +15,7 @@
                             <div class="column is-marginless">
                                 {% url 'index' as home_url %}
                                 {% if request.get_full_path == home_url %}
-                                    <h1 class="title is-marginless is-4" style="text-transform: uppercase;">Get Mobile Price</h1>
+                                    <h2 class="title is-marginless is-4" style="text-transform: uppercase;">Get Mobile Price</h2>
                                 {% else %}
                                     <p class="title is-marginless is-4" style="text-transform: uppercase;">Get Mobile Price</p>
                                 {% endif %}
@@ -29,23 +29,18 @@
                     </div>
                 </div>
                 <div id="navMain" class="navbar-menu">
-                    <div class="navbar-start">
-                        <div class="navbar-item has-dropdown is-hoverable is-hidden">
-                            <a class="navbar-link">
-                                Docs
-                            </a>
-
-                            <div class="navbar-dropdown">
-                              <a class="navbar-item">
-                                Overview
-                              </a>
-                              <a class="navbar-item">
-                                Elements
-                              </a>
-                              <a class="navbar-item">
-                                Components
-                              </a>
+                    <div class="navbar-start" style="flex-grow: 1;">
+                        <div class="navbar-item" style="flex-grow: 1;">
+                            <div style="position: relative; width: 100%;">
+                                <div class="control">
+                                    <input class="input is-medium" id="phones" placeholder="Search For Mobile Model" style="border-radius: 0;">
+                                </div>   
+                                <div id="search" class="notification is-radiusless is-hidden" style="position: absolute; z-index: 99; right: 1px; left: 1px;">
+                                    <button class="delete is-large"></button>
+                                    <div class="has-text-black"></div>
+                                </div>   
                             </div>
+                        </div>
                         </div>
                     </div>
                 </div>
