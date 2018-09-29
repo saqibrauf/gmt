@@ -17,5 +17,6 @@ class PhoneAdmin(SummernoteModelAdmin):
     summernote_fields = '__all__'    
     list_display = ('phone_model', 'price', 'release', 'brand_name')
     autocomplete_fields = ['brand_name']
+    search_fields = ['phone_model']
 
 admin.site.register(Phone, PhoneAdmin)

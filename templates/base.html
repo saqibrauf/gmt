@@ -2,7 +2,7 @@
 {% load static %}
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="has-navbar-fixed-top">
 
 <head>
     <meta charset="utf-8">
@@ -21,19 +21,19 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-47699964-5"></script>
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
 
-      gtag('config', 'UA-47699964-5');
-  </script>
-  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-  <script>
+        gtag('config', 'UA-47699964-5');
+    </script>
+    <!--script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
         (adsbygoogle = window.adsbygoogle || []).push({
             google_ad_client: "ca-pub-7688661235566872",
             enable_page_level_ads: true
         });
-    </script>
+    </script-->
     <script type="application/ld+json">
         {
             "@context": "http://schema.org",
@@ -44,10 +44,29 @@
     </script>
 </head>
 
-<body class="content has-background-white is-marginless">
+<body class="content has-background-white is-marginless" style="position: relative;">
 
 
     {% include 'navbar.html' %}
+
+    <div id="search-by-phone" class="hero is-fullheight is-overlay has-background-white is-hidden" style="z-index: 99; position: fixed;">
+        <div class="section hero-body" style="position: relative;">
+            <div class="container">
+                <div class="field has-addons">
+                    <div class="control is-expanded">
+                        <input class="input is-large" id="search-by-phone-query" placeholder="Search For Mobile Model">
+                    </div>
+                    <div class="control">
+                        <button id="search-by-phone-btn" class="button is-large is-primary">Close</button>
+                    </div>
+                </div>
+                <div id="search-by-phone-result" class="is-hidden">
+                    <div class="has-text-black"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
 
     <header>{% block 'above_content' %}{% endblock %}</header>
 
@@ -58,7 +77,7 @@
                     {% block 'content' %}{% endblock %}
                 </main>
             </div>
-            <div class="column is-3-desktop is-paddingless is-marginless has-background-light">                 
+            <div class="column is-3-desktop is-paddingless is-marginless">                 
                 <aside class="section">
                     <div>
                         <h2 class="is-size-4">Search by price</h2>
@@ -127,7 +146,7 @@
             </div>     
         </div>
     </div>
-    <a href="#" class="scrollToTop button is-medium is-primary is-rounded">TOP</a>
+    <a href="#" class="scrollToTop button is-medium is-primary">TOP</a>
 {% block 'below_content' %}{% endblock %}
 
 <footer id="footer" class="footer has-background-black">
@@ -144,8 +163,8 @@
     $(document).ready(function(){
 
         //Ajax call to search phone models
-        $('#phones').keyup(function(){       
-            var term = $('#phones').val();
+        $('#search-by-phone-query').keyup(function(){       
+            var term = $('#search-by-phone-query').val();
             $.get({
                 url: '{% url 'get_phone' %}',
                 data: {
@@ -154,14 +173,14 @@
                 dataType: 'json',
                 success: function (data) {
                     if (data != 'none') {
-                        $('#search div').empty();
-                        $('#search').removeClass('is-hidden');
+                        $('#search-by-phone-result div').empty();
+                        $('#search-by-phone-result').removeClass('is-hidden');
                         $.each(data, function(i, v) {
                             var html = '<p class="is-uppercase"><a class="is-block" href="' + v.url + '">' + v.model + '</a></p>'
-                            $('#search div').append(html);
+                            $('#search-by-phone-result div').append(html);
                         });
                     } else {
-                        $('#search').addClass('is-hidden');
+                        $('#search-by-phone-result').addClass('is-hidden');
                     }                    
                 }
             });
@@ -182,12 +201,16 @@
             return false;
         });
 
-        $('.delete').click(function(){
-            $('#search').addClass('is-hidden');
-            $('#search p').empty();
-            $('#phones').val('');
+        $('#search-by-phone-btn').click(function(){
+            $('#search-by-phone').addClass('is-hidden');
+            $('#search-by-phone-result p').empty();
+            $('#search-by-phone-result div').empty();
+            $('#search-by-phone-query').val('');
         });
 
+        $('.mobile-search').click(function(){
+            $('#search-by-phone').removeClass('is-hidden');
+        })
     });
 </script>
 

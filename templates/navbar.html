@@ -1,50 +1,44 @@
 {% load static %}
 
-<div class="hero is-dark">
-    <div class="hero-head">
-        <nav class="navbar is-spaced">
-            <div class="container is-fluid">
-                <div class="navbar-brand">
-                    <a class="navbar-item" href="{% url 'index' %}">
-                        <div class="columns is-mobile is-vcentered is-paddingless is-marginless">
-                            <div class="column is-narrow is-marginless is-paddingless">
-                                <figure class="image is-48x48 is-marginless">
-                                    <img src="{% static 'images/smartphone12.png' %}" alt="Get Mobile Price">
-                                </figure>
-                            </div>
-                            <div class="column is-marginless">
-                                {% url 'index' as home_url %}
-                                {% if request.get_full_path == home_url %}
-                                    <h2 class="title is-marginless is-4" style="text-transform: uppercase;">Get Mobile Price</h2>
-                                {% else %}
-                                    <p class="title is-marginless is-4" style="text-transform: uppercase;">Get Mobile Price</p>
-                                {% endif %}
-                            </div>
-                        </div>
-                    </a>
-                    <div class="navbar-burger burger" data-target="navMain">
-                        <span></span>
-                        <span></span>
-                        <span></span>
+<nav class="navbar is-dark is-fixed-top">
+    <div class="container is-fluid">
+        <div class="navbar-brand" style="flex-grow: 1; justify-content: space-between;">
+            <a class="navbar-item" href="{% url 'index' %}">
+                <div class="columns is-mobile is-vcentered is-paddingless is-marginless">
+                    <div class="column is-narrow is-marginless is-paddingless">
+                        <figure class="image is-48x48 is-marginless">
+                            <img src="{% static 'images/smartphone12.png' %}" alt="Get Mobile Price">
+                        </figure>
+                    </div>
+                    <div class="column is-marginless">
+                        {% url 'index' as home_url %}
+                        {% if request.get_full_path == home_url %}
+                            <h2 class="title is-marginless is-4 has-text-white" style="text-transform: uppercase;">Get Mobile Price</h2>
+                        {% else %}
+                            <p class="title is-marginless is-4 has-text-white" style="text-transform: uppercase;">Get Mobile Price</p>
+                        {% endif %}
                     </div>
                 </div>
-                <div id="navMain" class="navbar-menu">
-                    <div class="navbar-start" style="flex-grow: 1;">
-                        <div class="navbar-item" style="flex-grow: 1;">
-                            <div style="position: relative; width: 100%;">
-                                <div class="control">
-                                    <input class="input is-medium" id="phones" placeholder="Search For Mobile Model" style="border-radius: 0;">
-                                </div>   
-                                <div id="search" class="notification is-radiusless is-hidden" style="position: absolute; z-index: 99; right: 1px; left: 1px;">
-                                    <button class="delete is-large"></button>
-                                    <div class="has-text-black"></div>
-                                </div>   
-                            </div>
-                        </div>
-                        </div>
+            </a>
+            <div class="navbar-item">
+                <div class="control">
+                    <button class="button is-primary mobile-search">Search Mobile</button>
+                </div>
+            </div>
+            <div class="navbar-burger burger is-hidden" data-target="navMain">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        <div id="navMain" class="navbar-menu is-hidden">
+            <div class="navbar-end">
+                <div class="navbar-item">
+                    <div class="control">
+                        <button class="button is-primary mobile-search">Search Mobile</button>
                     </div>
                 </div>
             </div>
-        </nav>
+        </div>
     </div>
-</div>
+</nav>
