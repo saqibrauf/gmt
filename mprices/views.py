@@ -113,7 +113,7 @@ def get_phone(request):
 	if request.GET:
 		query = request.GET.get('term')
 		if query:
-			p_model = Phone.objects.filter(phone_model__icontains=query)
+			p_model = Phone.objects.filter(phone_model__icontains=query)[:5]
 			
 			for p in p_model:
 				url = reverse('phone', kwargs={'slug': p.phone_model_slug})
