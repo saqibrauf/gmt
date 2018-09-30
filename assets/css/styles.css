@@ -5,14 +5,14 @@
 .content h4, h4,
 .content h5, h5,
 .content h6, h6 {
-	font-family: 'Asap Condensed', sans-serif !important;
+	font-family: 'Saira Extra Condensed', sans-serif !important;
 	font-weight: 700 !important;
 	text-transform: capitalize;
 	color: black;
 }
 
-body {
-	font-family: 'Asap', sans-serif !important;
+body, button, input, select, textarea {
+	font-family: 'Saira', sans-serif !important;
 	font-weight: 400 !important;
 }
 

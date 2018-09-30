@@ -13,7 +13,7 @@
     <title>{% block 'title' %}Mobile Phone Prices{% endblock %}</title>
     <meta name="news_keywords" content="{% block 'news' %}{% endblock %}">
     <meta name="description" content="{% block 'description' %}{% endblock %}">
-    <link href="https://fonts.googleapis.com/css?family=Asap:400,600|Asap+Condensed:700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:700|Saira:400" rel="stylesheet">
     <link rel="icon" href="{% static 'images/frame.png' %}" type="image/png">
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
     <link rel="stylesheet" href="{% static 'css/bulma.css' %}">
@@ -50,8 +50,8 @@
     {% include 'navbar.html' %}
 
     <div id="search-by-phone" class="is-overlay has-background-white is-hidden" style="z-index: 99; position: fixed;">
-        <div class="section" style="position: relative;">
-            <div class="container">
+        <div style="position: relative;">
+            <div class="container" style="padding: 1.5rem;">
                 <div class="field has-addons">
                     <div class="control is-expanded">
                         <input class="input is-large" id="search-by-phone-query" placeholder="Search For Mobile Model">
@@ -72,14 +72,15 @@
 
     <div id="content" class="container is-fluid" style="padding: 0;">
         <div class="columns is-desktop is-paddingless is-marginless">
-            <div class="column is-9-desktop is-paddingless is-marginless">
+            <div class="column is-9-desktop is-paddingless is-marginless" style="border-right: 1px solid #e6e6e6;">
+                {% block 'pageheading' %}{% endblock %}
                 <main class="section">
                     {% block 'content' %}{% endblock %}
                 </main>
             </div>
             <div class="column is-3-desktop is-paddingless is-marginless">                 
                 <aside class="section">
-                    <div>
+                    <div class="is-hidden">
                         <h2 class="is-size-4">Search by price</h2>
                         <form action="{% url 'search' %}" method="GET">
                             <div class="field">
@@ -128,7 +129,7 @@
                             </div>
                             <div class="field">
                                 <div class="control">
-                                    <input type="submit" class="button is-medium is-primary" value="Search">
+                                    <input type="submit" class="button is-medium is-danger" value="Search">
                                 </div>
                             </div>
                         </form> 
@@ -137,7 +138,7 @@
                             {% if not phones %}
                                 <p class="has-text-danger heading is-marginless">There is nothing to match your search results.</p>
                             {% endif %}
-                        {% endif %}
+                        {% endif %}<!--Search-->
                     </div>
                     {% block 'sidebar' %}
 
@@ -146,7 +147,7 @@
             </div>     
         </div>
     </div>
-    <a href="#" class="scrollToTop button is-medium is-primary">TOP</a>
+    <a href="#" class="scrollToTop button is-medium is-danger">TOP</a>
 {% block 'below_content' %}{% endblock %}
 
 <footer id="footer" class="footer has-background-black">
@@ -176,7 +177,7 @@
                         $('#search-by-phone-result div').empty();
                         $('#search-by-phone-result').removeClass('is-hidden');
                         $.each(data, function(i, v) {
-                            var html = '<p class="is-uppercase"><a class="is-block" href="' + v.url + '">' + v.model + '</a></p>'
+                            var html = '<p class="is-uppercase"><a class="is-block has-text-grey" href="' + v.url + '">' + v.model + '</a></p>'
                             $('#search-by-phone-result div').append(html);
                         });
                     } else {

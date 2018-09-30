@@ -52,7 +52,7 @@ def search(request):
 		}
 
 	else:
-		message = 'Start your Search'	
+		message = ''	
 		sidebar_brands = Brand.objects.all().order_by('brand_name')
 		context = {
 			'sidebar_brands' : sidebar_brands,
@@ -113,7 +113,7 @@ def get_phone(request):
 	if request.GET:
 		query = request.GET.get('term')
 		if query:
-			p_model = Phone.objects.filter(phone_model__icontains=query)[:5]
+			p_model = Phone.objects.filter(phone_model__icontains=query)[:8]
 			
 			for p in p_model:
 				url = reverse('phone', kwargs={'slug': p.phone_model_slug})

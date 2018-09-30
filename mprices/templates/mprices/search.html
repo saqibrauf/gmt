@@ -4,65 +4,66 @@
 {% block 'description' %}Checkout the latest mobiles phones, specifications and features. We are a trusted source to get all mobile phone prices, specification and features. We provide you updated information on daily basis by taking information from online ecommerce stores and retailers in country.{% endblock %}
 {% block 'canonical' %}<link rel="canonical" href="{{request.build_absolute_uri}}" />{% endblock %}
 
-{% block 'content' %}
-	<div class="content">
-		<h1>Search by price</h1>	
-	</div>
-	<div class="notification is-radiusless" style="padding: 1rem;">
-		<form class="field" action="{% url 'search' %}" method="GET">
-			<div class="field columns">
-				<div class="control column">
-					<div class="select is-fullwidth is-large">
-						<select name="minprice">
-							<option class="is-capitalized" value="0">Rs 0</option>
-							<option class="is-capitalized" value="5000">Rs 5000</option>
-							<option class="is-capitalized" value="10000" selected>Rs 10000</option>
-							<option class="is-capitalized" value="15000">Rs 15000</option>
-							<option class="is-capitalized" value="20000">Rs 20000</option>
-							<option class="is-capitalized" value="30000">Rs 30000</option>
-							<option class="is-capitalized" value="40000">Rs 40000</option>
-							<option class="is-capitalized" value="50000">Rs 50000</option>
-							<option class="is-capitalized" value="60000">Rs 60000</option>
-							<option class="is-capitalized" value="70000">Rs 70000</option>
-							<option class="is-capitalized" value="80000">Rs 80000</option>
-							<option class="is-capitalized" value="90000">Rs 90000</option>
-							<option class="is-capitalized" value="100000">Rs 100000</option>
-							<option class="is-capitalized" value="125000">Rs 125000</option>
-						</select>
-					</div>
-				</div>
-				<div class="control column">
-					<div class="select is-fullwidth is-large">
-						<select name="maxprice">
-							<option class="is-capitalized" value="5000">Rs 5000</option>
-							<option class="is-capitalized" value="10000">Rs 10000</option>
-							<option class="is-capitalized" value="15000">Rs 15000</option>
-							<option class="is-capitalized" value="20000">Rs 20000</option>
-							<option class="is-capitalized" value="30000" selected>Rs 30000</option>
-							<option class="is-capitalized" value="40000">Rs 40000</option>
-							<option class="is-capitalized" value="50000">Rs 50000</option>
-							<option class="is-capitalized" value="60000">Rs 60000</option>
-							<option class="is-capitalized" value="70000">Rs 70000</option>
-							<option class="is-capitalized" value="80000">Rs 80000</option>
-							<option class="is-capitalized" value="90000">Rs 90000</option>
-							<option class="is-capitalized" value="100000">Rs 100000</option>
-							<option class="is-capitalized" value="125000">Rs 125000</option>
-							<option class="is-capitalized" value="150000">Rs 150000</option>
-						</select>
-					</div>
-				</div>
-				<div class="control column is-narrow">
-					<input type="submit" class="button is-dark is-large" value="Search">
+{% block 'pageheading' %}
+<div class="section has-background-light">
+	<h1>Search by price</h1>	
+	<form class="field" action="{% url 'search' %}" method="GET">
+		<div class="field columns">
+			<div class="control column">
+				<div class="select is-fullwidth is-large">
+					<select name="minprice">
+						<option class="is-capitalized" value="0">Rs 0</option>
+						<option class="is-capitalized" value="5000">Rs 5000</option>
+						<option class="is-capitalized" value="10000" selected>Rs 10000</option>
+						<option class="is-capitalized" value="15000">Rs 15000</option>
+						<option class="is-capitalized" value="20000">Rs 20000</option>
+						<option class="is-capitalized" value="30000">Rs 30000</option>
+						<option class="is-capitalized" value="40000">Rs 40000</option>
+						<option class="is-capitalized" value="50000">Rs 50000</option>
+						<option class="is-capitalized" value="60000">Rs 60000</option>
+						<option class="is-capitalized" value="70000">Rs 70000</option>
+						<option class="is-capitalized" value="80000">Rs 80000</option>
+						<option class="is-capitalized" value="90000">Rs 90000</option>
+						<option class="is-capitalized" value="100000">Rs 100000</option>
+						<option class="is-capitalized" value="125000">Rs 125000</option>
+					</select>
 				</div>
 			</div>
-		</form>	
-		{% if message %}
-			<p class="heading is-size-6" style="margin: .5rem 0;" ><strong>{{ message }}</strong></p>
-			{% if not phones %}
-				<p class="has-text-danger heading is-marginless">There is nothing to match your search results.</p>
-			{% endif %}
+			<div class="control column">
+				<div class="select is-fullwidth is-large">
+					<select name="maxprice">
+						<option class="is-capitalized" value="5000">Rs 5000</option>
+						<option class="is-capitalized" value="10000">Rs 10000</option>
+						<option class="is-capitalized" value="15000">Rs 15000</option>
+						<option class="is-capitalized" value="20000">Rs 20000</option>
+						<option class="is-capitalized" value="30000" selected>Rs 30000</option>
+						<option class="is-capitalized" value="40000">Rs 40000</option>
+						<option class="is-capitalized" value="50000">Rs 50000</option>
+						<option class="is-capitalized" value="60000">Rs 60000</option>
+						<option class="is-capitalized" value="70000">Rs 70000</option>
+						<option class="is-capitalized" value="80000">Rs 80000</option>
+						<option class="is-capitalized" value="90000">Rs 90000</option>
+						<option class="is-capitalized" value="100000">Rs 100000</option>
+						<option class="is-capitalized" value="125000">Rs 125000</option>
+						<option class="is-capitalized" value="150000">Rs 150000</option>
+					</select>
+				</div>
+			</div>
+			<div class="control column is-narrow">
+				<input type="submit" class="button is-danger is-large" value="Search">
+			</div>
+		</div>
+	</form>	
+	{% if request.GET %}
+		<p class="heading is-size-6" style="margin: .5rem 0;" ><strong>{{ message }}</strong></p>
+		{% if not phones %}
+			<p class="has-text-danger heading is-marginless">There is nothing to match your search results.</p>
 		{% endif %}
-	</div>
+	{% endif %}	
+</div>
+{% endblock %}
+
+{% block 'content' %}
 
 	<div class="columns is-multiline">
 		{% for p in phones %}
@@ -90,7 +91,7 @@
 		{% endfor %}
 	</div>
 	{% if phones.has_other_pages %}
-		<nav class="box is-radiusless pagination is-centered is-medium">
+		<nav class="box is-radiusless pagination is-centered is-small">
 			{% if phones.has_previous %}
 				<a rel="prev" class="pagination-previous" href="?page={{ phones.previous_page_number }}{% if request.GET %}&minprice={{ request.GET.minprice }}&maxprice={{ request.GET.maxprice }}{% endif %}">Previous</a>
 			{% else %}

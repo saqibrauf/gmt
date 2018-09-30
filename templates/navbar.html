@@ -1,11 +1,11 @@
 {% load static %}
 
-<nav class="navbar is-dark is-fixed-top">
+<nav class="navbar is-info is-fixed-top">
     <div class="container is-fluid">
         <div class="navbar-brand" style="flex-grow: 1; justify-content: space-between;">
             <a class="navbar-item" href="{% url 'index' %}">
                 <div class="columns is-mobile is-vcentered is-paddingless is-marginless">
-                    <div class="column is-narrow is-marginless is-paddingless is-hidden-mobile">
+                    <div class="column is-narrow is-marginless is-paddingless is-hidden">
                         <figure class="image is-48x48 is-marginless">
                             <img src="{% static 'images/smartphone12.png' %}" alt="Get Mobile Price">
                         </figure>
@@ -13,18 +13,21 @@
                     <div class="column is-marginless">
                         {% url 'index' as home_url %}
                         {% if request.get_full_path == home_url %}
-                            <h2 class="is-marginless is-size-4 is-size-5-mobile has-text-white" style="text-transform: uppercase;">Get Mobile Price</h2>
+                            <h2 class="is-marginless is-size-4 has-text-white" style="text-transform: uppercase;">Get Mobile Price</h2>
                         {% else %}
-                            <p class="is-marginless is-size-4 is-size-5-mobile has-text-white" style="text-transform: uppercase;">Get Mobile Price</p>
+                            <h3 class="is-marginless is-size-4 has-text-white" style="text-transform: uppercase;">Get Mobile Price</h3>
                         {% endif %}
                     </div>
                 </div>
             </a>
             <div class="navbar-item">
-                <div class="control">
-                    <button class="button is-primary mobile-search">Search Mobile</button>
-                </div>
-            </div>
+                <a class="navbar-item button is-primary is-small" href="{% url 'search' %}">Search By Price</a>
+                <a class="navbar-item mobile-search">
+                    <figure class="image is-32x32 is-marginless">
+                        <img  src="{% static 'images/search.png' %}" alt="Get Mobile Price">
+                    </figure>
+                </a> 
+            </div> 
             <div class="navbar-burger burger is-hidden" data-target="navMain">
                 <span></span>
                 <span></span>

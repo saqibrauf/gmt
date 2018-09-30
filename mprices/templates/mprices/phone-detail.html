@@ -4,11 +4,14 @@
 {% block 'description' %}Checkout the latest {{ phone.phone_model|title }} Price{% if sidebar_location %} in {{sidebar_location.location_name|title}}{% endif %}. Get {{ phone.phone_model|title }} specification and features. Updated on daily basis by taking information from online e-commerce stores and retailers{% if sidebar_location %} in {{sidebar_location.location_name|title}}{% endif %}.{% endblock %}
 {% block 'canonical' %}<link rel="canonical" href="{{request.build_absolute_uri}}" />{% endblock %}
 
+{% block 'pageheading' %}
+<div class="section has-background-light">
+	<h1>{{ phone.phone_model|title }} Price{% if sidebar_location %} in {{sidebar_location.location_name|title}}{% endif %}</h1>
+	<p>Checkout the latest <strong>{{ phone.phone_model|title }} Price{% if sidebar_location %} in {{sidebar_location.location_name|title}}{% endif %}.</strong> Get <strong>{{ phone.phone_model|title }} specification and features.</strong> Updated on daily basis by taking information from online e-commerce stores and retailers{% if sidebar_location %} in {{sidebar_location.location_name|title}}{% endif %}.</strong></p>		
+</div>
+{% endblock %}
+
 {% block 'content' %}
-	<div class="content">
-		<h1>{{ phone.phone_model|title }} Price{% if sidebar_location %} in {{sidebar_location.location_name|title}}{% endif %}</h1>
-		<p>Checkout the latest <strong>{{ phone.phone_model|title }} Price{% if sidebar_location %} in {{sidebar_location.location_name|title}}{% endif %}.</strong> Get <strong>{{ phone.phone_model|title }} specification and features.</strong> Updated on daily basis by taking information from online e-commerce stores and retailers{% if sidebar_location %} in {{sidebar_location.location_name|title}}{% endif %}.</strong></p>
-	</div>
 	
 	<div class="columns is-desktop" itemscope itemtype="http://schema.org/Product">
 		<div itemprop="brand" class="is-hidden" itemscope itemtype="http://schema.org/Thing">
