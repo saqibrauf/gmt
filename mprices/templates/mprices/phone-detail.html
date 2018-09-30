@@ -30,8 +30,8 @@
 			<table class="table is-bordered is-fullwidth is-uppercase is-size-5">
 				<tbody class="is-size-5-desktop has-background-white-ter">
 					<tr itemprop="offers" itemscope itemtype="http://schema.org/Offer">
-						<th class="">Price</th>
-						<td class="">Rs <span>{{phone.price|intcomma}}</span><meta itemprop="priceCurrency" content="PKR" /><meta itemprop="price" content="{{phone.price}}" /></td>
+						<th class="has-background-info has-text-white">Price</th>
+						<td class="has-background-primary has-text-white">Rs <span>{{phone.price|intcomma}}</span><meta itemprop="priceCurrency" content="PKR" /><meta itemprop="price" content="{{phone.price}}" /></td>
 					</tr>
 				</tbody>				
 			</table>
@@ -191,7 +191,7 @@
 
 {% block 'sidebar' %}
 	{{ block.super }}
-    <h2>Mobile Phone Brands</h2>  
+    <h3 class="is-marginless">Mobile Phone Brands</h3><hr>
     <ul class="is-marginless" style="list-style: none;">
         {%for b in sidebar_brands%}
         	{% if sidebar_location %}

@@ -10,7 +10,7 @@
 	<form class="field" action="{% url 'search' %}" method="GET">
 		<div class="field columns">
 			<div class="control column">
-				<div class="select is-fullwidth is-large">
+				<div id="minprice" class="select is-fullwidth is-large">
 					<select name="minprice">
 						<option class="is-capitalized" value="0">Rs 0</option>
 						<option class="is-capitalized" value="5000">Rs 5000</option>
@@ -30,7 +30,7 @@
 				</div>
 			</div>
 			<div class="control column">
-				<div class="select is-fullwidth is-large">
+				<div id="maxprice" class="select is-fullwidth is-large">
 					<select name="maxprice">
 						<option class="is-capitalized" value="5000">Rs 5000</option>
 						<option class="is-capitalized" value="10000">Rs 10000</option>
@@ -91,7 +91,7 @@
 		{% endfor %}
 	</div>
 	{% if phones.has_other_pages %}
-		<nav class="box is-radiusless pagination is-centered is-small">
+		<nav class="box is-radiusless pagination is-centered">
 			{% if phones.has_previous %}
 				<a rel="prev" class="pagination-previous" href="?page={{ phones.previous_page_number }}{% if request.GET %}&minprice={{ request.GET.minprice }}&maxprice={{ request.GET.maxprice }}{% endif %}">Previous</a>
 			{% else %}
@@ -118,7 +118,7 @@
 
 {% block 'sidebar' %}
 	{{ block.super }}
-	<h3>Mobile Phone Brands</h2>  
+	<h3 class="is-marginless">Mobile Phone Brands</h2><hr>
     <ul class="is-marginless" style="list-style: none;">
         {%for b in sidebar_brands%}
             <li class="sidebar-list"><a href="{% url 'brand' slug=b.brand_slug  %}">{{b.brand_name|title}} Mobile Prices</a></li>
@@ -126,4 +126,19 @@
     </ul> 
     <hr>
     <div class="addthis_inline_share_toolbox"></div>
+{% endblock %}
+
+{% block 'scripts' %}
+	{% if request.GET %}
+		<script type="text/javascript">
+
+			$(document).ready(function(){
+
+				$("#minprice select").val("{{ request.GET.minprice }}");
+				$("#maxprice select").val("{{ request.GET.maxprice }}");
+
+			});
+
+		</script>
+	{% endif %}
 {% endblock %}

@@ -78,6 +78,7 @@
                     {% block 'content' %}{% endblock %}
                 </main>
             </div>
+            <hr class="is-hidden-desktop is-marginless">
             <div class="column is-3-desktop is-paddingless is-marginless">                 
                 <aside class="section">
                     <div class="is-hidden">
@@ -187,6 +188,17 @@
             });
         });
 
+        $('#search-by-phone-btn').click(function(){
+            $('#search-by-phone').addClass('is-hidden');
+            $('#search-by-phone-result p').empty();
+            $('#search-by-phone-result div').empty();
+            $('#search-by-phone-query').val('');
+        });
+
+        $('.mobile-search').click(function(){
+            $('#search-by-phone').removeClass('is-hidden');
+        })
+
         //Check to see if the window is top if not then display button
         $(window).scroll(function(){
             if ($(this).scrollTop() > 100) {
@@ -201,18 +213,8 @@
             $('html, body').animate({scrollTop : 0},800);
             return false;
         });
-
-        $('#search-by-phone-btn').click(function(){
-            $('#search-by-phone').addClass('is-hidden');
-            $('#search-by-phone-result p').empty();
-            $('#search-by-phone-result div').empty();
-            $('#search-by-phone-query').val('');
-        });
-
-        $('.mobile-search').click(function(){
-            $('#search-by-phone').removeClass('is-hidden');
-        })
     });
+    
 </script>
 
   {% block 'scripts' %}{% endblock %}
