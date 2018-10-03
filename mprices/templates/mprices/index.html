@@ -23,11 +23,11 @@
 							<img itemprop="image" src="{{p.phone_image.url}}" alt="{{p.phone_model|title}}" height="212">	
 						</div>
 						<div class="column desc">
-							<h2 itemprop="name" class="is-marginless is-size-5 has-text-black">{{p.phone_model|title}}</h2>
-							<p itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="is-size-3 is-marginless has-text-weight-bold has-text-primary">
-								<span>Rs {{p.price|intcomma}}</span>
+							<h2 itemprop="name" class="is-marginless is-size-4 has-text-black">{{p.phone_model|title}}</h2>
+							<p itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="is-size-5 is-marginless has-text-weight-bold has-text-primary">
+								<span>USD {{p.price|intcomma}}</span>
 								<meta itemprop="price" content="{{p.price}}" />
-								<meta itemprop="priceCurrency" content="PKR" />
+								<meta itemprop="priceCurrency" content="USD" />
 							</p>
 							<div class="has-text-black is-size-7" itemprop="description">{{p.description|truncatewords:150|safe}}</div>
 						</div>

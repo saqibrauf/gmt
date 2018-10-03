@@ -12,40 +12,40 @@
 			<div class="control column">
 				<div id="minprice" class="select is-fullwidth is-large">
 					<select name="minprice">
-						<option class="is-capitalized" value="0">Rs 0</option>
-						<option class="is-capitalized" value="5000">Rs 5000</option>
-						<option class="is-capitalized" value="10000" selected>Rs 10000</option>
-						<option class="is-capitalized" value="15000">Rs 15000</option>
-						<option class="is-capitalized" value="20000">Rs 20000</option>
-						<option class="is-capitalized" value="30000">Rs 30000</option>
-						<option class="is-capitalized" value="40000">Rs 40000</option>
-						<option class="is-capitalized" value="50000">Rs 50000</option>
-						<option class="is-capitalized" value="60000">Rs 60000</option>
-						<option class="is-capitalized" value="70000">Rs 70000</option>
-						<option class="is-capitalized" value="80000">Rs 80000</option>
-						<option class="is-capitalized" value="90000">Rs 90000</option>
-						<option class="is-capitalized" value="100000">Rs 100000</option>
-						<option class="is-capitalized" value="125000">Rs 125000</option>
+						<option class="is-capitalized" value="0">0</option>
+						<option class="is-capitalized" value="5000">5000</option>
+						<option class="is-capitalized" value="10000" selected>10000</option>
+						<option class="is-capitalized" value="15000">15000</option>
+						<option class="is-capitalized" value="20000">20000</option>
+						<option class="is-capitalized" value="30000">30000</option>
+						<option class="is-capitalized" value="40000">40000</option>
+						<option class="is-capitalized" value="50000">50000</option>
+						<option class="is-capitalized" value="60000">60000</option>
+						<option class="is-capitalized" value="70000">70000</option>
+						<option class="is-capitalized" value="80000">80000</option>
+						<option class="is-capitalized" value="90000">90000</option>
+						<option class="is-capitalized" value="100000">100000</option>
+						<option class="is-capitalized" value="125000">125000</option>
 					</select>
 				</div>
 			</div>
 			<div class="control column">
 				<div id="maxprice" class="select is-fullwidth is-large">
 					<select name="maxprice">
-						<option class="is-capitalized" value="5000">Rs 5000</option>
-						<option class="is-capitalized" value="10000">Rs 10000</option>
-						<option class="is-capitalized" value="15000">Rs 15000</option>
-						<option class="is-capitalized" value="20000">Rs 20000</option>
-						<option class="is-capitalized" value="30000" selected>Rs 30000</option>
-						<option class="is-capitalized" value="40000">Rs 40000</option>
-						<option class="is-capitalized" value="50000">Rs 50000</option>
-						<option class="is-capitalized" value="60000">Rs 60000</option>
-						<option class="is-capitalized" value="70000">Rs 70000</option>
-						<option class="is-capitalized" value="80000">Rs 80000</option>
-						<option class="is-capitalized" value="90000">Rs 90000</option>
-						<option class="is-capitalized" value="100000">Rs 100000</option>
-						<option class="is-capitalized" value="125000">Rs 125000</option>
-						<option class="is-capitalized" value="150000">Rs 150000</option>
+						<option class="is-capitalized" value="5000">5000</option>
+						<option class="is-capitalized" value="10000">10000</option>
+						<option class="is-capitalized" value="15000">15000</option>
+						<option class="is-capitalized" value="20000">20000</option>
+						<option class="is-capitalized" value="30000" selected>30000</option>
+						<option class="is-capitalized" value="40000">40000</option>
+						<option class="is-capitalized" value="50000">50000</option>
+						<option class="is-capitalized" value="60000">60000</option>
+						<option class="is-capitalized" value="70000">70000</option>
+						<option class="is-capitalized" value="80000">80000</option>
+						<option class="is-capitalized" value="90000">90000</option>
+						<option class="is-capitalized" value="100000">100000</option>
+						<option class="is-capitalized" value="125000">125000</option>
+						<option class="is-capitalized" value="150000">150000</option>
 					</select>
 				</div>
 			</div>
@@ -74,11 +74,11 @@
 							<img itemprop="image" src="{{p.phone_image.url}}" alt="{{p.phone_model|title}}" height="212">	
 						</div>
 						<div class="column desc">
-							<h2 itemprop="name" class="is-marginless is-size-5 has-text-black">{{p.phone_model|title}}</h2>
-							<p itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="is-size-3 is-marginless has-text-weight-bold has-text-primary">
-								<span>Rs {{p.price|intcomma}}</span>
+							<h2 itemprop="name" class="is-marginless is-size-4 has-text-black">{{p.phone_model|title}}</h2>
+							<p itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="is-size-5 is-marginless has-text-weight-bold has-text-primary">
+								<span>USD {{p.price|intcomma}}</span>
 								<meta itemprop="price" content="{{p.price}}" />
-								<meta itemprop="priceCurrency" content="PKR" />
+								<meta itemprop="priceCurrency" content="USD" />
 							</p>
 							<div class="has-text-black is-size-7" itemprop="description">{{p.description|truncatewords:150|safe}}</div>
 						</div>

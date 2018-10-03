@@ -22,8 +22,8 @@
 				<img src="{{phone.phone_image.url}}"" alt="{{phone.phone_model|title}}" itemprop="image" height="212">						
 			</div>
 			<div class="box is-radiusless has-background-white-ter has-text-centered">
-				<h2 class="is-marginless is-size-5 has-text-black" itemprop="name">{{phone.phone_model|title}}</h2>
-				<p class="is-size-4 has-text-weight-bold has-text-primary">Rs {{phone.price|intcomma}}</p>
+				<h2 class="is-marginless is-size-4 has-text-black" itemprop="name">{{phone.phone_model|title}}</h2>
+				<p class="is-size-4 has-text-weight-bold has-text-primary">USD {{phone.price|intcomma}}</p>
 			</div>		
 		</div>
 		<div class="column">			
@@ -31,7 +31,7 @@
 				<tbody class="is-size-5-desktop has-background-white-ter">
 					<tr itemprop="offers" itemscope itemtype="http://schema.org/Offer">
 						<th class="has-background-info has-text-white">Price</th>
-						<td class="has-background-primary has-text-white">Rs <span>{{phone.price|intcomma}}</span><meta itemprop="priceCurrency" content="PKR" /><meta itemprop="price" content="{{phone.price}}" /></td>
+						<td class="has-background-primary has-text-white">USD <span>{{phone.price|intcomma}}</span><meta itemprop="priceCurrency" content="USD" /><meta itemprop="price" content="{{phone.price}}" /></td>
 					</tr>
 				</tbody>				
 			</table>
@@ -168,11 +168,11 @@
 								<img itemprop="image" src="{{p.phone_image.url}}" alt="{{p.phone_model|title}}" height="212">	
 							</div>
 							<div class="column desc">
-								<h2 itemprop="name" class="is-marginless is-size-5 has-text-black">{{p.phone_model|title}}</h2>
-								<p itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="is-size-3 is-marginless has-text-weight-bold has-text-primary">
+								<h2 itemprop="name" class="is-marginless is-size-4 has-text-black">{{p.phone_model|title}}</h2>
+								<p itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="is-size-5 is-marginless has-text-weight-bold has-text-primary">
 									<span>Rs {{p.price|intcomma}}</span>
 									<meta itemprop="price" content="{{p.price}}" />
-									<meta itemprop="priceCurrency" content="PKR" />
+									<meta itemprop="priceCurrency" content="USD" />
 								</p>
 								<div class="has-text-black is-size-7" itemprop="description">{{p.description|truncatewords:300|safe}}</div>
 							</div>
