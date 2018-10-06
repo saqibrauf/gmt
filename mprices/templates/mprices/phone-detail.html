@@ -2,7 +2,6 @@
 {% load humanize %}
 {% block 'title' %}{{ phone.phone_model|title }} Price{% if sidebar_location %} in {{sidebar_location.location_name|title}}{% endif %}, {{ phone.phone_model|title }} Specification and Features - GET MOBILE PRICES{% endblock %}
 {% block 'description' %}Checkout the latest {{ phone.phone_model|title }} Price{% if sidebar_location %} in {{sidebar_location.location_name|title}}{% endif %}. Get {{ phone.phone_model|title }} specification and features. Updated on daily basis by taking information from online e-commerce stores and retailers{% if sidebar_location %} in {{sidebar_location.location_name|title}}{% endif %}.{% endblock %}
-{% block 'canonical' %}<link rel="canonical" href="{{request.build_absolute_uri}}" />{% endblock %}
 
 {% block 'pageheading' %}
 <div class="section has-background-light">
@@ -23,7 +22,8 @@
 			</div>
 			<div class="box is-radiusless has-background-white-ter has-text-centered">
 				<h2 class="is-marginless is-size-4 has-text-black" itemprop="name">{{phone.phone_model|title}}</h2>
-				<p class="is-size-4 has-text-weight-bold has-text-primary">USD {{phone.price|intcomma}}</p>
+				<p class="is-size-4 has-text-weight-bold has-text-primary is-marginless">USD {{phone.price|intcomma}}</p>
+				<p class="is-size-4 has-text-weight-bold has-text-primary">{{local}}</p>
 			</div>		
 		</div>
 		<div class="column">			
@@ -31,7 +31,7 @@
 				<tbody class="is-size-5-desktop has-background-white-ter">
 					<tr itemprop="offers" itemscope itemtype="http://schema.org/Offer">
 						<th class="has-background-info has-text-white">Price</th>
-						<td class="has-background-primary has-text-white">USD <span>{{phone.price|intcomma}}</span><meta itemprop="priceCurrency" content="USD" /><meta itemprop="price" content="{{phone.price}}" /></td>
+						<td class="has-background-primary has-text-white">USD <span>{{phone.price|intcomma}}{% if local %} - {{local}}{% endif %}</span><meta itemprop="priceCurrency" content="USD" /><meta itemprop="price" content="{{phone.price}}" /></td>
 					</tr>
 				</tbody>				
 			</table>
@@ -221,5 +221,9 @@
 		<h3>Disclaimer</h3>
 		<p class="is-size-7">We are not responsible for any errors or omissions, or for the results obtained from the use of this information. All information on this site is provided “as is,” with no guarantee of completeness, accuracy, timeliness or the results obtained from the use of this information.</p>
 	</div>
+	<div>
+		<p class="is-uppercase">{{local}}</p>
+	</div>
+	
 
 {% endblock %}

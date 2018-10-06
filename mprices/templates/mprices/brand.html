@@ -2,7 +2,6 @@
 {% load humanize %}
 {% block 'title' %}{{brand.brand_name|title}} Mobiles Prices{% if sidebar_location %} in {{sidebar_location.location_name|title}}{% endif %}, Specifaction and Features - GET MOBILE PRICES{% endblock %}
 {% block 'description' %}Checkout the latest {{brand.brand_name|title}} Mobiles Prices in {{sidebar_location.location_name|title}}. Latest {{brand.brand_name|title}} mobiles, {{brand.brand_name|title}} mobiles specification and features. Updated on daily basis by taking information from online ecommerce stores and retailers{% if sidebar_location %} in {{sidebar_location.location_name|title}}{% endif %}.{% endblock %}
-{% block 'canonical' %}<link rel="canonical" href="{{request.build_absolute_uri}}" />{% endblock %}
 
 {% block 'pageheading' %}
 	<div class="section has-background-light">

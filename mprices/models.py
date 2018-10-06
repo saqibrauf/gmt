@@ -3,7 +3,27 @@ from django.template.defaultfilters import slugify
 from datetime import date
 from django.urls import reverse
 
+class Country(models.Model):
+	country = models.CharField(max_length=75, unique=True)
+	country_slug = models.CharField(max_length=75, blank=True, editable=False)
+	currency = models.CharField(max_length=5, blank=True)
+	exchange_rate = models.DecimalField(blank=True, default=0, decimal_places=6, max_digits=12)
+
+	def __str__(self):
+		return self.country.title()
+
+	def save(self, *args, **kwargs):
+		self.country = self.country.title()
+		self.country_slug = slugify(self.country)
+		self.currency = self.currency.upper()
+		super().save(*args, **kwargs)
+
+	class Meta:
+		ordering = ['country']
+
+
 class Location(models.Model):
+	country = models.ForeignKey(Country, on_delete=models.CASCADE, blank=True, null=True)
 	location_name = models.CharField(max_length=50, unique=True)
 	location_slug = models.CharField(max_length=50, blank=True, editable=False)
 

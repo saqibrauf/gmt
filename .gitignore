@@ -5,4 +5,5 @@ __pycache__
 /gmt-bulma
 /media
 .env
+backup.json
 .DS_Store

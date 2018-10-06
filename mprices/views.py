@@ -1,6 +1,6 @@
 from django.shortcuts import render, HttpResponse
 from django.shortcuts import get_object_or_404
-from .models import Location, Brand, Phone
+from .models import Location, Brand, Phone, Country
 from django.urls import reverse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
@@ -95,14 +95,30 @@ def phone(request, slug, location=''):
 	sidebar_phones = Phone.objects.filter(brand_name=brand).exclude(id=phone.id).order_by('-release', '-price')
 	if location:
 		sidebar_location = get_object_or_404(Location, location_slug=location)
+		try:
+			country = Country.objects.get(location__location_slug=location)
+			if country.currency != 'USD':
+				base_cur = Country.objects.get(currency='USD')
+				base = 1 / base_cur.exchange_rate
+				er = country.exchange_rate
+				local = phone.price * base * er
+				local = int(local)
+				local = round(local,-2)		
+				local = country.currency + ' ' + str(local)
+			else:
+				local = ''
+		except:
+			local=''
 	else:
 		sidebar_location = ''
+		local = ''
 	context = {
 		'phone' : phone,
 		'brand' : brand,
 		'sidebar_location' : sidebar_location,
 		'sidebar_brands' : sidebar_brands,
 		'sidebar_phones' : sidebar_phones,
+		'local' : local,
 	}
 	return render(request, 'mprices/phone-detail.html', context)
 
