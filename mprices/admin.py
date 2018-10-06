@@ -12,6 +12,7 @@ class CountryAdmin(admin.ModelAdmin):
 class LocatiionAdmin(admin.ModelAdmin):
 	list_display = ('location_name', 'country')
 	autocomplete_fields = ['country']
+	search_fields = ['location_name']
 
 class BrandAdmin(admin.ModelAdmin):
 	search_fields = ['brand_name']
