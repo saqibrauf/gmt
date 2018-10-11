@@ -76,16 +76,21 @@ def brand(request, slug, location=''):
 				er = country.exchange_rate
 				exch = base * er
 				request.session['currency'] = country.currency
-				request.session['exchange'] = int(exch)
+				request.session['exchange'] = float(exch)
 				request.session['location'] = location
 			else:
-				request.session['currency'] = country.currency
-				request.session['exchange'] = 1
-				request.session['location'] = location
+				request.session['currency'] = 'USD'
+				request.session['exchange'] = int(1)
+				request.session['location'] = ''
 		except:
-			pass
+			request.session['currency'] = 'USD'
+			request.session['exchange'] = int(1)
+			request.session['location'] = sidebar_location.location_name
 	else:
-		sidebar_location = ''	
+		sidebar_location = ''
+		request.session['currency'] = 'USD'
+		request.session['exchange'] = int(1)
+		request.session['location'] = ''	
 
 	page = request.GET.get('page', 1)
 	paginator = Paginator(phones, 30)
@@ -121,16 +126,21 @@ def phone(request, slug, location=''):
 				er = country.exchange_rate
 				exch = base * er
 				request.session['currency'] = country.currency
-				request.session['exchange'] = int(exch)
+				request.session['exchange'] = float(exch)
 				request.session['location'] = location
 			else:
-				request.session['currency'] = country.currency
-				request.session['exchange'] = 1
-				request.session['location'] = location
+				request.session['currency'] = 'USD'
+				request.session['exchange'] = int(1)
+				request.session['location'] = ''
 		except:
-			pass
+			request.session['currency'] = 'USD'
+			request.session['exchange'] = int(1)
+			request.session['location'] = sidebar_location.location_name
 	else:
 		sidebar_location = ''
+		request.session['currency'] = 'USD'
+		request.session['exchange'] = int(1)
+		request.session['location'] = ''		
 
 	context = {
 		'phone' : phone,
