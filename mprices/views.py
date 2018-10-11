@@ -130,7 +130,7 @@ def phone(request, slug, location=''):
 				request.session['location'] = location
 			else:
 				request.session['currency'] = 'USD'
-				request.session['exchange'] = int(1)
+				request.session['exchange'] = 1
 				request.session['location'] = ''
 		except:
 			request.session['currency'] = 'USD'

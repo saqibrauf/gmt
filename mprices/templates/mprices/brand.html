@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 {% load humanize %}
+{% load multiply %}
+
 {% block 'title' %}{{brand.brand_name|title}} Mobiles Prices{% if sidebar_location %} in {{sidebar_location.location_name|title}}{% endif %}, Specifaction and Features - GET MOBILE PRICES{% endblock %}
 {% block 'description' %}Checkout the latest {{brand.brand_name|title}} Mobiles Prices in {{sidebar_location.location_name|title}}. Latest {{brand.brand_name|title}} mobiles, {{brand.brand_name|title}} mobiles specification and features. Updated on daily basis by taking information from online ecommerce stores and retailers{% if sidebar_location %} in {{sidebar_location.location_name|title}}{% endif %}.{% endblock %}
 
@@ -31,7 +33,7 @@
 							<p itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="is-size-5 is-marginless has-text-weight-bold has-text-primary">
 								<span>USD {{p.price|intcomma}}</span>
 								{% if request.session.location %}
-									<span> - {{ request.session.currency }} {% widthratio p.price 1 request.session.exchange %}</span>
+									<span> - {{ request.session.currency }} {% multiply p.price request.session.exchange %}</span>	
 								{% endif %}
 								<meta itemprop="price" content="{{p.price}}" />
 								<meta itemprop="priceCurrency" content="USD" />

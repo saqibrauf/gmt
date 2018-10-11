@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 {% load humanize %}
+{% load multiply %}
+
 {% block 'title' %}{{ phone.phone_model|title }} Price{% if sidebar_location %} in {{sidebar_location.location_name|title}}{% endif %}, {{ phone.phone_model|title }} Specification and Features - GET MOBILE PRICES{% endblock %}
 {% block 'description' %}Checkout the latest {{ phone.phone_model|title }} Price{% if sidebar_location %} in {{sidebar_location.location_name|title}}{% endif %}. Get {{ phone.phone_model|title }} specification and features. Updated on daily basis by taking information from online e-commerce stores and retailers{% if sidebar_location %} in {{sidebar_location.location_name|title}}{% endif %}.{% endblock %}
 
@@ -33,7 +35,7 @@
 						<th class="has-background-info has-text-white">Price</th>
 						<td class="has-background-primary has-text-white">USD <span>{{phone.price|intcomma}}</span>
 							{% if request.session.location %}
-									<span> - {{ request.session.currency }} {% widthratio phone.price 1 request.session.exchange %}</span>
+									<span> - {{ request.session.currency }} {% multiply phone.price request.session.exchange %}</span>
 							{% endif %}
 							<meta itemprop="priceCurrency" content="USD" /><meta itemprop="price" content="{{phone.price}}" />
 						</td>
@@ -177,7 +179,7 @@
 								<p itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="is-size-5 is-marginless has-text-weight-bold has-text-primary">
 									<span>USD {{p.price|intcomma}}</span>
 									{% if request.session.location %}
-										<span> - {{ request.session.currency }} {% widthratio p.price 1 request.session.exchange %}</span>
+										<span> - {{ request.session.currency }} {% multiply p.price request.session.exchange %}</span>	
 									{% endif %}
 									<meta itemprop="price" content="{{p.price}}" />
 									<meta itemprop="priceCurrency" content="USD" />
