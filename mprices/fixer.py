@@ -1,6 +1,6 @@
 import requests, json
 from bs4 import BeautifulSoup
-from .models import Country
+from mprices.models import Country
 
 url = 'http://data.fixer.io/api/latest?access_key=15b662e7810082c0eef61e7c8aa0353a'
 response = requests.get(url)
