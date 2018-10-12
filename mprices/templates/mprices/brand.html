@@ -17,13 +17,11 @@
 	<div class="columns is-multiline">
 		{% for p in phones %}
 			<div class="column is-6" itemscope itemtype="http://schema.org/Product">
-				<a class="box is-radiusless" href="
-					{% if request.session.location %}
-						{% url 'phone' slug=p.phone_model_slug location=request.session.location %}
-					{% else %}
-						{% url 'phone' slug=p.phone_model_slug %}
-					{% endif %}
-					">
+				{% if request.session.location %}
+					<a class="box is-radiusless" href="{% url 'phone' slug=p.phone_model_slug location=request.session.location %}">
+				{% else %}
+					<a class="box is-radiusless" href="{% url 'phone' slug=p.phone_model_slug %}">
+				{% endif %}
 					<div class="columns">
 						<div class="column is-narrow has-text-centered">
 							<img itemprop="image" src="{{p.phone_image.url}}" alt="{{p.phone_model|title}}" height="212">	
@@ -32,7 +30,7 @@
 							<h2 itemprop="name" class="is-marginless is-size-4 has-text-black">{{p.phone_model|title}}</h2>
 							<p itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="is-size-5 is-marginless has-text-weight-bold has-text-primary">
 								<span>USD {{p.price|intcomma}}</span>
-								{% if request.session.location %}
+								{% if request.session.location and request.session.currency != 'USD' %}
 									<span> - {{ request.session.currency }} {% multiply p.price request.session.exchange %}</span>	
 								{% endif %}
 								<meta itemprop="price" content="{{p.price}}" />

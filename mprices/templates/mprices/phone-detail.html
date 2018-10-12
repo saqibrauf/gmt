@@ -25,7 +25,11 @@
 			<div class="box is-radiusless has-background-white-ter has-text-centered">
 				<h2 class="is-marginless is-size-4 has-text-black" itemprop="name">{{phone.phone_model|title}}</h2>
 				<p class="is-size-4 has-text-weight-bold has-text-primary is-marginless">USD {{phone.price|intcomma}}</p>
-				<p class="is-size-4 has-text-weight-bold has-text-primary">{{ request.session.currency }} {% widthratio phone.price 1 request.session.exchange %}</p>
+				<p class="is-size-4 has-text-weight-bold has-text-primary">
+					{% if request.session.location and request.session.currency != 'USD' %}
+						<span>{{ request.session.currency }} {% multiply phone.price request.session.exchange %}</span>
+					{% endif %}
+				</p>
 			</div>		
 		</div>
 		<div class="column">			
@@ -34,7 +38,7 @@
 					<tr itemprop="offers" itemscope itemtype="http://schema.org/Offer">
 						<th class="has-background-info has-text-white">Price</th>
 						<td class="has-background-primary has-text-white">USD <span>{{phone.price|intcomma}}</span>
-							{% if request.session.location %}
+							{% if request.session.location and request.session.currency != 'USD' %}
 									<span> - {{ request.session.currency }} {% multiply phone.price request.session.exchange %}</span>
 							{% endif %}
 							<meta itemprop="priceCurrency" content="USD" /><meta itemprop="price" content="{{phone.price}}" />
@@ -162,36 +166,34 @@
 			{% if sidebar_phones %}
 				<h2>Other Mobiles From {{brand}}</h2>
 				{% for p in sidebar_phones|slice:':10' %}
-				<div itemscope itemtype="http://schema.org/Product">
-					{% if sidebar_location %}
-					{% with location=sidebar_location.location_name %}
-					<a class="box is-radiusless" href="{% url 'phone' slug=p.phone_model_slug location=location %}">
-					{% endwith %}
-					{% else %}
-					<a class="box is-radiusless" href="{% url 'phone' slug=p.phone_model_slug %}">
-					{% endif %}
-						<div class="columns">
-							<div class="column is-narrow has-text-centered">
-								<img itemprop="image" src="{{p.phone_image.url}}" alt="{{p.phone_model|title}}" height="212">	
+					<div itemscope itemtype="http://schema.org/Product">
+						{% if request.session.location %}
+							<a class="box is-radiusless" href="{% url 'phone' slug=p.phone_model_slug location=request.session.location %}">
+						{% else %}
+							<a class="box is-radiusless" href="{% url 'phone' slug=p.phone_model_slug %}">
+						{% endif %}
+							<div class="columns">
+								<div class="column is-narrow has-text-centered">
+									<img itemprop="image" src="{{p.phone_image.url}}" alt="{{p.phone_model|title}}" height="212">	
+								</div>
+								<div class="column desc">
+									<h2 itemprop="name" class="is-marginless is-size-4 has-text-black">{{p.phone_model|title}}</h2>
+									<p itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="is-size-5 is-marginless has-text-weight-bold has-text-primary">
+										<span>USD {{p.price|intcomma}}</span>
+										{% if request.session.location %}
+											<span> - {{ request.session.currency }} {% multiply p.price request.session.exchange %}</span>	
+										{% endif %}
+										<meta itemprop="price" content="{{p.price}}" />
+										<meta itemprop="priceCurrency" content="USD" />
+									</p>
+									<div class="has-text-black is-size-7" itemprop="description">{{p.description|truncatewords:300|safe}}</div>
+								</div>
 							</div>
-							<div class="column desc">
-								<h2 itemprop="name" class="is-marginless is-size-4 has-text-black">{{p.phone_model|title}}</h2>
-								<p itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="is-size-5 is-marginless has-text-weight-bold has-text-primary">
-									<span>USD {{p.price|intcomma}}</span>
-									{% if request.session.location %}
-										<span> - {{ request.session.currency }} {% multiply p.price request.session.exchange %}</span>	
-									{% endif %}
-									<meta itemprop="price" content="{{p.price}}" />
-									<meta itemprop="priceCurrency" content="USD" />
-								</p>
-								<div class="has-text-black is-size-7" itemprop="description">{{p.description|truncatewords:300|safe}}</div>
-							</div>
+						</a>
+						<div itemprop="brand" class="is-hidden" itemscope itemtype="http://schema.org/Thing">
+							<p itemprop="name">{{p.brand_name|title}}</p>
 						</div>
-					</a>
-					<div itemprop="brand" class="is-hidden" itemscope itemtype="http://schema.org/Thing">
-						<p itemprop="name">{{p.brand_name|title}}</p>
 					</div>
-				</div>
 				{% endfor %}
 			{% endif %}			
 		</div>
