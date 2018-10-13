@@ -142,7 +142,7 @@
 	{{ block.super }}
 	<h3 class="is-marginless">Mobile Phone Brands</h2><hr>
     <ul class="is-marginless" style="list-style: none;">
-        {%for b in sidebar_brands%}
+        {%for b in all_brands%}
         	{% if request.session.location %}
             	<li class="sidebar-list"><a href="{% url 'brand' slug=b.brand_slug location=request.session.location %}">{{b.brand_name|title}} Mobile Prices in {{request.session.location|title}}</a></li>
             {% else %}

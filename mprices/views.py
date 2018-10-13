@@ -17,10 +17,10 @@ def index(request):
 	except EmptyPage:
 		phones = paginator.page(paginator.num_pages)	
 
-	sidebar_brands = Brand.objects.all().order_by('brand_name')
+	all_brands = Brand.objects.all().order_by('brand_name')
 	context = {
 		'phones' : phones,
-		'sidebar_brands' : sidebar_brands,
+		'all_brands' : all_brands,
 	}
 	return render(request, 'mprices/index.html', context)
 
@@ -44,18 +44,18 @@ def search(request):
 			phones = paginator.page(paginator.num_pages)
 		
 
-		sidebar_brands = Brand.objects.all().order_by('brand_name')
+		all_brands = Brand.objects.all().order_by('brand_name')
 		context = {
 			'phones' : phones,
-			'sidebar_brands' : sidebar_brands,
+			'all_brands' : all_brands,
 			'message' : message
 		}
 
 	else:
 		message = ''	
-		sidebar_brands = Brand.objects.all().order_by('brand_name')
+		all_brands = Brand.objects.all().order_by('brand_name')
 		context = {
-			'sidebar_brands' : sidebar_brands,
+			'all_brands' : all_brands,
 			'message' : message
 		}
 	return render(request, 'mprices/search.html', context)
@@ -64,30 +64,23 @@ def search(request):
 def brand(request, slug, location=''):
 	brand = get_object_or_404(Brand, brand_slug=slug)
 	phones = brand.phone_set.all().order_by('-release', '-price')
-	sidebar_brands = Brand.objects.all().order_by('brand_name')
+	all_brands = Brand.objects.all().order_by('brand_name')
 
 	if location:
-		sidebar_location = get_object_or_404(Location, location_slug=location)
 		try:
 			country = Country.objects.get(location__location_slug=location)
-			if country.currency != 'USD':
-				base_cur = Country.objects.get(currency='USD')
-				base = 1 / base_cur.exchange_rate
-				er = country.exchange_rate
-				exch = base * er
-				request.session['currency'] = country.currency
-				request.session['exchange'] = float(exch)
-				request.session['location'] = location
-			else:
-				request.session['currency'] = 'USD'
-				request.session['exchange'] = int(1)
-				request.session['location'] = ''
+			base_cur = Country.objects.get(currency='USD')
+			base = 1 / base_cur.exchange_rate
+			er = country.exchange_rate
+			exch = base * er
+			request.session['currency'] = country.currency
+			request.session['exchange'] = float(exch)
+			request.session['location'] = location
 		except:
 			request.session['currency'] = 'USD'
-			request.session['exchange'] = int(1)
-			request.session['location'] = sidebar_location.location_name
+			request.session['exchange'] = 1
+			request.session['location'] = location
 	else:
-		sidebar_location = ''
 		request.session['currency'] = 'USD'
 		request.session['exchange'] = int(1)
 		request.session['location'] = ''	
@@ -105,39 +98,31 @@ def brand(request, slug, location=''):
 	context = {
 		'brand' : brand,
 		'phones' : phones,
-		'sidebar_brands' : sidebar_brands,
-		'sidebar_location' : sidebar_location,
+		'all_brands' : all_brands,
 	}
 	return render(request, 'mprices/brand.html', context)
 
 def phone(request, slug, location=''):
 	phone = get_object_or_404(Phone, phone_model_slug=slug)
-	sidebar_brands = Brand.objects.all().order_by('brand_name')
+	all_brands = Brand.objects.all().order_by('brand_name')
 	brand = phone.brand_name
-	sidebar_phones = Phone.objects.filter(brand_name=brand).exclude(id=phone.id).order_by('-release', '-price')
+	all_phones = Phone.objects.filter(brand_name=brand).exclude(id=phone.id).order_by('-release', '-price')
 	
 	if location:
-		sidebar_location = get_object_or_404(Location, location_slug=location)
 		try:
 			country = Country.objects.get(location__location_slug=location)
-			if country.currency != 'USD':
-				base_cur = Country.objects.get(currency='USD')
-				base = 1 / base_cur.exchange_rate
-				er = country.exchange_rate
-				exch = base * er
-				request.session['currency'] = country.currency
-				request.session['exchange'] = float(exch)
-				request.session['location'] = location
-			else:
-				request.session['currency'] = 'USD'
-				request.session['exchange'] = 1
-				request.session['location'] = ''
+			base_cur = Country.objects.get(currency='USD')
+			base = 1 / base_cur.exchange_rate
+			er = country.exchange_rate
+			exch = base * er
+			request.session['currency'] = country.currency
+			request.session['exchange'] = float(exch)
+			request.session['location'] = location
 		except:
 			request.session['currency'] = 'USD'
-			request.session['exchange'] = int(1)
-			request.session['location'] = sidebar_location.location_name
+			request.session['exchange'] = 1
+			request.session['location'] = location
 	else:
-		sidebar_location = ''
 		request.session['currency'] = 'USD'
 		request.session['exchange'] = int(1)
 		request.session['location'] = ''		
@@ -145,9 +130,8 @@ def phone(request, slug, location=''):
 	context = {
 		'phone' : phone,
 		'brand' : brand,
-		'sidebar_location' : sidebar_location,
-		'sidebar_brands' : sidebar_brands,
-		'sidebar_phones' : sidebar_phones,
+		'all_brands' : all_brands,
+		'all_phones' : all_phones,
 	}
 	return render(request, 'mprices/phone-detail.html', context)
 

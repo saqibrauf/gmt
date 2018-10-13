@@ -86,81 +86,83 @@
         </div>
     </div>
     <a href="#" class="scrollToTop button is-medium is-danger">TOP</a>
-{% block 'below_content' %}{% endblock %}
 
-<footer id="footer" class="footer has-background-black">
-    <div class="container content has-text-centered">
-        <div class="buttons" style="justify-content: center;">
-            {%for b in sidebar_brands%}
-                  <a class="button is-grey is-small is-outlined" href="{% url 'brand' slug=b.brand_slug  %}">{{b.brand_name|title}} Mobile Prices</a>
-            {%endfor%}
+    {% block 'below_content' %}{% endblock %}
+
+    <footer id="footer" class="footer has-background-black">
+        <div class="container content has-text-centered">
+            <div class="buttons" style="justify-content: center;">
+                {%for b in all_brands%}
+                      <a class="button is-grey is-small is-outlined" href="{% url 'brand' slug=b.brand_slug  %}">{{b.brand_name|title}} Mobile Prices</a>
+                {%endfor%}
+            </div>
+            <hr class="has-background-grey">
+            <p class="title is-3 has-text-grey"><a class="has-text-grey" href="{% url 'index' %}" style="text-transform: uppercase;">Get Mobile Price</a></p>
+            <p class="subtitle is-6 heading has-text-grey">© 2018 Copyright</p>
         </div>
-        <hr class="has-background-grey">
-        <p class="title is-3 has-text-grey"><a class="has-text-grey" href="{% url 'index' %}" style="text-transform: uppercase;">Get Mobile Price</a></p>
-        <p class="subtitle is-6 heading has-text-grey">© 2018 Copyright</p>
-    </div>
-</footer>
+    </footer>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script type="text/javascript" src="{% static 'js/main.js' %}"></script>
-<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b7eae997ddf8392"></script>
-<script type="text/javascript">
-    $(document).ready(function(){
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b7eae997ddf8392"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
 
-        //Ajax call to search phone models
-        $('#search-by-phone-query').keyup(function(){       
-            var term = $('#search-by-phone-query').val();
-            $.get({
-                url: '{% url 'get_phone' %}',
-                data: {
-                  'term': term
-                },
-                dataType: 'json',
-                success: function (data) {
-                    if (data != 'none') {
-                        $('#search-by-phone-result div').empty();
-                        $('#search-by-phone-result').removeClass('is-hidden');
-                        $.each(data, function(i, v) {
-                            var html = '<p class="is-uppercase"><a class="is-block has-text-grey" href="' + v.url + '">' + v.model + '</a></p>'
-                            $('#search-by-phone-result div').append(html);
-                        });
-                    } else {
-                        $('#search-by-phone-result').addClass('is-hidden');
-                    }                    
+            //Ajax call to search phone models
+            $('#search-by-phone-query').keyup(function(){       
+                var term = $('#search-by-phone-query').val();
+                $.get({
+                    url: '{% url 'get_phone' %}',
+                    data: {
+                      'term': term
+                    },
+                    dataType: 'json',
+                    success: function (data) {
+                        if (data != 'none') {
+                            $('#search-by-phone-result div').empty();
+                            $('#search-by-phone-result').removeClass('is-hidden');
+                            $.each(data, function(i, v) {
+                                var html = '<p class="is-uppercase"><a class="is-block has-text-grey" href="' + v.url + '">' + v.model + '</a></p>'
+                                $('#search-by-phone-result div').append(html);
+                            });
+                        } else {
+                            $('#search-by-phone-result').addClass('is-hidden');
+                        }                    
+                    }
+                });
+            });
+
+            $('#search-by-phone-btn').click(function(){
+                $('#search-by-phone').addClass('is-hidden');
+                $('#search-by-phone-result p').empty();
+                $('#search-by-phone-result div').empty();
+                $('#search-by-phone-query').val('');
+            });
+
+            $('.mobile-search').click(function(){
+                $('#search-by-phone').removeClass('is-hidden');
+                $("#search-by-phone-query").focus();
+            })
+
+            //Check to see if the window is top if not then display button
+            $(window).scroll(function(){
+                if ($(this).scrollTop() > 100) {
+                    $('.scrollToTop').fadeIn();
+                } else {
+                    $('.scrollToTop').fadeOut();
                 }
             });
-        });
 
-        $('#search-by-phone-btn').click(function(){
-            $('#search-by-phone').addClass('is-hidden');
-            $('#search-by-phone-result p').empty();
-            $('#search-by-phone-result div').empty();
-            $('#search-by-phone-query').val('');
+            //Click event to scroll to top
+            $('.scrollToTop').click(function(){
+                $('html, body').animate({scrollTop : 0},800);
+                return false;
+            });
         });
+        
+    </script>
 
-        $('.mobile-search').click(function(){
-            $('#search-by-phone').removeClass('is-hidden');
-            $("#search-by-phone-query").focus();
-        })
-
-        //Check to see if the window is top if not then display button
-        $(window).scroll(function(){
-            if ($(this).scrollTop() > 100) {
-                $('.scrollToTop').fadeIn();
-            } else {
-                $('.scrollToTop').fadeOut();
-            }
-        });
-
-        //Click event to scroll to top
-        $('.scrollToTop').click(function(){
-            $('html, body').animate({scrollTop : 0},800);
-            return false;
-        });
-    });
+    {% block 'scripts' %}{% endblock %}
     
-</script>
-
-  {% block 'scripts' %}{% endblock %}
 </body>
 </html>

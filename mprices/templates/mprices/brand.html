@@ -2,13 +2,13 @@
 {% load humanize %}
 {% load multiply %}
 
-{% block 'title' %}{{brand.brand_name|title}} Mobiles Prices{% if sidebar_location %} in {{sidebar_location.location_name|title}}{% endif %}, Specifaction and Features - GET MOBILE PRICES{% endblock %}
-{% block 'description' %}Checkout the latest {{brand.brand_name|title}} Mobiles Prices in {{sidebar_location.location_name|title}}. Latest {{brand.brand_name|title}} mobiles, {{brand.brand_name|title}} mobiles specification and features. Updated on daily basis by taking information from online ecommerce stores and retailers{% if sidebar_location %} in {{sidebar_location.location_name|title}}{% endif %}.{% endblock %}
+{% block 'title' %}{{brand.brand_name|title}} Mobiles Prices{% if request.session.location %} in {{request.session.location|title}}{% endif %}, Specifaction and Features - GET MOBILE PRICES{% endblock %}
+{% block 'description' %}Checkout the latest {{brand.brand_name|title}} Mobiles Prices in {{request.session.location|title}}. Latest {{brand.brand_name|title}} mobiles, {{brand.brand_name|title}} mobiles specification and features. Updated on daily basis by taking information from online ecommerce stores and retailers{% if request.session.location %} in {{request.session.location|title}}{% endif %}.{% endblock %}
 
 {% block 'pageheading' %}
 	<div class="section has-background-light">
-		<h1>{{brand.brand_name|title}} Mobiles Prices{% if sidebar_location %} in {{sidebar_location.location_name|title}}{% endif %}</h1>
-		<p>Checkout the latest <strong>{{brand.brand_name|title}} Mobile Prices{% if sidebar_location %} in {{sidebar_location.location_name|title}}{% endif %}</strong>. Latest <strong>{{brand.brand_name|title}} mobiles, {{brand.brand_name|title}} mobiles specification and features.</strong> Updated on daily basis by taking information from online ecommerce stores and retailers{% if sidebar_location %} in {{sidebar_location.location_name|title}}{% endif %}.</strong></p>
+		<h1>{{brand.brand_name|title}} Mobiles Prices{% if request.session.location %} in {{request.session.location|title}}{% endif %}</h1>
+		<p>Checkout the latest <strong>{{brand.brand_name|title}} Mobile Prices{% if request.session.location %} in {{request.session.location|title}}{% endif %}</strong>. Latest <strong>{{brand.brand_name|title}} mobiles, {{brand.brand_name|title}} mobiles specification and features.</strong> Updated on daily basis by taking information from online ecommerce stores and retailers{% if request.session.location %} in {{request.session.location|title}}{% endif %}.</strong></p>
 	</div>
 {% endblock %}
 
@@ -76,7 +76,7 @@
 	{{ block.super }}
     <h3 class="is-marginless">Mobile Phone Brands</h3><hr>
     <ul class="is-marginless" style="list-style: none;">
-        {%for b in sidebar_brands%}
+        {%for b in all_brands%}
         	{% if request.session.location %}
             	<li class="sidebar-list"><a href="{% url 'brand' slug=b.brand_slug location=request.session.location %}">{{b.brand_name|title}} Mobile Prices in {{request.session.location|title}}</a></li>
             {% else %}

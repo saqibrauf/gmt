@@ -2,13 +2,13 @@
 {% load humanize %}
 {% load multiply %}
 
-{% block 'title' %}{{ phone.phone_model|title }} Price{% if sidebar_location %} in {{sidebar_location.location_name|title}}{% endif %}, {{ phone.phone_model|title }} Specification and Features - GET MOBILE PRICES{% endblock %}
-{% block 'description' %}Checkout the latest {{ phone.phone_model|title }} Price{% if sidebar_location %} in {{sidebar_location.location_name|title}}{% endif %}. Get {{ phone.phone_model|title }} specification and features. Updated on daily basis by taking information from online e-commerce stores and retailers{% if sidebar_location %} in {{sidebar_location.location_name|title}}{% endif %}.{% endblock %}
+{% block 'title' %}{{ phone.phone_model|title }} Price{% if request.session.location %} in {{request.session.location|title}}{% endif %}, {{ phone.phone_model|title }} Specification and Features - GET MOBILE PRICES{% endblock %}
+{% block 'description' %}Checkout the latest {{ phone.phone_model|title }} Price{% if request.session.location %} in {{request.session.location|title}}{% endif %}. Get {{ phone.phone_model|title }} specification and features. Updated on daily basis by taking information from online e-commerce stores and retailers{% if request.session.location %} in {{request.session.location|title}}{% endif %}.{% endblock %}
 
 {% block 'pageheading' %}
 <div class="section has-background-light">
-	<h1>{{ phone.phone_model|title }} Price{% if sidebar_location %} in {{sidebar_location.location_name|title}}{% endif %}</h1>
-	<p>Checkout the latest <strong>{{ phone.phone_model|title }} Price{% if sidebar_location %} in {{sidebar_location.location_name|title}}{% endif %}.</strong> Get <strong>{{ phone.phone_model|title }} specification and features.</strong> Updated on daily basis by taking information from online e-commerce stores and retailers{% if sidebar_location %} in {{sidebar_location.location_name|title}}{% endif %}.</strong></p>		
+	<h1>{{ phone.phone_model|title }} Price{% if request.session.location %} in {{request.session.location|title}}{% endif %}</h1>
+	<p>Checkout the latest <strong>{{ phone.phone_model|title }} Price{% if request.session.location %} in {{request.session.location|title}}{% endif %}.</strong> Get <strong>{{ phone.phone_model|title }} specification and features.</strong> Updated on daily basis by taking information from online e-commerce stores and retailers{% if request.session.location %} in {{request.session.location|title}}{% endif %}.</strong></p>		
 </div>
 {% endblock %}
 
@@ -163,9 +163,9 @@
 			<hr>
 			<div class="addthis_inline_share_toolbox"></div>
 			<hr>
-			{% if sidebar_phones %}
+			{% if all_phones %}
 				<h2>Other Mobiles From {{brand}}</h2>
-				{% for p in sidebar_phones|slice:':10' %}
+				{% for p in all_phones|slice:':10' %}
 					<div itemscope itemtype="http://schema.org/Product">
 						{% if request.session.location %}
 							<a class="box is-radiusless" href="{% url 'phone' slug=p.phone_model_slug location=request.session.location %}">
@@ -205,7 +205,7 @@
 	{{ block.super }}
     <h3 class="is-marginless">Mobile Phone Brands</h3><hr>
     <ul class="is-marginless" style="list-style: none;">
-        {%for b in sidebar_brands%}
+        {%for b in all_brands%}
         	{% if request.session.location %}
             	<li class="sidebar-list"><a href="{% url 'brand' slug=b.brand_slug location=request.session.location %}">{{b.brand_name|title}} Mobile Prices in {{request.session.location|title}}</a></li>
             {% else %}
@@ -213,12 +213,12 @@
         	{% endif %}
         {%endfor%}
     </ul>
-    <h2>{{brand|title}} Mobiles{% if sidebar_location %} in {{sidebar_location.location_name|title}}{% endif %}</h2>
+    <h2>{{brand|title}} Mobiles{% if request.session.location %} in {{request.session.location|title}}{% endif %}</h2>
     <ul class="is-marginless" style="list-style: none;">
-        {%for p in sidebar_phones%}
-        	{% if sidebar_location %}
-				{% with location=sidebar_location.location_name %}
-					<li class="sidebar-list"><a href="{% url 'phone' slug=p.phone_model_slug location=location  %}">{{p.phone_model|title}} Price in {{sidebar_location.location_name|title}}</a></li>					
+        {%for p in all_phones%}
+        	{% if request.session.location %}
+				{% with location=request.session.location %}
+					<li class="sidebar-list"><a href="{% url 'phone' slug=p.phone_model_slug location=location  %}">{{p.phone_model|title}} Price in {{request.session.location|title}}</a></li>					
 				{% endwith %}
 			{% else %}
 				<li class="sidebar-list"><a href="{% url 'phone' slug=p.phone_model_slug  %}">{{p.phone_model|title}} Price</a></li>
