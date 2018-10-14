@@ -144,7 +144,7 @@
     <ul class="is-marginless" style="list-style: none;">
         {%for b in all_brands%}
         	{% if request.session.location %}
-            	<li class="sidebar-list"><a href="{% url 'brand' slug=b.brand_slug location=request.session.location %}">{{b.brand_name|title}} Mobile Prices in {{request.session.location|title}}</a></li>
+            	<li class="sidebar-list"><a href="{% url 'brand' slug=b.brand_slug location=request.session.location %}">{{b.brand_name|title}} Mobile Prices in {{request.session.loc_name|title}}</a></li>
             {% else %}
             	<li class="sidebar-list"><a href="{% url 'brand' slug=b.brand_slug %}">{{b.brand_name|title}} Mobile Prices</a></li>
         	{% endif %}

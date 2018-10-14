@@ -2,13 +2,13 @@
 {% load humanize %}
 {% load multiply %}
 
-{% block 'title' %}{{ phone.phone_model|title }} Price{% if request.session.location %} in {{request.session.location|title}}{% endif %}, {{ phone.phone_model|title }} Specification and Features - GET MOBILE PRICES{% endblock %}
-{% block 'description' %}Checkout the latest {{ phone.phone_model|title }} Price{% if request.session.location %} in {{request.session.location|title}}{% endif %}. Get {{ phone.phone_model|title }} specification and features. Updated on daily basis by taking information from online e-commerce stores and retailers{% if request.session.location %} in {{request.session.location|title}}{% endif %}.{% endblock %}
+{% block 'title' %}{{ phone.phone_model|title }} Price{% if request.session.location %} in {{request.session.loc_name|title}}{% endif %}, {{ phone.phone_model|title }} Specification and Features - GET MOBILE PRICES{% endblock %}
+{% block 'description' %}Checkout the latest {{ phone.phone_model|title }} Price{% if request.session.location %} in {{request.session.loc_name|title}}{% endif %}. Get {{ phone.phone_model|title }} specification and features. Updated on daily basis by taking information from online e-commerce stores and retailers{% if request.session.location %} in {{request.session.loc_name|title}}{% endif %}.{% endblock %}
 
 {% block 'pageheading' %}
 <div class="section has-background-light">
-	<h1>{{ phone.phone_model|title }} Price{% if request.session.location %} in {{request.session.location|title}}{% endif %}</h1>
-	<p>Checkout the latest <strong>{{ phone.phone_model|title }} Price{% if request.session.location %} in {{request.session.location|title}}{% endif %}.</strong> Get <strong>{{ phone.phone_model|title }} specification and features.</strong> Updated on daily basis by taking information from online e-commerce stores and retailers{% if request.session.location %} in {{request.session.location|title}}{% endif %}.</strong></p>		
+	<h1>{{ phone.phone_model|title }} Price{% if request.session.location %} in {{request.session.loc_name|title}}{% endif %}</h1>
+	<p>Checkout the latest <strong>{{ phone.phone_model|title }} Price{% if request.session.location %} in {{request.session.loc_name|title}}{% endif %}.</strong> Get <strong>{{ phone.phone_model|title }} specification and features.</strong> Updated on daily basis by taking information from online e-commerce stores and retailers{% if request.session.location %} in {{request.session.loc_name|title}}{% endif %}.</strong></p>		
 </div>
 {% endblock %}
 
@@ -207,7 +207,7 @@
     <ul class="is-marginless" style="list-style: none;">
         {%for b in all_brands%}
         	{% if request.session.location %}
-            	<li class="sidebar-list"><a href="{% url 'brand' slug=b.brand_slug location=request.session.location %}">{{b.brand_name|title}} Mobile Prices in {{request.session.location|title}}</a></li>
+            	<li class="sidebar-list"><a href="{% url 'brand' slug=b.brand_slug location=request.session.location %}">{{b.brand_name|title}} Mobile Prices in {{request.session.loc_name|title}}</a></li>
             {% else %}
             	<li class="sidebar-list"><a href="{% url 'brand' slug=b.brand_slug %}">{{b.brand_name|title}} Mobile Prices</a></li>
         	{% endif %}
@@ -217,9 +217,7 @@
     <ul class="is-marginless" style="list-style: none;">
         {%for p in all_phones%}
         	{% if request.session.location %}
-				{% with location=request.session.location %}
-					<li class="sidebar-list"><a href="{% url 'phone' slug=p.phone_model_slug location=location  %}">{{p.phone_model|title}} Price in {{request.session.location|title}}</a></li>					
-				{% endwith %}
+				<li class="sidebar-list"><a href="{% url 'phone' slug=p.phone_model_slug location=request.session.location  %}">{{p.phone_model|title}} Price in {{request.session.loc_name|title}}</a></li>	
 			{% else %}
 				<li class="sidebar-list"><a href="{% url 'phone' slug=p.phone_model_slug  %}">{{p.phone_model|title}} Price</a></li>
 			{% endif %}
@@ -230,9 +228,6 @@
     <div class="notifications is-primary is-radiusless">
 		<h3>Disclaimer</h3>
 		<p class="is-size-7">We are not responsible for any errors or omissions, or for the results obtained from the use of this information. All information on this site is provided “as is,” with no guarantee of completeness, accuracy, timeliness or the results obtained from the use of this information.</p>
-	</div>
-	<div>
-		<p class="is-uppercase">{{local}}</p>
 	</div>
 	
 

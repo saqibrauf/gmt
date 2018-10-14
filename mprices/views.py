@@ -67,23 +67,28 @@ def brand(request, slug, location=''):
 	all_brands = Brand.objects.all().order_by('brand_name')
 
 	if location:
-		try:
-			country = Country.objects.get(location__location_slug=location)
-			base_cur = Country.objects.get(currency='USD')
-			base = 1 / base_cur.exchange_rate
-			er = country.exchange_rate
-			exch = base * er
-			request.session['currency'] = country.currency
-			request.session['exchange'] = float(exch)
-			request.session['location'] = location
-		except:
-			request.session['currency'] = 'USD'
-			request.session['exchange'] = 1
-			request.session['location'] = location
+		loc = get_object_or_404(Location, location_slug=location)
+		if loc:
+			try:
+				country = Country.objects.get(location__location_slug=location)
+				base_cur = Country.objects.get(currency='USD')
+				base = 1 / base_cur.exchange_rate
+				er = country.exchange_rate
+				exch = base * er
+				request.session['currency'] = country.currency
+				request.session['exchange'] = float(exch)
+				
+			except:
+				request.session['currency'] = 'USD'
+				request.session['exchange'] = 1
+
+			request.session['loc_name'] = loc.location_name
+			request.session['location'] = loc.location_slug
 	else:
 		request.session['currency'] = 'USD'
-		request.session['exchange'] = int(1)
-		request.session['location'] = ''	
+		request.session['exchange'] = 1
+		request.session['loc_name'] = ''
+		request.session['location'] = ''
 
 	page = request.GET.get('page', 1)
 	paginator = Paginator(phones, 30)
@@ -109,22 +114,27 @@ def phone(request, slug, location=''):
 	all_phones = Phone.objects.filter(brand_name=brand).exclude(id=phone.id).order_by('-release', '-price')
 	
 	if location:
-		try:
-			country = Country.objects.get(location__location_slug=location)
-			base_cur = Country.objects.get(currency='USD')
-			base = 1 / base_cur.exchange_rate
-			er = country.exchange_rate
-			exch = base * er
-			request.session['currency'] = country.currency
-			request.session['exchange'] = float(exch)
-			request.session['location'] = location
-		except:
-			request.session['currency'] = 'USD'
-			request.session['exchange'] = 1
-			request.session['location'] = location
+		loc = get_object_or_404(Location, location_slug=location)
+		if loc:
+			try:
+				country = Country.objects.get(location__location_slug=location)
+				base_cur = Country.objects.get(currency='USD')
+				base = 1 / base_cur.exchange_rate
+				er = country.exchange_rate
+				exch = base * er
+				request.session['currency'] = country.currency
+				request.session['exchange'] = float(exch)
+				
+			except:
+				request.session['currency'] = 'USD'
+				request.session['exchange'] = 1
+
+			request.session['loc_name'] = loc.location_name
+			request.session['location'] = loc.location_slug
 	else:
 		request.session['currency'] = 'USD'
-		request.session['exchange'] = int(1)
+		request.session['exchange'] = 1
+		request.session['loc_name'] = ''
 		request.session['location'] = ''		
 
 	context = {
