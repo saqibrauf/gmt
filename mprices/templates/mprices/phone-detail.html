@@ -180,8 +180,8 @@
 									<h2 itemprop="name" class="is-marginless is-size-4 has-text-black">{{p.phone_model|title}}</h2>
 									<p itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="is-size-5 is-marginless has-text-weight-bold has-text-primary">
 										<span>USD {{p.price|intcomma}}</span>
-										{% if request.session.location %}
-											<span> - {{ request.session.currency }} {% multiply p.price request.session.exchange %}</span>	
+										{% if request.session.location and request.session.currency != 'USD' %}
+												<span> - {{ request.session.currency }} {% multiply phone.price request.session.exchange %}</span>
 										{% endif %}
 										<meta itemprop="price" content="{{p.price}}" />
 										<meta itemprop="priceCurrency" content="USD" />
