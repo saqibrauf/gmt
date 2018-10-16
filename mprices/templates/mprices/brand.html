@@ -27,8 +27,8 @@
 							<img class="p-img" itemprop="image" src="{{p.phone_image.url}}" alt="{{p.phone_model|title}}" height="212">	
 						</div>
 						<div class="column desc">
-							<h2 itemprop="name" class="is-marginless is-size-4 is-size-6-mobile has-text-black">{{p.phone_model|title}}</h2>
-							<p itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="is-size-6 is-size-7-mobile is-marginless has-text-weight-bold has-text-primary">
+							<h2 itemprop="name" class="is-marginless is-size-4 is-size-5-mobile has-text-black">{{p.phone_model|title}}</h2>
+							<p itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="is-size-5 is-size-7-touch has-text-black" style="border: 1px solid #000; padding: 0.25rem; margin: 0.5rem 0;">
 								<span>USD {{p.price|intcomma}}</span>
 								{% if request.session.location and request.session.currency != 'USD' %}
 									<span> - {{ request.session.currency }} {% multiply p.price request.session.exchange %}</span>	
