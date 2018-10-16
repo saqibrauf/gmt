@@ -166,27 +166,27 @@
 			{% if all_phones %}
 				<h2>Other Mobiles From {{brand}}</h2>
 				{% for p in all_phones|slice:':10' %}
-					<div itemscope itemtype="http://schema.org/Product">
+					<div itemscope itemtype="http://schema.org/Product">				
 						{% if request.session.location %}
 							<a class="box is-radiusless" href="{% url 'phone' slug=p.phone_model_slug location=request.session.location %}">
 						{% else %}
 							<a class="box is-radiusless" href="{% url 'phone' slug=p.phone_model_slug %}">
 						{% endif %}
-							<div class="columns">
+							<div class="columns is-mobile">
 								<div class="column is-narrow has-text-centered">
-									<img itemprop="image" src="{{p.phone_image.url}}" alt="{{p.phone_model|title}}" height="212">	
+									<img class="p-img" itemprop="image" src="{{p.phone_image.url}}" alt="{{p.phone_model|title}}" height="212">	
 								</div>
 								<div class="column desc">
-									<h2 itemprop="name" class="is-marginless is-size-4 has-text-black">{{p.phone_model|title}}</h2>
-									<p itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="is-size-5 is-marginless has-text-weight-bold has-text-primary">
+									<h2 itemprop="name" class="is-marginless is-size-4 is-size-6-mobile has-text-black">{{p.phone_model|title}}</h2>
+									<p itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="is-size-6 is-size-7-mobile is-marginless has-text-weight-bold has-text-primary">
 										<span>USD {{p.price|intcomma}}</span>
 										{% if request.session.location and request.session.currency != 'USD' %}
-												<span> - {{ request.session.currency }} {% multiply p.price request.session.exchange %}</span>
+											<span> - {{ request.session.currency }} {% multiply p.price request.session.exchange %}</span>	
 										{% endif %}
 										<meta itemprop="price" content="{{p.price}}" />
 										<meta itemprop="priceCurrency" content="USD" />
 									</p>
-									<div class="has-text-black is-size-7" itemprop="description">{{p.description|truncatewords:300|safe}}</div>
+									<div class="has-text-black is-size-7" itemprop="description">{{p.description|truncatewords:150|safe}}</div>
 								</div>
 							</div>
 						</a>

@@ -77,8 +77,12 @@ b, strong {
 }
 
 .desc {
-	max-height: 215px;
+	max-height: 220px;
 	overflow: hidden;
+}
+
+.column .box {
+	margin-bottom: 0.5rem !important;
 }
 
 @media screen and (min-width: 1088px) {
@@ -89,7 +93,11 @@ b, strong {
 	}
 }
 
-@media screen and (min-width: 768px) {
-	
-
+@media screen and (max-width: 768px) {
+	.p-img {
+		max-height: 125px;
+	}
+	.desc {
+		max-height: 135px;
+	}
 }
