@@ -2,7 +2,7 @@
 
 <nav class="navbar is-info is-fixed-top">
     <div class="container is-fluid">
-        <div class="navbar-brand" style="flex-grow: 1; justify-content: space-between;">
+        <div class="navbar-brand">
             <a class="navbar-item has-background-primary" href="{% url 'index' %}">
                 {% url 'index' as home_url %}
                 {% if request.get_full_path == home_url %}
@@ -11,7 +11,7 @@
                     <h3 class="is-marginless is-size-4 has-text-white" style="text-transform: uppercase;">Get Mobile Price</h3>
                 {% endif %}
             </a>
-            <div class="navbar-item">
+            <div class="navbar-item is-hidden-desktop">                 
                 <div class="field is-grouped">
                     <p class="control">
                         <a class="button is-light is-small" href="{% url 'search' %}">Search By Price</a>
@@ -21,21 +21,43 @@
                     </p>
                 </div>                
             </div>
-             
-            <div class="navbar-burger burger is-hidden" data-target="navMain">
+            <div class="navbar-burger burger" data-target="navMain">
                 <span></span>
                 <span></span>
                 <span></span>
             </div>
         </div>
-        <div id="navMain" class="navbar-menu is-hidden">
-            <div class="navbar-end">
-                <div class="navbar-item">
-                    <div class="control">
-                        <button class="button is-primary mobile-search">Search Mobile</button>
+
+        <div id="navMain" class="navbar-menu">
+
+            <div class="navbar-start">
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <a class="navbar-link" href="">All Mobile Brands</a>
+                    <div id="moreDropdown" class="navbar-dropdown">
+                        {%for b in all_brands%}
+                            {% if request.session.location %}
+                                <a class="navbar-item is-size-7" href="{% url 'brand' slug=b.brand_slug location=request.session.location %}">{{b.brand_name|title}} Mobile Prices in {{request.session.loc_name|title}}</a>
+                            {% else %}
+                                <a class="navbar-item is-size-7" href="{% url 'brand' slug=b.brand_slug %}">{{b.brand_name|title}} Mobile Prices</a>
+                            {% endif %}
+                        {%endfor%}
                     </div>
                 </div>
             </div>
+
+            <div class="navbar-end">
+                 <div class="navbar-item is-hidden-touch">                 
+                    <div class="field is-grouped">
+                        <p class="control">
+                            <a class="button is-light is-small" href="{% url 'search' %}">Search By Price</a>
+                        </p>
+                        <p class="control">
+                            <a class="button is-primary is-small mobile-search">Search</a>
+                        </p>
+                    </div>                
+                </div>
+            </div>
+
         </div>
     </div>
 </nav>

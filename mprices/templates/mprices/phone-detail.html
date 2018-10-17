@@ -166,7 +166,7 @@
 			{% if all_phones %}
 				<h2>Other Mobiles From {{brand}}</h2>
 				{% for p in all_phones|slice:':10' %}
-					<div itemscope itemtype="http://schema.org/Product">				
+					<div class="column" itemscope itemtype="http://schema.org/Product">				
 						{% if request.session.location %}
 							<a class="box is-radiusless" href="{% url 'phone' slug=p.phone_model_slug location=request.session.location %}">
 						{% else %}
