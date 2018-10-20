@@ -10,7 +10,7 @@ class CountryAdmin(admin.ModelAdmin):
 	search_fields = ['country']
 
 class LocatiionAdmin(admin.ModelAdmin):
-	list_display = ('location_name', 'country')
+	list_display = ('location_name', 'location_slug', 'country')
 	autocomplete_fields = ['country']
 	search_fields = ['location_name']
 
