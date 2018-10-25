@@ -70,8 +70,25 @@
     <div id="content" class="container is-fluid" style="padding: 0;">
         <div class="columns is-desktop is-paddingless is-marginless">
             <div class="column is-9-desktop is-paddingless is-marginless" style="border-right: 1px solid #e6e6e6;">
-                {% block 'pageheading' %}{% endblock %}
-                <main class="section">
+                {% block 'pageheading' %}
+                    <form id="countries" action="{% url 'index' %}" method="POST" style="position: absolute; right: 10px; top: 10px;">
+                        {% csrf_token %}
+                        <div class="field">
+                            <div class="control">
+                                <div id="country" class="select is-info">
+                                    <select name="country">
+                                        <option value="choose-location">CHOOSE YOUR LOCATION</option>
+                                        <option value="global">GLOBAL</option>
+                                        {% for c in countries %}
+                                            <option class="is-uppercase" value="{{c.country_slug}}">{{c.country|upper}}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                {% endblock %}
+                <main class="section">                    
                     {% block 'content' %}{% endblock %}
                 </main>
             </div>
@@ -158,6 +175,15 @@
                 $('html, body').animate({scrollTop : 0},800);
                 return false;
             });
+
+
+            $("#country").change(function(){
+                var city = $("#country select").val();
+                if (city != 'choose-location') {
+                    $("#countries").submit();
+                }
+            });
+
         });
         
     </script>

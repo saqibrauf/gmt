@@ -6,9 +6,10 @@
 {% block 'description' %}Checkout the latest {{ phone.phone_model|title }} Price{% if request.session.location %} in {{request.session.loc_name|title}}{% endif %}. Get {{ phone.phone_model|title }} specification and features. Updated on daily basis by taking information from online e-commerce stores and retailers{% if request.session.location %} in {{request.session.loc_name|title}}{% endif %}.{% endblock %}
 
 {% block 'pageheading' %}
-<div class="section has-background-light">
+<div class="section has-background-light" style="position: relative;">
 	<h1>{{ phone.phone_model|title }} Price{% if request.session.location %} in {{request.session.loc_name|title}}{% endif %}</h1>
-	<p>Checkout the latest <strong>{{ phone.phone_model|title }} Price{% if request.session.location %} in {{request.session.loc_name|title}}{% endif %}.</strong> Get <strong>{{ phone.phone_model|title }} specification and features.</strong> Updated on daily basis by taking information from online e-commerce stores and retailers{% if request.session.location %} in {{request.session.loc_name|title}}{% endif %}.</strong></p>		
+	<p>Checkout the latest <strong>{{ phone.phone_model|title }} Price{% if request.session.location %} in {{request.session.loc_name|title}}{% endif %}.</strong> Get <strong>{{ phone.phone_model|title }} specification and features.</strong> Updated on daily basis by taking information from online e-commerce stores and retailers{% if request.session.location %} in {{request.session.loc_name|title}}{% endif %}.</strong></p>	
+	{{block.super}}	
 </div>
 {% endblock %}
 

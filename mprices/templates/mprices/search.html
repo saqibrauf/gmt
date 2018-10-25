@@ -6,7 +6,7 @@
 {% block 'description' %}Checkout the latest mobiles phones, specifications and features. We are a trusted source to get all mobile phone prices, specification and features. We provide you updated information on daily basis by taking information from online ecommerce stores and retailers in country.{% endblock %}
 
 {% block 'pageheading' %}
-<div class="section has-background-light">
+<div class="section has-background-light" style="position: relative;">
 	<h1>Search by price</h1>	
 	<form class="field" action="{% url 'search' %}" method="GET">
 		<div class="field columns">
@@ -75,6 +75,7 @@
 			<p class="has-text-danger heading is-marginless">There is nothing to match your search results.</p>
 		{% endif %}
 	{% endif %}	
+	{{block.super}}
 </div>
 {% endblock %}
 
