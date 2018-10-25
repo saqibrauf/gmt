@@ -12,8 +12,8 @@ def index(request):
 			loc = get_object_or_404(Location, location_slug=country)
 			if loc:
 				try:
-					country = Country.objects.get(location__location_slug=loc)
-					base_cur = Country.objects.get(currency='USD')
+					country = Country.objects.get(location__location_slug=loc.location_slug)
+					base_cur = Country.objects.get(currency='USD') # US Dollar rate in EURO, Because we store prices in USD
 					base = 1 / base_cur.exchange_rate
 					er = country.exchange_rate
 					exch = base * er

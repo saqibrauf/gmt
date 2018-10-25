@@ -80,7 +80,7 @@
                                         <option value="choose-location">CHOOSE YOUR LOCATION</option>
                                         <option value="global">GLOBAL</option>
                                         {% for c in countries %}
-                                            <option class="is-uppercase" value="{{c.country_slug}}">{{c.country|upper}}</option>
+                                            <option value="{{c.country_slug}}">{{c.country|upper}}</option>
                                         {% endfor %}
                                     </select>
                                 </div>
