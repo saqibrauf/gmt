@@ -1,12 +1,11 @@
 {% extends 'base.html' %}
 {% load humanize %}
 {% load multiply %}
-{% block 'title' %}Latest and Updated Mobile Phone Prices, Specifications and Features - GET MOBILE PRICES{% endblock %}
-{% block 'description' %}Checkout the latest mobiles phones, specifications and features. We are a trusted source to get all mobile phone prices, specification and features. We provide you updated information on daily basis by taking information from online ecommerce stores and retailers in country.{% endblock %}
+{% block 'title' %}Latest and Updated Mobile Phone Prices, Specifications and Features{% endblock %}
+{% block 'description' %}Checkout the latest mobile phones, specifications and features. We are a trusted source of mobile phones related information. We provide you prices for all the major mobile brands.{% endblock %}
 
 {% block 'pageheading' %}
 	<div class="section has-background-light" style="position: relative;">
-		
 		<h1>Latest and Updated Mobile Phone Prices, Specs and Features</h1>
 		<p>Checkout the latest mobile prices, specifications and features. Updated on daily basis by taking information from online ecommerce stores and retailers in the country.</p>		
 		{{block.super}}
@@ -29,7 +28,7 @@
 							<img class="p-img" itemprop="image" src="{{p.phone_image.url}}" alt="{{p.phone_model|title}}" height="212">	
 						</div>
 						<div class="column desc">
-							<h2 itemprop="name" class="is-marginless is-size-4 is-size-5-mobile has-text-black">{{p.phone_model|title}}</h2>
+							<h2 itemprop="name" class="is-marginless is-size-4 is-size-5-mobile has-text-black">{{p.phone_model|title}} Price</h2>
 							<p itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="has-background-light is-size-5 is-size-7-touch has-text-black" style="padding: 0.25rem; margin: 0.5rem 0;">
 								<span>USD {{p.price|intcomma}}</span>
 								{% if request.session.location and request.session.currency != 'USD' %}

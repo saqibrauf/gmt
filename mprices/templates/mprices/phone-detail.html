@@ -2,8 +2,8 @@
 {% load humanize %}
 {% load multiply %}
 
-{% block 'title' %}{{ phone.phone_model|title }} Price{% if request.session.location %} in {{request.session.loc_name|title}}{% endif %}, {{ phone.phone_model|title }} Specification and Features - GET MOBILE PRICES{% endblock %}
-{% block 'description' %}Checkout the latest {{ phone.phone_model|title }} Price{% if request.session.location %} in {{request.session.loc_name|title}}{% endif %}. Get {{ phone.phone_model|title }} specification and features. Updated on daily basis by taking information from online e-commerce stores and retailers{% if request.session.location %} in {{request.session.loc_name|title}}{% endif %}.{% endblock %}
+{% block 'title' %}{{ phone.phone_model|title }} Price{% if request.session.location %} in {{request.session.loc_name|title}}{% endif %}, {{ phone.phone_model|title }} Specification and Features.{% endblock %}
+{% block 'description' %}Get the latest {{ phone.phone_model|title }} Price{% if request.session.location %} in {{request.session.loc_name|title}}{% endif %}. {{ phone.phone_model|title }} specification and features. We are a trusted source of mobile phones related information. We provide you prices for all the major mobile brands{% if request.session.location %} in {{request.session.loc_name|title}}{% endif %}.{% endblock %}
 
 {% block 'pageheading' %}
 <div class="section has-background-light" style="position: relative;">

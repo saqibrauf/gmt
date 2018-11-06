@@ -2,8 +2,8 @@
 {% load humanize %}
 {% load multiply %}
 
-{% block 'title' %}{{brand.brand_name|title}} Mobiles Prices{% if request.session.location %} in {{request.session.loc_name|title}}{% endif %}, Specifaction and Features - GET MOBILE PRICES{% endblock %}
-{% block 'description' %}Checkout the latest {{brand.brand_name|title}} Mobiles Prices{% if request.session.location %} in {{request.session.loc_name|title}}{% endif %}. Latest {{brand.brand_name|title}} mobiles, {{brand.brand_name|title}} mobiles specification and features. Updated on daily basis by taking information from online ecommerce stores and retailers{% if request.session.location %} in {{request.session.loc_name|title}}{% endif %}.{% endblock %}
+{% block 'title' %}{{brand.brand_name|title}} Mobiles Prices{% if request.session.location %} in {{request.session.loc_name|title}}{% endif %}, Specifactions and Features{% endblock %}
+{% block 'description' %}Latest {{brand.brand_name|title}} Mobiles Prices{% if request.session.location %} in {{request.session.loc_name|title}}{% endif %}. {{brand.brand_name|title}} mobiles, specification and features.{% endblock %}
 
 {% block 'pageheading' %}
 	<div class="section has-background-light" style="position: relative;">
