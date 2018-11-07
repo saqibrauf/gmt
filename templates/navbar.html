@@ -35,11 +35,7 @@
                     <a class="navbar-link" href="">All Mobile Brands</a>
                     <div class="navbar-dropdown">
                         {%for b in all_brands%}
-                            {% if request.session.location %}
-                                <a class="navbar-item is-size-7" href="{% url 'brand' slug=b.brand_slug location=request.session.location %}">{{b.brand_name|title}} Mobile Prices in {{request.session.loc_name|title}}</a>
-                            {% else %}
-                                <a class="navbar-item is-size-7" href="{% url 'brand' slug=b.brand_slug %}">{{b.brand_name|title}} Mobile Prices</a>
-                            {% endif %}
+                            <a class="navbar-item is-size-7" href="{% url 'brand' slug=b.brand_slug %}">{{b.brand_name|title}} Mobile Prices</a>
                         {%endfor%}
                     </div>
                 </div>

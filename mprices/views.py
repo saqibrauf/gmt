@@ -24,13 +24,13 @@ def index(request):
 					request.session['currency'] = 'USD'
 					request.session['exchange'] = 1
 
-				request.session['loc_name'] = loc.location_name
-				request.session['location'] = loc.location_slug
+				request.session['city'] = loc.location_name
+				request.session['city_slug'] = loc.location_slug
 		else:
 			request.session['currency'] = 'USD'
 			request.session['exchange'] = 1
-			request.session['loc_name'] = ''
-			request.session['location'] = ''
+			request.session['city'] = ''
+			request.session['city_slug'] = ''
 
 	countries = Country.objects.all()
 	phones = Phone.objects.filter(price__gt=0).order_by('-release', '-price')	
@@ -98,7 +98,7 @@ def brand(request, slug, location=''):
 	all_brands = Brand.objects.all().order_by('brand_name')
 	countries = Country.objects.all()
 
-	if location:
+	if location:		
 		loc = get_object_or_404(Location, location_slug=location)
 		if loc:
 			try:
@@ -114,13 +114,14 @@ def brand(request, slug, location=''):
 				request.session['currency'] = 'USD'
 				request.session['exchange'] = 1
 
-			request.session['loc_name'] = loc.location_name
-			request.session['location'] = loc.location_slug
-	else:
+			request.session['city'] = loc.location_name
+			request.session['city_slug'] = loc.location_slug
+
+	elif not request.session:
 		request.session['currency'] = 'USD'
 		request.session['exchange'] = 1
-		request.session['loc_name'] = ''
-		request.session['location'] = ''
+		request.session['city'] = ''
+		request.session['city_slug'] = ''
 
 	page = request.GET.get('page', 1)
 	paginator = Paginator(phones, 30)
@@ -163,13 +164,13 @@ def phone(request, slug, location=''):
 				request.session['currency'] = 'USD'
 				request.session['exchange'] = 1
 
-			request.session['loc_name'] = loc.location_name
-			request.session['location'] = loc.location_slug
-	else:
+			request.session['city'] = loc.location_name
+			request.session['city_slug'] = loc.location_slug
+	elif not request.session:
 		request.session['currency'] = 'USD'
 		request.session['exchange'] = 1
-		request.session['loc_name'] = ''
-		request.session['location'] = ''		
+		request.session['city'] = ''
+		request.session['city_slug'] = ''		
 
 	context = {
 		'phone' : phone,
@@ -191,8 +192,8 @@ def get_phone(request):
 			
 			for p in p_model:
 				url = reverse('phone', kwargs={'slug': p.phone_model_slug})
-				if request.session['location']:
-					url = url[:-1] + '-in-' + request.session['location']
+				if request.session['city_slug']:
+					url = url[:-1] + '-in-' + request.session['city_slug']
 				model_json = {
 					'url' : url,
 					'model' : p.phone_model,

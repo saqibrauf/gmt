@@ -2,13 +2,13 @@
 {% load humanize %}
 {% load multiply %}
 
-{% block 'title' %}{{ phone.phone_model|title }} Price{% if request.session.location %} in {{request.session.loc_name|title}}{% endif %}, {{ phone.phone_model|title }} Specification and Features.{% endblock %}
-{% block 'description' %}Get the latest {{ phone.phone_model|title }} Price{% if request.session.location %} in {{request.session.loc_name|title}}{% endif %}. {{ phone.phone_model|title }} specification and features. We are a trusted source of mobile phones related information. We provide you prices for all the major mobile brands{% if request.session.location %} in {{request.session.loc_name|title}}{% endif %}.{% endblock %}
+{% block 'title' %}{{ phone.phone_model|title }} Price{% if request.session.city %} in {{request.session.city|title}}{% endif %}, {{ phone.phone_model|title }} Specification and Features.{% endblock %}
+{% block 'description' %}Get the latest {{ phone.phone_model|title }} Price{% if request.session.city %} in {{request.session.city|title}}{% endif %}. {{ phone.phone_model|title }} specification and features. We are a trusted source of mobile phones related information. We provide you prices for all the major mobile brands{% if request.session.city %} in {{request.session.city|title}}{% endif %}.{% endblock %}
 
 {% block 'pageheading' %}
 <div class="section has-background-light" style="position: relative;">
-	<h1>{{ phone.phone_model|title }} Price{% if request.session.location %} in {{request.session.loc_name|title}}{% endif %}</h1>
-	<p>Checkout the latest <strong>{{ phone.phone_model|title }} Price{% if request.session.location %} in {{request.session.loc_name|title}}{% endif %}.</strong> Get <strong>{{ phone.phone_model|title }} specification and features.</strong> Updated on daily basis by taking information from online e-commerce stores and retailers{% if request.session.location %} in {{request.session.loc_name|title}}{% endif %}.</strong></p>	
+	<h1>{{ phone.phone_model|title }} Price{% if request.session.city %} in {{request.session.city|title}}{% endif %}</h1>
+	<p>Checkout the latest <strong>{{ phone.phone_model|title }} Price{% if request.session.city_slug %} in {{request.session.city|title}}{% endif %}.</strong> Get <strong>{{ phone.phone_model|title }} specification and features.</strong> Updated on daily basis by taking information from online e-commerce stores and retailers{% if request.session.city %} in {{request.session.city|title}}{% endif %}.</strong></p>	
 	{{block.super}}	
 </div>
 {% endblock %}
@@ -27,7 +27,7 @@
 				<h2 class="is-marginless is-size-4 has-text-black" itemprop="name">{{phone.phone_model|title}}</h2>
 				<p class="is-size-4 has-text-weight-bold has-text-primary is-marginless">USD {{phone.price|intcomma}}</p>
 				<p class="is-size-4 has-text-weight-bold has-text-primary">
-					{% if request.session.location and request.session.currency != 'USD' %}
+					{% if request.session.city and request.session.currency != 'USD' %}
 						<span>{{ request.session.currency }} {% multiply phone.price request.session.exchange %}</span>
 					{% endif %}
 				</p>
@@ -37,7 +37,7 @@
 			<div class="notification" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
 				<h2 class="is-marginless is-size-4-desktop is-size-6-mobile">{{ phone.phone_model|title }} Estimated Price</h2>
 				<p class="is-marginless is-size-3-desktop is-size-5-mobile has-text-weight-bold"><span class="has-text-primary">USD {{phone.price|intcomma}}
-					{% if request.session.location and request.session.currency != 'USD' %}
+					{% if request.session.city and request.session.currency != 'USD' %}
 							, {{ request.session.currency }} {% multiply phone.price request.session.exchange %}</span>
 					{% endif %}					
 				</p>
@@ -163,21 +163,17 @@
 			{% if all_phones %}
 				<h2>Other Mobiles From {{brand}}</h2>
 				{% for p in all_phones|slice:':10' %}
-					<div class="column" itemscope itemtype="http://schema.org/Product">				
-						{% if request.session.location %}
-							<a class="box is-radiusless" href="{% url 'phone' slug=p.phone_model_slug location=request.session.location %}">
-						{% else %}
-							<a class="box is-radiusless" href="{% url 'phone' slug=p.phone_model_slug %}">
-						{% endif %}
+					<div class="column" itemscope itemtype="http://schema.org/Product">	
+						<a class="box is-radiusless" href="{% url 'phone' slug=p.phone_model_slug %}">
 							<div class="columns is-mobile">
 								<div class="column is-narrow has-text-centered">
 									<img class="p-img" itemprop="image" src="{{p.phone_image.url}}" alt="{{p.phone_model|title}}" height="212">	
 								</div>
 								<div class="column desc">
-									<h2 itemprop="name" class="is-marginless is-size-4 is-size-5-mobile has-text-black">{{p.phone_model|title}}</h2>
+									<h2 itemprop="name" class="is-marginless is-size-4 is-size-5-mobile has-text-black">{{p.phone_model|title}} Price</h2>
 									<p itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="has-background-light is-size-5 is-size-7-touch has-text-black" style="padding: 0.25rem; margin: 0.5rem 0;">
 										<span>USD {{p.price|intcomma}}</span>
-										{% if request.session.location and request.session.currency != 'USD' %}
+										{% if request.session.city and request.session.currency != 'USD' %}
 											<span> - {{ request.session.currency }} {% multiply p.price request.session.exchange %}</span>	
 										{% endif %}
 										<meta itemprop="price" content="{{p.price}}" />
@@ -203,22 +199,13 @@
     <h3 class="is-marginless">Mobile Phone Brands</h3><hr>
     <ul class="is-marginless" style="list-style: none;">
         {%for b in all_brands%}
-        	{% if request.session.location %}
-            	<li class="sidebar-list"><a href="{% url 'brand' slug=b.brand_slug location=request.session.location %}">{{b.brand_name|title}} Mobile Prices in {{request.session.loc_name|title}}</a></li>
-            {% else %}
-            	<li class="sidebar-list"><a href="{% url 'brand' slug=b.brand_slug %}">{{b.brand_name|title}} Mobile Prices</a></li>
-        	{% endif %}
+        	<li class="sidebar-list"><a href="{% url 'brand' slug=b.brand_slug %}">{{b.brand_name|title}} Mobile Prices</a></li>
         {%endfor%}
     </ul>
-    <h2>{{brand|title}} Mobiles{% if request.session.location %} in {{request.session.location|title}}{% endif %}</h2>
+    <h2>{{brand|title}} Mobiles{% if request.session.city %} in {{request.session.city|title}}{% endif %}</h2>
     <ul class="is-marginless" style="list-style: none;">
         {%for p in all_phones%}
-        	{% if request.session.location %}
-				<li class="sidebar-list"><a href="{% url 'phone' slug=p.phone_model_slug location=request.session.location  %}">{{p.phone_model|title}} Price in {{request.session.loc_name|title}}</a></li>	
-			{% else %}
-				<li class="sidebar-list"><a href="{% url 'phone' slug=p.phone_model_slug  %}">{{p.phone_model|title}} Price</a></li>
-			{% endif %}
-            
+        	<li class="sidebar-list"><a href="{% url 'phone' slug=p.phone_model_slug  %}">{{p.phone_model|title}} Price</a></li>
         {%endfor%}
     </ul>
     <hr>
