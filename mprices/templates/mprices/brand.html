@@ -19,7 +19,7 @@
 		{% for p in phones %}
 			<div class="column is-6" itemscope itemtype="http://schema.org/Product">	
 				<a class="box is-radiusless" href="{% url 'phone' slug=p.phone_model_slug %}">
-					<div class="columns is-mobile">
+					<div class="columns is-mobile" style="position: relative;">
 						<div class="column is-narrow has-text-centered">
 							<img class="p-img" itemprop="image" src="{{p.phone_image.url}}" alt="{{p.phone_model|title}}" height="212">	
 						</div>
@@ -35,6 +35,7 @@
 							</p>
 							<div class="has-text-black is-size-7" itemprop="description">{{p.description|truncatewords:150|safe}}</div>
 						</div>
+						<p class="tag is-medium is-primary is-uppercase" style="position: absolute; bottom: 0; right: 0;">{{p.release|date:'F Y'}}</p>
 					</div>
 				</a>
 				<div itemprop="brand" class="is-hidden" itemscope itemtype="http://schema.org/Thing">

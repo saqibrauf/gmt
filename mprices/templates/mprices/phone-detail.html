@@ -8,6 +8,7 @@
 {% block 'pageheading' %}
 <div class="section has-background-light" style="position: relative;">
 	<h1>{{ phone.phone_model|title }} Price{% if request.session.city %} in {{request.session.city|title}}{% endif %}</h1>
+	<p class="tag is-medium is-primary is-uppercase">Release {{phone.release|date:'F Y'}}</p>	
 	<p>Checkout the latest <strong>{{ phone.phone_model|title }} Price{% if request.session.city_slug %} in {{request.session.city|title}}{% endif %}.</strong> Get <strong>{{ phone.phone_model|title }} specification and features.</strong> Updated on daily basis by taking information from online e-commerce stores and retailers{% if request.session.city %} in {{request.session.city|title}}{% endif %}.</strong></p>	
 	{{block.super}}	
 </div>
@@ -21,7 +22,7 @@
 		</div>
 		<div class="column is-narrow">
 			<div class="box is-radiusless is-marginless has-text-centered">				
-				<img src="{{phone.phone_image.url}}"" alt="{{phone.phone_model|title}}" itemprop="image" height="212">						
+				<img class="is-block" src="{{phone.phone_image.url}}"" alt="{{phone.phone_model|title}}" itemprop="image" height="212">
 			</div>
 			<div class="box is-radiusless has-background-white-ter has-text-centered is-hidden">
 				<h2 class="is-marginless is-size-4 has-text-black" itemprop="name">{{phone.phone_model|title}}</h2>
@@ -165,7 +166,7 @@
 				{% for p in all_phones|slice:':10' %}
 					<div class="column" itemscope itemtype="http://schema.org/Product">	
 						<a class="box is-radiusless" href="{% url 'phone' slug=p.phone_model_slug %}">
-							<div class="columns is-mobile">
+							<div class="columns is-mobile" style="position: relative;">
 								<div class="column is-narrow has-text-centered">
 									<img class="p-img" itemprop="image" src="{{p.phone_image.url}}" alt="{{p.phone_model|title}}" height="212">	
 								</div>
@@ -181,6 +182,7 @@
 									</p>
 									<div class="has-text-black is-size-7" itemprop="description">{{p.description|truncatewords:150|safe}}</div>
 								</div>
+								<p class="tag is-medium is-primary is-uppercase" style="position: absolute; bottom: 0; right: 0;">{{p.release|date:'F Y'}}</p>
 							</div>
 						</a>
 						<div itemprop="brand" class="is-hidden" itemscope itemtype="http://schema.org/Thing">
