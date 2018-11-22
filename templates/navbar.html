@@ -1,20 +1,20 @@
 {% load static %}
 
-<nav class="navbar is-info is-fixed-top">
-    <div class="container is-fluid">
+<nav class="navbar is-light is-fixed-top" style="border-bottom: 1px solid #cacaca;">
+    
         <div class="navbar-brand">
-            <a class="navbar-item has-background-primary" href="{% url 'index' %}">
+            <a class="navbar-item has-background-black" href="{% url 'index' %}">
                 {% url 'index' as home_url %}
                 {% if request.get_full_path == home_url %}
-                    <h2 class="is-marginless is-size-4 has-text-white" style="text-transform: uppercase;">Get Mobile Price</h2>
+                    <h2 class="is-marginless is-size-4 is-size-6-mobile has-text-white" style="text-transform: uppercase;">Get Mobile Price</h2>
                 {% else %}
-                    <h3 class="is-marginless is-size-4 has-text-white" style="text-transform: uppercase;">Get Mobile Price</h3>
+                    <h3 class="is-marginless is-size-4 is-size-6-mobile has-text-white" style="text-transform: uppercase;">Get Mobile Price</h3>
                 {% endif %}
             </a>
             <div class="navbar-item is-hidden-desktop">                 
                 <div class="field is-grouped">
                     <p class="control">
-                        <a class="button is-light is-small" href="{% url 'search' %}">Price Search</a>
+                        <a class="button is-primary is-small" href="{% url 'search' %}">Price Search</a>
                     </p>
                     <p class="control">
                         <a class="button is-primary is-small mobile-search">Search</a>
@@ -35,7 +35,7 @@
                     <a class="navbar-link" href="">All Mobile Brands</a>
                     <div class="navbar-dropdown">
                         {%for b in all_brands%}
-                            <a class="navbar-item is-size-7" href="{% url 'brand' slug=b.brand_slug %}">{{b.brand_name|title}} Mobile Prices</a>
+                            <a class="navbar-item" href="{% url 'brand' slug=b.brand_slug %}">{{b.brand_name|title}} Mobile Prices</a>
                         {%endfor%}
                     </div>
                 </div>
@@ -45,10 +45,10 @@
                 <div class="navbar-item is-hidden-touch">                 
                     <div class="field is-grouped">
                         <p class="control">
-                            <a class="button is-light is-small" href="{% url 'search' %}">Search By Price</a>
+                            <a class="button is-primary" href="{% url 'search' %}">Search By Price</a>
                         </p>
                         <p class="control">
-                            <a class="button is-primary is-small mobile-search">Search</a>
+                            <a class="button is-primary mobile-search">Search</a>
                         </p>
                     </div>                
                 </div>
@@ -56,5 +56,5 @@
             </div>
 
         </div>
-    </div>
+    
 </nav>

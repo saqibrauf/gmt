@@ -192,8 +192,10 @@ def get_phone(request):
 			
 			for p in p_model:
 				url = reverse('phone', kwargs={'slug': p.phone_model_slug})
+				
 				if request.session['city_slug']:
 					url = url[:-1] + '-in-' + request.session['city_slug']
+				
 				model_json = {
 					'url' : url,
 					'model' : p.phone_model,

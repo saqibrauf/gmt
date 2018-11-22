@@ -13,9 +13,9 @@
     <title>{% block 'title' %}Mobile Phone Prices{% endblock %}</title>
     <meta name="news_keywords" content="{% block 'news' %}{% endblock %}">
     <meta name="description" content="{% block 'description' %}{% endblock %}">
-    <link href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:700|Saira:400" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Saira+Semi+Condensed:400,700" rel="stylesheet">
+     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
     <link rel="icon" href="{% static 'images/frame.png' %}" type="image/png">
-    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
     <link rel="stylesheet" href="{% static 'css/bulma.css' %}">
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
     
@@ -63,21 +63,16 @@
             </div>
         </div>
     </div>
-    
-
-    <header>
-        {% block 'above_content' %}{% endblock %}
-    </header>
-
-    <div id="content" class="container is-fluid" style="padding: 0;">
-        <div class="columns is-desktop is-paddingless is-marginless">
-            <div class="column is-9-desktop is-paddingless is-marginless" style="border-right: 1px solid #e6e6e6;">
+    <div class="columns is-desktop is-paddingless is-marginless">
+        <div class="column is-9-desktop is-paddingless is-marginless">
+            
+            <main class="section">    
                 {% block 'pageheading' %}
-                    <form id="countries" action="{% url 'index' %}" method="POST" style="position: absolute; right: 10px; top: 10px;">
+                    <form id="countries" action="{% url 'index' %}" method="POST" style="position: absolute; right: 0; top: -2.5rem;">
                         {% csrf_token %}
                         <div class="field">
                             <div class="control">
-                                <div id="country" class="select is-small is-info">
+                                <div id="country" class="select is-small is-black">
                                     <select name="country">
                                         <option value="choose-location">CHOOSE YOUR COUNTRY</option>
                                         <option value="global">GLOBAL</option>
@@ -89,22 +84,21 @@
                             </div>
                         </div>
                     </form>
-                {% endblock %}
-                <main class="section">                    
-                    {% block 'content' %}{% endblock %}
-                </main>
-            </div>
-            <hr class="is-hidden-desktop is-marginless">
-            <div class="column is-3-desktop is-paddingless is-marginless">                 
-                <aside class="section">
-                    {% block 'sidebar' %}
-
-                    {% endblock %}
-                </aside>
-            </div>     
+                {% endblock %}                
+                {% block 'content' %}{% endblock %}
+            </main>
         </div>
+        <hr class="is-hidden-desktop is-marginless">
+        <div class="column is-3-desktop is-paddingless is-marginless has-background-light">                 
+            <aside class="section" style="padding: 3rem 1.5rem;">
+                {% block 'sidebar' %}
+
+                {% endblock %}
+            </aside>
+        </div>     
     </div>
-    <a href="#" class="scrollToTop button is-medium is-danger">TOP</a>
+    
+    <a href="#" class="scrollToTop button is-medium is-primary">TOP</a>
 
     {% block 'below_content' %}{% endblock %}
 
@@ -112,7 +106,7 @@
         <div class="container content has-text-centered">
             <div class="buttons" style="justify-content: center;">
                 {%for b in all_brands%}
-                      <a class="button is-grey is-small is-outlined" href="{% url 'brand' slug=b.brand_slug  %}">{{b.brand_name|title}} Mobile Prices</a>
+                      <a class="button is-light is-small" href="{% url 'brand' slug=b.brand_slug  %}">{{b.brand_name|title}} Mobile Prices</a>
                 {%endfor%}
             </div>
             <hr class="has-background-grey">

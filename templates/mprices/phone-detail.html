@@ -6,10 +6,10 @@
 {% block 'description' %}Get the latest {{ phone.phone_model|title }} Price{% if request.session.city %} in {{request.session.city|title}}{% endif %}. {{ phone.phone_model|title }} specification and features. We are a trusted source of mobile phones related information. We provide you prices for all the major mobile brands{% if request.session.city %} in {{request.session.city|title}}{% endif %}.{% endblock %}
 
 {% block 'pageheading' %}
-<div class="section has-background-light" style="position: relative;">
+<div style="position: relative; padding-bottom: 0;">
 	<h1>{{ phone.phone_model|title }} Price{% if request.session.city %} in {{request.session.city|title}}{% endif %}</h1>
-	<p class="tag is-medium is-primary is-uppercase">Release {{phone.release|date:'F Y'}}</p>	
 	<p>Checkout the latest <strong>{{ phone.phone_model|title }} Price{% if request.session.city_slug %} in {{request.session.city|title}}{% endif %}.</strong> Get <strong>{{ phone.phone_model|title }} specification and features.</strong> Updated on daily basis by taking information from online e-commerce stores and retailers{% if request.session.city %} in {{request.session.city|title}}{% endif %}.</strong></p>	
+	<p class="tag is-medium is-primary is-uppercase">Release {{phone.release|date:'F Y'}}</p>	
 	{{block.super}}	
 </div>
 {% endblock %}
@@ -22,26 +22,18 @@
 		</div>
 		<div class="column is-narrow">
 			<div class="box is-radiusless is-marginless has-text-centered">				
-				<img class="is-block" src="{{phone.phone_image.url}}"" alt="{{phone.phone_model|title}}" itemprop="image" height="212">
+				<img src="{{phone.phone_image.url}}"" alt="{{phone.phone_model|title}}" itemprop="image" height="212">
 			</div>
-			<div class="box is-radiusless has-background-white-ter has-text-centered is-hidden">
-				<h2 class="is-marginless is-size-4 has-text-black" itemprop="name">{{phone.phone_model|title}}</h2>
-				<p class="is-size-4 has-text-weight-bold has-text-primary is-marginless">USD {{phone.price|intcomma}}</p>
-				<p class="is-size-4 has-text-weight-bold has-text-primary">
-					{% if request.session.city and request.session.currency != 'USD' %}
-						<span>{{ request.session.currency }} {% multiply phone.price request.session.exchange %}</span>
-					{% endif %}
-				</p>
-			</div>		
 		</div>
 		<div class="column">	
 			<div class="notification" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
-				<h2 class="is-marginless is-size-4-desktop is-size-6-mobile">{{ phone.phone_model|title }} Estimated Price</h2>
-				<p class="is-marginless is-size-3-desktop is-size-5-mobile has-text-weight-bold"><span class="has-text-primary">USD {{phone.price|intcomma}}
+				<h2 class="is-size-4-desktop is-size-6-mobile">{{ phone.phone_model|title }} Estimated Price</h2>
+				<div class="tags is-marginless">
+					<span class="tag is-medium is-black">USD {{phone.price|intcomma}}</span>
 					{% if request.session.city and request.session.currency != 'USD' %}
-							, {{ request.session.currency }} {% multiply phone.price request.session.exchange %}</span>
-					{% endif %}					
-				</p>
+						<span class="tag is-medium is-primary">{{ request.session.currency }} {% multiply phone.price request.session.exchange %}</span>
+					{% endif %}
+				</div>
 				<meta itemprop="priceCurrency" content="USD" /><meta itemprop="price" content="{{phone.price}}" />
 			</div>
 			{% if phone.phone_video %}
@@ -164,25 +156,28 @@
 			{% if all_phones %}
 				<h2>Other Mobiles From {{brand}}</h2>
 				{% for p in all_phones|slice:':10' %}
-					<div class="column" itemscope itemtype="http://schema.org/Product">	
-						<a class="box is-radiusless" href="{% url 'phone' slug=p.phone_model_slug %}">
-							<div class="columns is-mobile" style="position: relative;">
-								<div class="column is-narrow has-text-centered">
-									<img class="p-img" itemprop="image" src="{{p.phone_image.url}}" alt="{{p.phone_model|title}}" height="212">	
+					<div class="notification">
+						<a href="{% url 'phone' slug=p.phone_model_slug %}">
+							<div class="columns is-desktop">
+								<div class="column is-narrow has-text-centered" style="border-radius: 10px;">
+									<img class="p-img" itemprop="image" src="{{p.phone_image.url}}" alt="{{p.phone_model|title}}" height="140">
 								</div>
-								<div class="column desc">
-									<h2 itemprop="name" class="is-marginless is-size-4 is-size-5-mobile has-text-black">{{p.phone_model|title}} Price</h2>
-									<p itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="has-background-light is-size-5 is-size-7-touch has-text-black" style="padding: 0.25rem; margin: 0.5rem 0;">
-										<span>USD {{p.price|intcomma}}</span>
-										{% if request.session.city and request.session.currency != 'USD' %}
-											<span> - {{ request.session.currency }} {% multiply p.price request.session.exchange %}</span>	
-										{% endif %}
-										<meta itemprop="price" content="{{p.price}}" />
-										<meta itemprop="priceCurrency" content="USD" />
-									</p>
-									<div class="has-text-black is-size-7" itemprop="description">{{p.description|truncatewords:150|safe}}</div>
+								<div class="column">
+									<h2 itemprop="name" class="is-size-4 is-size-6-mobile is-size-5-mobile has-text-black">{{p.phone_model|title}} Price</h2>
+									<div class="content is-size-7-mobile" itemprop="description">{{p.description|truncatewords:40|safe}}</div>
+									<div class="tags">
+										<span itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="tag is-medium is-black is-size-7-mobile">
+											<span>USD {{p.price|intcomma}}</span>
+											{% if request.session.city and request.session.currency != 'USD' %}
+												<span> - {{ request.session.currency }} {% multiply p.price request.session.exchange %}</span>	
+											{% endif %}
+											<meta itemprop="price" content="{{p.price}}" />
+											<meta itemprop="priceCurrency" content="USD" />
+										</span>
+										<span class="tag is-medium is-primary is-size-7-mobile">{{p.release|date:'F Y'}}</span>
+									</div>
 								</div>
-								<p class="tag is-medium is-primary is-uppercase" style="position: absolute; bottom: 0; right: 0;">{{p.release|date:'F Y'}}</p>
+								
 							</div>
 						</a>
 						<div itemprop="brand" class="is-hidden" itemscope itemtype="http://schema.org/Thing">
@@ -198,7 +193,7 @@
 
 {% block 'sidebar' %}
 	{{ block.super }}
-    <h3 class="is-marginless">Mobile Phone Brands</h3><hr>
+    <h3>Mobile Phone Brands</h3>
     <ul class="is-marginless" style="list-style: none;">
         {%for b in all_brands%}
         	<li class="sidebar-list"><a href="{% url 'brand' slug=b.brand_slug %}">{{b.brand_name|title}} Mobile Prices</a></li>

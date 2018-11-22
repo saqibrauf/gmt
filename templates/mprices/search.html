@@ -6,7 +6,7 @@
 {% block 'description' %}Checkout the latest mobiles phones, specifications and features. We are a trusted source of mobile phones related information. We provide you prices for all the major mobile brands.{% endblock %}
 
 {% block 'pageheading' %}
-<div class="section has-background-light" style="position: relative;">
+<div style="position: relative; padding-bottom: 0;">
 	<h1>Search by price</h1>	
 	<form class="field" action="{% url 'search' %}" method="GET">
 		<div class="field columns">
@@ -65,7 +65,7 @@
 				</div>
 			</div>
 			<div class="control column is-narrow">
-				<input type="submit" class="button is-danger is-large" value="Search">
+				<input type="submit" class="button is-primary is-large" value="Search">
 			</div>
 		</div>
 	</form>	
@@ -81,44 +81,48 @@
 
 {% block 'content' %}
 
-	<div class="columns is-multiline">
-		{% for p in phones %}
-			<div class="column is-6" itemscope itemtype="http://schema.org/Product">	
-				<a class="box is-radiusless" href="{% url 'phone' slug=p.phone_model_slug %}">
-					<div class="columns is-mobile" style="position: relative;">
-						<div class="column is-narrow has-text-centered">
-							<img class="p-img" itemprop="image" src="{{p.phone_image.url}}" alt="{{p.phone_model|title}}" height="212">	
-						</div>
-						<div class="column desc">
-							<h2 itemprop="name" class="is-marginless is-size-4 is-size-5-mobile has-text-black">{{p.phone_model|title}} Price</h2>
-							<p itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="has-background-light is-size-5 is-size-7-touch has-text-black" style="padding: 0.25rem; margin: 0.5rem 0;">
+	{% for p in phones %}
+
+		<div class="notification">
+			<a href="{% url 'phone' slug=p.phone_model_slug %}">
+				<div class="columns is-desktop">
+					<div class="column is-narrow has-text-centered" style="border-radius: 10px;">
+						<img class="p-img" itemprop="image" src="{{p.phone_image.url}}" alt="{{p.phone_model|title}}" height="140">
+					</div>
+					<div class="column">
+						<h2 itemprop="name" class="is-size-4 is-size-6-mobile is-size-5-mobile has-text-black">{{p.phone_model|title}} Price</h2>
+						<div class="content is-size-7-mobile" itemprop="description">{{p.description|truncatewords:40|safe}}</div>
+						<div class="tags">
+							<span itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="tag is-medium is-black is-size-7-mobile">
 								<span>USD {{p.price|intcomma}}</span>
 								{% if request.session.city and request.session.currency != 'USD' %}
 									<span> - {{ request.session.currency }} {% multiply p.price request.session.exchange %}</span>	
 								{% endif %}
 								<meta itemprop="price" content="{{p.price}}" />
 								<meta itemprop="priceCurrency" content="USD" />
-							</p>
-							<div class="has-text-black is-size-7" itemprop="description">{{p.description|truncatewords:150|safe}}</div>
+							</span>
+							<span class="tag is-medium is-primary is-size-7-mobile">{{p.release|date:'F Y'}}</span>
 						</div>
-						<p class="tag is-medium is-primary is-uppercase" style="position: absolute; bottom: 0; right: 0;">{{p.release|date:'F Y'}}</p>
 					</div>
-				</a>
-				<div itemprop="brand" class="is-hidden" itemscope itemtype="http://schema.org/Thing">
-					<p itemprop="name">{{p.brand_name|title}}</p>
+					
 				</div>
+			</a>
+			<div itemprop="brand" class="is-hidden" itemscope itemtype="http://schema.org/Thing">
+				<p itemprop="name">{{p.brand_name|title}}</p>
 			</div>
-		{% endfor %}
-	</div>
+		</div>
+		
+	{% endfor %}
+
 	{% if phones.has_other_pages %}
-		<nav class="box is-radiusless pagination is-centered">
+		<nav class="pagination is-medium is-right">
 			{% if phones.has_previous %}
-				<a rel="prev" class="pagination-previous" href="?page={{ phones.previous_page_number }}{% if request.GET %}&minprice={{ request.GET.minprice }}&maxprice={{ request.GET.maxprice }}{% endif %}">Previous</a>
+				<a rel="prev" class="pagination-previous" href="?page={{ phones.previous_page_number }}">Previous</a>
 			{% else %}
 				<a class="pagination-previous" disabled>Previous</a>
 			{% endif %}
 			{% if phones.has_next %}
-				<a rel="next" class="pagination-next" href="?page={{ phones.next_page_number }}{% if request.GET %}&minprice={{ request.GET.minprice }}&maxprice={{ request.GET.maxprice }}{% endif %}">Next</a>
+				<a rel="next" class="pagination-next" href="?page={{ phones.next_page_number }}">Next</a>
 			{% else %}
 				<a class="pagination-next" disabled>Next</a>
 			{% endif %}
@@ -128,17 +132,18 @@
 					{% if phones.number == i %}
 						<li><a class="pagination-link is-current">{{ i }}</a></li>
 					{% else %}
-						<li><a class="pagination-link" href="?page={{ i }}{% if request.GET %}&minprice={{ request.GET.minprice }}&maxprice={{ request.GET.maxprice }}{% endif %}">{{ i }}</a></li>
+						<li><a class="pagination-link" href="?page={{ i }}">{{ i }}</a></li>
 					{% endif %}
 				{% endfor %}
 			</ul>
 		</nav>
 	{% endif %}
+
 {% endblock %}
 
 {% block 'sidebar' %}
 	{{ block.super }}
-	<h3 class="is-marginless">Mobile Phone Brands</h2><hr>
+	<h3>Mobile Phone Brands</h2>
     <ul class="is-marginless" style="list-style: none;">
         {%for b in all_brands%}
         	<li class="sidebar-list"><a href="{% url 'brand' slug=b.brand_slug %}">{{b.brand_name|title}} Mobile Prices</a></li>
