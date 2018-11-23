@@ -17,13 +17,14 @@
 
 		<div class="notification">
 			<a href="{% url 'phone' slug=p.phone_model_slug %}">
-				<div class="columns is-desktop">
+				<div class="columns is-mobile">
 					<div class="column is-narrow has-text-centered" style="border-radius: 10px;">
-						<img class="p-img" itemprop="image" src="{{p.phone_image.url}}" alt="{{p.phone_model|title}}" height="140">
+						<p class="is-marginless"><img class="p-img" itemprop="image" src="{{p.phone_image.url}}" alt="{{p.phone_model|title}}" height="140"></p>
+						<p><span class="tag is-small is-white is-hidden-tablet">{{p.release|date:'F Y'}}</span></p>
 					</div>
 					<div class="column">
 						<h2 itemprop="name" class="is-size-4 is-size-6-mobile is-size-5-mobile has-text-black">{{p.phone_model|title}} Price</h2>
-						<div class="content is-size-7-mobile" itemprop="description">{{p.description|truncatewords:40|safe}}</div>
+						<div class="content is-size-7-mobile item-desc" itemprop="description">{{p.description|truncatewords_html:30|safe}}</div>
 						<div class="tags">
 							<span itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="tag is-medium is-black is-size-7-mobile">
 								<span>USD {{p.price|intcomma}}</span>
@@ -33,7 +34,7 @@
 								<meta itemprop="price" content="{{p.price}}" />
 								<meta itemprop="priceCurrency" content="USD" />
 							</span>
-							<span class="tag is-medium is-primary is-size-7-mobile">{{p.release|date:'F Y'}}</span>
+							<span class="tag is-medium is-white is-hidden-mobile">{{p.release|date:'F Y'}}</span>
 						</div>
 					</div>
 					

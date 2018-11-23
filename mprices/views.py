@@ -57,7 +57,7 @@ def search(request):
 	if request.GET:
 		min_price = request.GET.get('minprice', '100')
 		max_price = request.GET.get('maxprice', '250')
-		phones = Phone.objects.filter(price__gte=min_price, price__lte=max_price).order_by('-release', '-price')
+		phones = Phone.objects.filter(price__gte=min_price, price__lte=max_price).order_by('-price')
 		total = str(phones.count())
 		message = total + ' Search result for mobiles between ' + min_price + ' to ' + max_price
 		
