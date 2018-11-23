@@ -68,29 +68,31 @@
             
             <main class="section">    
                 {% block 'pageheading' %}
-                    <form id="countries" action="{% url 'index' %}" method="POST" style="position: absolute; right: 0; top: -2.5rem;">
-                        {% csrf_token %}
-                        <div class="field">
-                            <div class="control">
-                                <div id="country" class="select is-small is-black">
-                                    <select name="country">
-                                        <option value="choose-location">CHOOSE YOUR COUNTRY</option>
-                                        <option value="global">GLOBAL</option>
-                                        {% for c in countries %}
-                                            <option value="{{c.country_slug}}">{{c.country|upper}}</option>
-                                        {% endfor %}
-                                    </select>
+                    <div class="content">
+                         <form id="countries" action="{% url 'index' %}" method="POST">
+                            {% csrf_token %}
+                            <div class="field">
+                                <div class="control has-text-right">
+                                    <div id="country" class="select is-small is-black">
+                                        <select name="country">
+                                            <option value="choose-location">CHOOSE YOUR COUNTRY</option>
+                                            <option value="global">GLOBAL</option>
+                                            {% for c in countries %}
+                                                <option value="{{c.country_slug}}">{{c.country|upper}}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
                 {% endblock %}                
                 {% block 'content' %}{% endblock %}
             </main>
         </div>
         <hr class="is-hidden-desktop is-marginless">
         <div class="column is-3-desktop is-paddingless is-marginless has-background-light">                 
-            <aside class="section" style="padding: 3rem 1.5rem;">
+            <aside class="section" style="padding: 3rem 2rem;">
                 {% block 'sidebar' %}
 
                 {% endblock %}
@@ -102,7 +104,7 @@
 
     {% block 'below_content' %}{% endblock %}
 
-    <footer id="footer" class="footer has-background-black">
+    <footer id="footer" class="footer has-background-grey-lighter">
         <div class="container content has-text-centered">
             <div class="buttons" style="justify-content: center;">
                 {%for b in all_brands%}

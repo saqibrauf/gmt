@@ -6,12 +6,12 @@
 {% block 'description' %}Get the latest {{ phone.phone_model|title }} Price{% if request.session.city %} in {{request.session.city|title}}{% endif %}. {{ phone.phone_model|title }} specification and features. We are a trusted source of mobile phones related information. We provide you prices for all the major mobile brands{% if request.session.city %} in {{request.session.city|title}}{% endif %}.{% endblock %}
 
 {% block 'pageheading' %}
-<div style="position: relative; padding-bottom: 0;">
-	<h1>{{ phone.phone_model|title }} Price{% if request.session.city %} in {{request.session.city|title}}{% endif %}</h1>
-	<p>Checkout the latest <strong>{{ phone.phone_model|title }} Price{% if request.session.city_slug %} in {{request.session.city|title}}{% endif %}.</strong> Get <strong>{{ phone.phone_model|title }} specification and features.</strong> Updated on daily basis by taking information from online e-commerce stores and retailers{% if request.session.city %} in {{request.session.city|title}}{% endif %}.</strong></p>	
-	<p class="tag is-medium is-primary is-uppercase">Release {{phone.release|date:'F Y'}}</p>	
+	<div class="content">
+		<h1>{{ phone.phone_model|title }} Price{% if request.session.city %} in {{request.session.city|title}}{% endif %}</h1>
+		<p>Checkout the latest <strong>{{ phone.phone_model|title }} Price{% if request.session.city_slug %} in {{request.session.city|title}}{% endif %}.</strong> Get <strong>{{ phone.phone_model|title }} specification and features.</strong> Updated on daily basis by taking information from online e-commerce stores and retailers{% if request.session.city %} in {{request.session.city|title}}{% endif %}.</strong></p>	
+		<p class="tag is-medium is-primary is-uppercase">Release {{phone.release|date:'F Y'}}</p>	
+	</div>
 	{{block.super}}	
-</div>
 {% endblock %}
 
 {% block 'content' %}
@@ -165,16 +165,14 @@
 								</div>
 								<div class="column">
 									<h2 itemprop="name" class="is-size-4 is-size-6-mobile is-size-5-mobile has-text-black">{{p.phone_model|title}} Price</h2>
-									<div class="content is-size-7-mobile item-desc" itemprop="description">{{p.description|truncatewords_html:20|safe}}</div>
+									<div class="content is-size-7-mobile item-desc" itemprop="description">{{p.description|truncatewords_html:30|safe}}</div>
 									<div class="tags">
-										<span itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="tag is-medium is-black is-size-7-mobile">
-											<span>USD {{p.price|intcomma}}</span>
-											{% if request.session.city and request.session.currency != 'USD' %}
-												<span> - {{ request.session.currency }} {% multiply p.price request.session.exchange %}</span>	
-											{% endif %}
-											<meta itemprop="price" content="{{p.price}}" />
-											<meta itemprop="priceCurrency" content="USD" />
-										</span>
+										<span itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="tag is-medium is-black is-size-7-mobile">USD {{p.price|intcomma}}</span>
+										{% if request.session.city and request.session.currency != 'USD' %}
+											<span class="tag is-medium is-black is-size-7-mobile">{{ request.session.currency }} {% multiply p.price request.session.exchange %}</span>	
+										{% endif %}
+										<meta itemprop="price" content="{{p.price}}" />
+										<meta itemprop="priceCurrency" content="USD" />
 										<span class="tag is-medium is-white is-hidden-mobile">{{p.release|date:'F Y'}}</span>
 									</div>
 								</div>

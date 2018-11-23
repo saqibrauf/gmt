@@ -6,11 +6,11 @@
 {% block 'description' %}Latest {{brand.brand_name|title}} Mobiles Prices{% if request.session.city %} in {{request.session.city|title}}{% endif %}. {{brand.brand_name|title}} mobiles, specification and features.{% endblock %}
 
 {% block 'pageheading' %}
-	<div style="position: relative; padding-bottom: 0;">
+	<div class="content">
 		<h1>{{brand.brand_name|title}} Mobiles Prices{% if request.session.city %} in {{request.session.city|title}}{% endif %}</h1>
 		<p>Checkout the latest <strong>{{brand.brand_name|title}} Mobile Prices{% if request.session.city %} in {{request.session.city|title}}{% endif %}</strong>. Latest <strong>{{brand.brand_name|title}} mobiles, {{brand.brand_name|title}} mobiles specification and features.</strong> Updated on daily basis by taking information from online ecommerce stores and retailers{% if request.session.city %} in {{request.session.city|title}}{% endif %}.</strong></p>
-		{{block.super}}
 	</div>
+	{{block.super}}
 {% endblock %}
 
 {%block 'content'%}
@@ -28,14 +28,12 @@
 						<h2 itemprop="name" class="is-size-4 is-size-6-mobile is-size-5-mobile has-text-black">{{p.phone_model|title}} Price</h2>
 						<div class="content is-size-7-mobile item-desc" itemprop="description">{{p.description|truncatewords_html:30|safe}}</div>
 						<div class="tags">
-							<span itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="tag is-medium is-black is-size-7-mobile">
-								<span>USD {{p.price|intcomma}}</span>
-								{% if request.session.city and request.session.currency != 'USD' %}
-									<span> - {{ request.session.currency }} {% multiply p.price request.session.exchange %}</span>	
-								{% endif %}
-								<meta itemprop="price" content="{{p.price}}" />
-								<meta itemprop="priceCurrency" content="USD" />
-							</span>
+							<span itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="tag is-medium is-black is-size-7-mobile">USD {{p.price|intcomma}}</span>
+							{% if request.session.city and request.session.currency != 'USD' %}
+								<span class="tag is-medium is-black is-size-7-mobile">{{ request.session.currency }} {% multiply p.price request.session.exchange %}</span>	
+							{% endif %}
+							<meta itemprop="price" content="{{p.price}}" />
+							<meta itemprop="priceCurrency" content="USD" />
 							<span class="tag is-medium is-white is-hidden-mobile">{{p.release|date:'F Y'}}</span>
 						</div>
 					</div>

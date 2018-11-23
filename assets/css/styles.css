@@ -12,6 +12,10 @@ b, strong {
 	font-weight: 600;
 }
 
+.navbar {
+	box-shadow: 0 1px 3px #cacaca !important;
+}
+
 .p-img {
 	border: 3px solid white;
 	border-radius: 10px;

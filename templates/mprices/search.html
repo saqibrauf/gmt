@@ -6,77 +6,77 @@
 {% block 'description' %}Checkout the latest mobiles phones, specifications and features. We are a trusted source of mobile phones related information. We provide you prices for all the major mobile brands.{% endblock %}
 
 {% block 'pageheading' %}
-<div style="position: relative; padding-bottom: 0;">
-	<h1>Search by price</h1>	
-	<form class="field" action="{% url 'search' %}" method="GET">
-		<div class="field columns">
-			<div class="control column">
-				<div id="minprice" class="select is-fullwidth is-large">
-					<select name="minprice">
-						<option class="is-capitalized" value="0">USD 0</option>
-						<option class="is-capitalized" value="50">USD 50</option>
-						<option class="is-capitalized" value="100" selected>USD 100</option>
-						<option class="is-capitalized" value="150">USD 150</option>
-						<option class="is-capitalized" value="200">USD 200</option>
-						<option class="is-capitalized" value="250">USD 250</option>
-						<option class="is-capitalized" value="300">USD 300</option>
-						<option class="is-capitalized" value="350">USD 350</option>
-						<option class="is-capitalized" value="400">USD 400</option>
-						<option class="is-capitalized" value="450">USD 450</option>
-						<option class="is-capitalized" value="500">USD 500</option>
-						<option class="is-capitalized" value="600">USD 600</option>
-						<option class="is-capitalized" value="700">USD 700</option>
-						<option class="is-capitalized" value="800">USD 800</option>
-						<option class="is-capitalized" value="900">USD 900</option>
-						<option class="is-capitalized" value="1000">USD 1000</option>
-						<option class="is-capitalized" value="1100">USD 1100</option>
-						<option class="is-capitalized" value="1200">USD 1200</option>
-						<option class="is-capitalized" value="1300">USD 1300</option>
-						<option class="is-capitalized" value="1400">USD 1400</option>
-						<option class="is-capitalized" value="1500">USD 1500</option>
-					</select>
-				</div>
-			</div>
-			<div class="control column">
-				<div id="maxprice" class="select is-fullwidth is-large">
-					<select name="maxprice">
-						<option class="is-capitalized" value="0">USD 0</option>
-						<option class="is-capitalized" value="50">USD 50</option>
-						<option class="is-capitalized" value="100">USD 100</option>
-						<option class="is-capitalized" value="150">USD 150</option>
-						<option class="is-capitalized" value="200">USD 200</option>
-						<option class="is-capitalized" value="250" selected>USD 250</option>
-						<option class="is-capitalized" value="300">USD 300</option>
-						<option class="is-capitalized" value="350">USD 350</option>
-						<option class="is-capitalized" value="400">USD 400</option>
-						<option class="is-capitalized" value="450">USD 450</option>
-						<option class="is-capitalized" value="500">USD 500</option>
-						<option class="is-capitalized" value="600">USD 600</option>
-						<option class="is-capitalized" value="700">USD 700</option>
-						<option class="is-capitalized" value="800">USD 800</option>
-						<option class="is-capitalized" value="900">USD 900</option>
-						<option class="is-capitalized" value="1000">USD 1000</option>
-						<option class="is-capitalized" value="1100">USD 1100</option>
-						<option class="is-capitalized" value="1200">USD 1200</option>
-						<option class="is-capitalized" value="1300">USD 1300</option>
-						<option class="is-capitalized" value="1400">USD 1400</option>
-						<option class="is-capitalized" value="1500">USD 1500</option>
-					</select>
-				</div>
-			</div>
-			<div class="control column is-narrow">
-				<input type="submit" class="button is-primary is-large" value="Search">
-			</div>
-		</div>
-	</form>	
-	{% if request.GET %}
-		<p class="heading is-size-6" style="margin: .5rem 0;" ><strong>{{ message }}</strong></p>
-		{% if not phones %}
-			<p class="has-text-danger heading is-marginless">There is nothing to match your search results.</p>
-		{% endif %}
-	{% endif %}	
 	{{block.super}}
-</div>
+	<div class="content">
+		<h1>Search by price</h1>	
+		<form class="field" action="{% url 'search' %}" method="GET">
+			<div class="field columns">
+				<div class="control column">
+					<div id="minprice" class="select is-fullwidth is-large">
+						<select name="minprice">
+							<option class="is-capitalized" value="0">USD 0</option>
+							<option class="is-capitalized" value="50">USD 50</option>
+							<option class="is-capitalized" value="100" selected>USD 100</option>
+							<option class="is-capitalized" value="150">USD 150</option>
+							<option class="is-capitalized" value="200">USD 200</option>
+							<option class="is-capitalized" value="250">USD 250</option>
+							<option class="is-capitalized" value="300">USD 300</option>
+							<option class="is-capitalized" value="350">USD 350</option>
+							<option class="is-capitalized" value="400">USD 400</option>
+							<option class="is-capitalized" value="450">USD 450</option>
+							<option class="is-capitalized" value="500">USD 500</option>
+							<option class="is-capitalized" value="600">USD 600</option>
+							<option class="is-capitalized" value="700">USD 700</option>
+							<option class="is-capitalized" value="800">USD 800</option>
+							<option class="is-capitalized" value="900">USD 900</option>
+							<option class="is-capitalized" value="1000">USD 1000</option>
+							<option class="is-capitalized" value="1100">USD 1100</option>
+							<option class="is-capitalized" value="1200">USD 1200</option>
+							<option class="is-capitalized" value="1300">USD 1300</option>
+							<option class="is-capitalized" value="1400">USD 1400</option>
+							<option class="is-capitalized" value="1500">USD 1500</option>
+						</select>
+					</div>
+				</div>
+				<div class="control column">
+					<div id="maxprice" class="select is-fullwidth is-large">
+						<select name="maxprice">
+							<option class="is-capitalized" value="0">USD 0</option>
+							<option class="is-capitalized" value="50">USD 50</option>
+							<option class="is-capitalized" value="100">USD 100</option>
+							<option class="is-capitalized" value="150">USD 150</option>
+							<option class="is-capitalized" value="200">USD 200</option>
+							<option class="is-capitalized" value="250" selected>USD 250</option>
+							<option class="is-capitalized" value="300">USD 300</option>
+							<option class="is-capitalized" value="350">USD 350</option>
+							<option class="is-capitalized" value="400">USD 400</option>
+							<option class="is-capitalized" value="450">USD 450</option>
+							<option class="is-capitalized" value="500">USD 500</option>
+							<option class="is-capitalized" value="600">USD 600</option>
+							<option class="is-capitalized" value="700">USD 700</option>
+							<option class="is-capitalized" value="800">USD 800</option>
+							<option class="is-capitalized" value="900">USD 900</option>
+							<option class="is-capitalized" value="1000">USD 1000</option>
+							<option class="is-capitalized" value="1100">USD 1100</option>
+							<option class="is-capitalized" value="1200">USD 1200</option>
+							<option class="is-capitalized" value="1300">USD 1300</option>
+							<option class="is-capitalized" value="1400">USD 1400</option>
+							<option class="is-capitalized" value="1500">USD 1500</option>
+						</select>
+					</div>
+				</div>
+				<div class="control column is-narrow">
+					<input type="submit" class="button is-primary is-large" value="Search">
+				</div>
+			</div>
+		</form>	
+		{% if request.GET %}
+			<p class="heading is-size-6" style="margin: .5rem 0;" ><strong>{{ message }}</strong></p>
+			{% if not phones %}
+				<p class="has-text-danger heading is-marginless">There is nothing to match your search results.</p>
+			{% endif %}
+		{% endif %}	
+	</div>
 {% endblock %}
 
 {% block 'content' %}
@@ -94,14 +94,12 @@
 						<h2 itemprop="name" class="is-size-4 is-size-6-mobile is-size-5-mobile has-text-black">{{p.phone_model|title}} Price</h2>
 						<div class="content is-size-7-mobile item-desc" itemprop="description">{{p.description|truncatewords_html:30|safe}}</div>
 						<div class="tags">
-							<span itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="tag is-medium is-black is-size-7-mobile">
-								<span>USD {{p.price|intcomma}}</span>
-								{% if request.session.city and request.session.currency != 'USD' %}
-									<span> - {{ request.session.currency }} {% multiply p.price request.session.exchange %}</span>	
-								{% endif %}
-								<meta itemprop="price" content="{{p.price}}" />
-								<meta itemprop="priceCurrency" content="USD" />
-							</span>
+							<span itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="tag is-medium is-black is-size-7-mobile">USD {{p.price|intcomma}}</span>
+							{% if request.session.city and request.session.currency != 'USD' %}
+								<span class="tag is-medium is-black is-size-7-mobile">{{ request.session.currency }} {% multiply p.price request.session.exchange %}</span>	
+							{% endif %}
+							<meta itemprop="price" content="{{p.price}}" />
+							<meta itemprop="priceCurrency" content="USD" />
 							<span class="tag is-medium is-white is-hidden-mobile">{{p.release|date:'F Y'}}</span>
 						</div>
 					</div>
