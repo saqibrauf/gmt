@@ -77,6 +77,7 @@ def USER_LOCATION(request):
 
 		else:
 			request.session['country'] = 'global'
+			request.session['city'] = ''
 			request.session['currency'] = 'USD'
 			request.session['exchange'] = 1
 
