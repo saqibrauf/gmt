@@ -58,10 +58,14 @@ def brand(request, slug, location=''):
 	phones = brand.phone_set.all().order_by('-release', '-price')
 
 	if location:
-		city = get_object_or_404(Location, location_slug=location)
-		request.session['city'] = city.location_name
 		try:
-			request.session['country'] = city.country.country		
+			city = get_object_or_404(Location, location_slug=location)
+			request.session['city'] = city.location_name
+			try:
+				request.session['country'] = city.country.country		
+			except:
+				request.session['country'] = 'global'
+				request.session['city'] = ''
 		except:
 			request.session['country'] = 'global'
 			request.session['city'] = ''
@@ -87,10 +91,14 @@ def phone(request, slug, location=''):
 	all_phones = Phone.objects.filter(brand_name=brand).exclude(id=phone.id).order_by('-release', '-price')
 
 	if location:
-		city = get_object_or_404(Location, location_slug=location)
-		request.session['city'] = city.location_name
 		try:
-			request.session['country'] = city.country.country		
+			city = get_object_or_404(Location, location_slug=location)
+			request.session['city'] = city.location_name
+			try:
+				request.session['country'] = city.country.country		
+			except:
+				request.session['country'] = 'global'
+				request.session['city'] = ''
 		except:
 			request.session['country'] = 'global'
 			request.session['city'] = ''
