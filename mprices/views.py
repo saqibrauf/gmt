@@ -63,8 +63,9 @@ def brand(request, slug, location=''):
 			request.session['country'] = city.country.country			
 		except:
 			request.session['country'] = 'global'
-		request.session['city'] = city.location_name
+			request.session['city'] = ''
 	else:
+		request.session['country'] = 'global'
 		request.session['city'] = ''
 
 	page = request.GET.get('page', 1)
@@ -93,8 +94,9 @@ def phone(request, slug, location=''):
 			request.session['country'] = city.country.country			
 		except:
 			request.session['country'] = 'global'
-		request.session['city'] = city.location_name
+			request.session['city'] = ''
 	else:
+		request.session['country'] = 'global'
 		request.session['city'] = ''
 
 	context = {
