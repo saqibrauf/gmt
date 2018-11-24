@@ -36,7 +36,7 @@ def USER_LOCATION(request):
 		g = GeoIP2()
 		ip = request.META.get('REMOTE_ADDR', None)
 		if ip == '127.0.0.1':
-			ip = 'getmobileprice.com'
+			ip = '104.131.92.125'
 		CITY = g.city(ip)['city']
 		COUNTRY = g.country(ip)['country_name']
 		try:
