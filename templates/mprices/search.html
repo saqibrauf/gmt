@@ -95,8 +95,10 @@
 						<div class="content is-size-7-mobile item-desc" itemprop="description">{{p.description|truncatewords_html:30|safe}}</div>
 						<div class="tags">
 							<span itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="tag is-medium is-black is-size-7-mobile">USD {{p.price|intcomma}}</span>
-							{% if request.session.country and request.session.currency != 'USD' %}
-								<span class="tag is-medium is-black is-size-7-mobile">{{ request.session.currency }} {% multiply p.price request.session.exchange %}</span>	
+							{% if request.session.country %}
+								{% if request.session.country != 'global' and request.session.currency != 'USD' %}
+									<span class="tag is-medium is-black is-size-7-mobile">{{ request.session.currency }} {% multiply p.price request.session.exchange %}</span>	
+								{% endif %}
 							{% endif %}
 							<meta itemprop="price" content="{{p.price}}" />
 							<meta itemprop="priceCurrency" content="USD" />
