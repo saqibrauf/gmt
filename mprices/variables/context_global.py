@@ -56,20 +56,34 @@ def USER_LOCATION(request):
 		except:
 			request.session['country'] = 'global'
 			request.session['city'] = ''
+			request.session['currency'] = 'USD'
+			request.session['exchange'] = 1
 
 	elif request.session['country']:
 		COUNTRY = request.session['country']
-		try:
-			country = Country.objects.get(country__iexact=COUNTRY)
-			base_cur = Country.objects.get(currency='USD')
-			base = 1 / base_cur.exchange_rate
-			er = country.exchange_rate
-			exch = base * er
-			request.session['currency'] = country.currency
-			request.session['exchange'] = float(exch)
-		except:
+		if COUNTRY != 'global':
+			try:
+				country = Country.objects.get(country__iexact=COUNTRY)
+				base_cur = Country.objects.get(currency='USD')
+				base = 1 / base_cur.exchange_rate
+				er = country.exchange_rate
+				exch = base * er
+				request.session['currency'] = country.currency
+				request.session['exchange'] = float(exch)
+				request.session['country'] = COUNTRY
+			except:
+				request.session['currency'] = 'USD'
+				request.session['exchange'] = 1
+
+		else:
+			request.session['country'] = 'global'
 			request.session['currency'] = 'USD'
 			request.session['exchange'] = 1
-		request.session['country'] = COUNTRY
+
+	else:
+		request.session['country'] = 'global'
+		request.session['city'] = ''
+		request.session['currency'] = 'USD'
+		request.session['exchange'] = 1
 
 	return {}

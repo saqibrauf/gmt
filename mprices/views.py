@@ -60,7 +60,8 @@ def brand(request, slug, location=''):
 	if location:
 		city = get_object_or_404(Location, location_slug=location)
 		try:
-			request.session['country'] = city.country.country			
+			request.session['city'] = city.location_name
+			request.session['country'] = city.country.country		
 		except:
 			request.session['country'] = 'global'
 			request.session['city'] = ''
@@ -91,6 +92,7 @@ def phone(request, slug, location=''):
 	if location:
 		city = get_object_or_404(Location, location_slug=location)
 		try:
+			request.session['city'] = city.location_name
 			request.session['country'] = city.country.country			
 		except:
 			request.session['country'] = 'global'

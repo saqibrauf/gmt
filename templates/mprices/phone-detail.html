@@ -32,7 +32,7 @@
 					<span class="tag is-medium is-black">USD {{phone.price|intcomma}}</span>
 					{% if request.session.country %}
 						{% if request.session.country != 'global' and request.session.currency != 'USD' %}
-							<span class="tag is-medium is-black is-size-7-mobile">{{ request.session.currency }} {% multiply p.price request.session.exchange %}</span>	
+							<span class="tag is-medium is-black is-size-7-mobile">{{ request.session.currency }} {% multiply phone.price request.session.exchange %}</span>	
 						{% endif %}
 					{% endif %}
 					<span class="tag is-medium is-white is-uppercase has-background-grey-lighter">{{phone.release|date:'F Y'}}</span>	
