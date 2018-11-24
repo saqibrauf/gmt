@@ -1,25 +1,18 @@
 {% load static %}
 
-<nav class="navbar is-light is-fixed-top has-shadow">
+<nav class="navbar is-white is-fixed-top has-shadow">
     
         <div class="navbar-brand">
             <a class="navbar-item has-background-black" href="{% url 'index' %}">
                 {% url 'index' as home_url %}
                 {% if request.get_full_path == home_url %}
-                    <h2 class="is-marginless is-size-4 is-size-6-mobile has-text-white" style="text-transform: uppercase;">Get Mobile Price</h2>
+                    <h2 class="is-marginless is-size-4 is-size-5-mobile has-text-white" style="text-transform: uppercase;">Get Mobile Price</h2>
                 {% else %}
-                    <h3 class="is-marginless is-size-4 is-size-6-mobile has-text-white" style="text-transform: uppercase;">Get Mobile Price</h3>
+                    <h3 class="is-marginless is-size-4 is-size-5-mobile has-text-white" style="text-transform: uppercase;">Get Mobile Price</h3>
                 {% endif %}
             </a>
-            <div class="navbar-item is-hidden-desktop">                 
-                <div class="field is-grouped">
-                    <p class="control">
-                        <a class="button is-primary is-small" href="{% url 'search' %}">Price Search</a>
-                    </p>
-                    <p class="control">
-                        <a class="button is-primary is-small mobile-search">Search</a>
-                    </p>
-                </div>                
+            <div class="navbar-item">
+                <a class="button is-dark is-outlined is-uppercase select-location">{{request.session.country}}</a>
             </div>
             <div class="navbar-burger burger" data-target="navMain">
                 <span></span>
@@ -31,28 +24,16 @@
         <div id="navMain" class="navbar-menu">
 
             <div class="navbar-start">
+                <a class="navbar-item is-uppercase mobile-search">Search By Mobile</a>
+                <a class="navbar-item is-uppercase" href="{% url 'search' %}">Search By Price</a>
                 <div class="navbar-item has-dropdown is-hoverable">
-                    <a class="navbar-link" href="">All Mobile Brands</a>
-                    <div class="navbar-dropdown">
+                    <a class="navbar-link is-uppercase">Mobile Brands</a>
+                    <div class="navbar-dropdown is-hidden-touch">
                         {%for b in all_brands%}
-                            <a class="navbar-item" href="{% url 'brand' slug=b.brand_slug %}">{{b.brand_name|title}} Mobile Prices</a>
+                            <a class="navbar-item is-uppercase" href="{% url 'brand' slug=b.brand_slug %}">{{b.brand_name|title}} Mobile Prices</a>
                         {%endfor%}
                     </div>
                 </div>
-            </div>
-
-            <div class="navbar-end">
-                <div class="navbar-item is-hidden-touch">                 
-                    <div class="field is-grouped">
-                        <p class="control">
-                            <a class="button is-primary" href="{% url 'search' %}">Search By Price</a>
-                        </p>
-                        <p class="control">
-                            <a class="button is-primary mobile-search">Search</a>
-                        </p>
-                    </div>                
-                </div>
-                
             </div>
 
         </div>

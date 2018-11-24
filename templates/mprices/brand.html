@@ -22,19 +22,19 @@
 				<div class="columns is-mobile">
 					<div class="column is-narrow has-text-centered" style="border-radius: 10px;">
 						<p class="is-marginless"><img class="p-img" itemprop="image" src="{{p.phone_image.url}}" alt="{{p.phone_model|title}}" height="140"></p>
-						<p><span class="tag is-small is-white is-hidden-tablet">{{p.release|date:'F Y'}}</span></p>
+						<p><span class="tag is-small is-white is-hidden-tablet has-background-grey-lighter">{{p.release|date:'F Y'}}</span></p>
 					</div>
 					<div class="column">
 						<h2 itemprop="name" class="is-size-4 is-size-6-mobile is-size-5-mobile has-text-black">{{p.phone_model|title}} Price</h2>
 						<div class="content is-size-7-mobile item-desc" itemprop="description">{{p.description|truncatewords_html:30|safe}}</div>
 						<div class="tags">
 							<span itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="tag is-medium is-black is-size-7-mobile">USD {{p.price|intcomma}}</span>
-							{% if request.session.city and request.session.currency != 'USD' %}
+							{% if request.session.country and request.session.currency != 'USD' %}
 								<span class="tag is-medium is-black is-size-7-mobile">{{ request.session.currency }} {% multiply p.price request.session.exchange %}</span>	
 							{% endif %}
 							<meta itemprop="price" content="{{p.price}}" />
 							<meta itemprop="priceCurrency" content="USD" />
-							<span class="tag is-medium is-white is-hidden-mobile">{{p.release|date:'F Y'}}</span>
+							<span class="tag is-medium is-white is-hidden-mobile has-background-grey-lighter">{{p.release|date:'F Y'}}</span>
 						</div>
 					</div>
 					
@@ -76,12 +76,4 @@
 
 {% block 'sidebar' %}
 	{{ block.super }}
-    <h3>Mobile Phone Brands</h3>
-    <ul class="is-marginless" style="list-style: none;">
-        {%for b in all_brands%}
-        	<li class="sidebar-list"><a href="{% url 'brand' slug=b.brand_slug %}">{{b.brand_name|title}} Mobile Prices</a></li>
-        {%endfor%}
-    </ul>
-    <hr>
-    <div class="addthis_inline_share_toolbox"></div>
 {% endblock %}

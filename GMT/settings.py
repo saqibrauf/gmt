@@ -68,6 +68,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'mprices.variables.context_global.global_var',
+                'mprices.variables.context_global.USER_LOCATION'
             ],
         },
     },
@@ -156,3 +158,5 @@ SUMMERNOTE_CONFIG = {
         'height': '250',
     }
 }
+
+GEOIP_PATH = os.path.join(BASE_DIR, 'geolite')

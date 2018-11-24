@@ -23,7 +23,7 @@ class Country(models.Model):
 
 
 class Location(models.Model):
-	country = models.ForeignKey(Country, on_delete=models.CASCADE, blank=True, null=True)
+	country = models.ForeignKey(Country, on_delete=models.CASCADE, blank=True, null=True, related_name='cities')
 	location_name = models.CharField(max_length=50, unique=True)
 	location_slug = models.CharField(max_length=50, blank=True, editable=False)
 

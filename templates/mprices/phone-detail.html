@@ -8,8 +8,8 @@
 {% block 'pageheading' %}
 	<div class="content">
 		<h1>{{ phone.phone_model|title }} Price{% if request.session.city %} in {{request.session.city|title}}{% endif %}</h1>
-		<p>Checkout the latest <strong>{{ phone.phone_model|title }} Price{% if request.session.city_slug %} in {{request.session.city|title}}{% endif %}.</strong> Get <strong>{{ phone.phone_model|title }} specification and features.</strong> Updated on daily basis by taking information from online e-commerce stores and retailers{% if request.session.city %} in {{request.session.city|title}}{% endif %}.</strong></p>	
-		<p class="tag is-medium is-primary is-uppercase">Release {{phone.release|date:'F Y'}}</p>	
+		<p>Checkout the latest <strong>{{ phone.phone_model|title }} Price{% if request.session.city %} in {{request.session.city|title}}{% endif %}.</strong> Get <strong>{{ phone.phone_model|title }} specification and features.</strong> Updated on daily basis by taking information from online e-commerce stores and retailers{% if request.session.city %} in {{request.session.city|title}}{% endif %}.</strong></p>	
+		
 	</div>
 	{{block.super}}	
 {% endblock %}
@@ -30,9 +30,10 @@
 				<h2 class="is-size-4-desktop is-size-6-mobile">{{ phone.phone_model|title }} Estimated Price</h2>
 				<div class="tags is-marginless">
 					<span class="tag is-medium is-black">USD {{phone.price|intcomma}}</span>
-					{% if request.session.city and request.session.currency != 'USD' %}
+					{% if request.session.country and request.session.currency != 'USD' %}
 						<span class="tag is-medium is-primary">{{ request.session.currency }} {% multiply phone.price request.session.exchange %}</span>
 					{% endif %}
+					<span class="tag is-medium is-white is-uppercase has-background-grey-lighter">{{phone.release|date:'F Y'}}</span>	
 				</div>
 				<meta itemprop="priceCurrency" content="USD" /><meta itemprop="price" content="{{phone.price}}" />
 			</div>
@@ -42,7 +43,7 @@
 				</div>
 			{% endif %}
 			<div class="addthis_inline_share_toolbox"></div>
-			<h2>{{ phone.phone_model}} Specification</h2>
+			<h2>{{ phone.phone_model|title}} Specification</h2>
 			<table class="table is-bordered is-narrow is-fullwidth is-uppercase">
 				<tbody>
 					<tr>
@@ -67,7 +68,7 @@
 					</tr>
 				</tbody>				
 			</table>
-			<h2>{{ phone.phone_model}} Processor</h2>
+			<h2>{{ phone.phone_model|title}} Processor</h2>
 			<table class="table is-bordered is-narrow is-fullwidth is-uppercase">
 				<tbody>
 					<tr>
@@ -84,7 +85,7 @@
 					</tr>
 				</tbody>				
 			</table>
-			<h2>{{ phone.phone_model}} Display</h2>
+			<h2>{{ phone.phone_model|title}} Display</h2>
 			<table class="table is-bordered is-narrow is-fullwidth is-uppercase">
 				<tbody>
 					<tr>
@@ -105,7 +106,7 @@
 					</tr>
 				</tbody>				
 			</table>
-			<h2>{{ phone.phone_model}} Memory</h2>
+			<h2>{{ phone.phone_model|title}} Memory</h2>
 			<table class="table is-bordered is-narrow is-fullwidth is-uppercase">
 				<tbody>
 					<tr>
@@ -118,7 +119,7 @@
 					</tr>
 				</tbody>				
 			</table>
-			<h2>{{ phone.phone_model}} Camera</h2>
+			<h2>{{ phone.phone_model|title}} Camera</h2>
 			<table class="table is-bordered is-narrow is-fullwidth is-uppercase">
 				<tbody>
 					<tr>
@@ -135,7 +136,7 @@
 					</tr>
 				</tbody>				
 			</table>
-			<h2>{{ phone.phone_model}} Features</h2>
+			<h2>{{ phone.phone_model|title}} Features</h2>
 			<table class="table is-bordered is-narrow is-fullwidth is-uppercase">
 				<tbody>
 					<tr>
@@ -148,7 +149,7 @@
 					</tr>
 				</tbody>				
 			</table>
-			<h2>{{ phone.phone_model}} Description</h2>
+			<h2>{{ phone.phone_model|title}} Description</h2>
 			<div  itemprop="description">{{ phone.description|safe }}</div>
 			<hr>
 			<div class="addthis_inline_share_toolbox"></div>
@@ -161,19 +162,19 @@
 							<div class="columns is-mobile">
 								<div class="column is-narrow has-text-centered" style="border-radius: 10px;">
 									<p class="is-marginless"><img class="p-img" itemprop="image" src="{{p.phone_image.url}}" alt="{{p.phone_model|title}}" height="140"></p>
-									<p><span class="tag is-small is-white is-hidden-tablet">{{p.release|date:'F Y'}}</span></p>
+									<p><span class="tag is-small is-white is-hidden-tablet has-background-grey-lighter">{{p.release|date:'F Y'}}</span></p>
 								</div>
 								<div class="column">
 									<h2 itemprop="name" class="is-size-4 is-size-6-mobile is-size-5-mobile has-text-black">{{p.phone_model|title}} Price</h2>
 									<div class="content is-size-7-mobile item-desc" itemprop="description">{{p.description|truncatewords_html:30|safe}}</div>
 									<div class="tags">
 										<span itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="tag is-medium is-black is-size-7-mobile">USD {{p.price|intcomma}}</span>
-										{% if request.session.city and request.session.currency != 'USD' %}
+										{% if request.session.country and request.session.currency != 'USD' %}
 											<span class="tag is-medium is-black is-size-7-mobile">{{ request.session.currency }} {% multiply p.price request.session.exchange %}</span>	
 										{% endif %}
 										<meta itemprop="price" content="{{p.price}}" />
 										<meta itemprop="priceCurrency" content="USD" />
-										<span class="tag is-medium is-white is-hidden-mobile">{{p.release|date:'F Y'}}</span>
+										<span class="tag is-medium is-white is-hidden-mobile has-background-grey-lighter">{{p.release|date:'F Y'}}</span>
 									</div>
 								</div>
 								
@@ -191,24 +192,11 @@
 {% endblock %}
 
 {% block 'sidebar' %}
-	{{ block.super }}
-    <h3>Mobile Phone Brands</h3>
-    <ul class="is-marginless" style="list-style: none;">
-        {%for b in all_brands%}
-        	<li class="sidebar-list"><a href="{% url 'brand' slug=b.brand_slug %}">{{b.brand_name|title}} Mobile Prices</a></li>
-        {%endfor%}
-    </ul>
     <h2>{{brand|title}} Mobiles{% if request.session.city %} in {{request.session.city|title}}{% endif %}</h2>
     <ul class="is-marginless" style="list-style: none;">
         {%for p in all_phones%}
         	<li class="sidebar-list"><a href="{% url 'phone' slug=p.phone_model_slug  %}">{{p.phone_model|title}} Price</a></li>
         {%endfor%}
     </ul>
-    <hr>
-    <div class="notifications is-primary is-radiusless">
-		<h3>Disclaimer</h3>
-		<p class="is-size-7">We are not responsible for any errors or omissions, or for the results obtained from the use of this information. All information on this site is provided “as is,” with no guarantee of completeness, accuracy, timeliness or the results obtained from the use of this information.</p>
-	</div>
-	
-
+    {{ block.super }}
 {% endblock %}

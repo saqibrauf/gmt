@@ -69,22 +69,7 @@
             <main class="section">    
                 {% block 'pageheading' %}
                     <div class="content">
-                         <form id="countries" action="{% url 'index' %}" method="POST">
-                            {% csrf_token %}
-                            <div class="field">
-                                <div class="control has-text-right">
-                                    <div id="country" class="select is-small is-black">
-                                        <select name="country">
-                                            <option value="choose-location">CHOOSE YOUR COUNTRY</option>
-                                            <option value="global">GLOBAL</option>
-                                            {% for c in countries %}
-                                                <option value="{{c.country_slug}}">{{c.country|upper}}</option>
-                                            {% endfor %}
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
+                        
                     </div>
                 {% endblock %}                
                 {% block 'content' %}{% endblock %}
@@ -94,13 +79,46 @@
         <div class="column is-3-desktop is-paddingless is-marginless has-background-light">                 
             <aside class="section" style="padding: 3rem 2rem;">
                 {% block 'sidebar' %}
-
+                    <h3>Mobile Phone Brands</h2>
+                    <ul class="is-marginless" style="list-style: none;">
+                        {%for b in all_brands%}
+                            <li class="sidebar-list"><a href="{% url 'brand' slug=b.brand_slug %}">{{b.brand_name|title}} Mobile Prices</a></li>
+                        {%endfor%}
+                    </ul> 
+                    <hr>
+                    <div class="addthis_inline_share_toolbox"></div>
+                    <h3>Disclaimer</h3>
+                    <p class="is-size-7">We are not responsible for any errors or omissions, or for the results obtained from the use of this information. All information on this site is provided “as is,” with no guarantee of completeness, accuracy, timeliness or the results obtained from the use of this information.</p>
                 {% endblock %}
             </aside>
         </div>     
     </div>
     
     <a href="#" class="scrollToTop button is-medium is-primary">TOP</a>
+    <div id="select-location" class="modal">
+        <div class="modal-background"></div>
+            <div class="modal-content">
+                <div class="section has-background-white">
+                    <form id="countries" action="" method="POST">
+                        {% csrf_token %}
+                        <div class="field">
+                            <div class="control has-text-centered">
+                                <div id="country" class="select is-large is-black">
+                                    <select name="country">
+                                        <option value="choose-location" disabled selected>CHOOSE YOUR COUNTRY</option>
+                                        <option value="global">GLOBAL</option>
+                                        {% for c in countries %}
+                                            <option value="{{c.country_slug}}">{{c.country|upper}}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        <button class="modal-close is-large" aria-label="close"></button>
+    </div>
 
     {% block 'below_content' %}{% endblock %}
 
@@ -108,7 +126,7 @@
         <div class="container content has-text-centered">
             <div class="buttons" style="justify-content: center;">
                 {%for b in all_brands%}
-                      <a class="button is-light is-small" href="{% url 'brand' slug=b.brand_slug  %}">{{b.brand_name|title}} Mobile Prices</a>
+                      <a class="button is-dark is-small  has-background-grey-light" href="{% url 'brand' slug=b.brand_slug  %}">{{b.brand_name|title}} Mobile Prices</a>
                 {%endfor%}
             </div>
             <hr class="has-background-grey">
@@ -180,6 +198,14 @@
                 if (city != 'choose-location') {
                     $("#countries").submit();
                 }
+            });
+
+            $('.select-location').click(function(){
+                $('#select-location').toggleClass('is-active');
+            });
+
+            $('.navbar-link').click(function(){
+                $('.navbar-dropdown').toggleClass('is-hidden-touch');
             });
 
         });
