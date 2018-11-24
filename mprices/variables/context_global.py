@@ -37,21 +37,25 @@ def USER_LOCATION(request):
 		ip = request.META.get('REMOTE_ADDR', None)
 		if ip == '127.0.0.1':
 			ip = '104.131.92.125'
-		CITY = g.city(ip)['city']
-		COUNTRY = g.country(ip)['country_name']
 		try:
-			country = Country.objects.get(country__iexact=COUNTRY)
-			base_cur = Country.objects.get(currency='USD')
-			base = 1 / base_cur.exchange_rate
-			er = country.exchange_rate
-			exch = base * er
-			request.session['currency'] = country.currency
-			request.session['exchange'] = float(exch)
+			CITY = g.city(ip)['city']
+			COUNTRY = g.country(ip)['country_name']
+			try:
+				country = Country.objects.get(country__iexact=COUNTRY)
+				base_cur = Country.objects.get(currency='USD')
+				base = 1 / base_cur.exchange_rate
+				er = country.exchange_rate
+				exch = base * er
+				request.session['currency'] = country.currency
+				request.session['exchange'] = float(exch)
+			except:
+				request.session['currency'] = 'USD'
+				request.session['exchange'] = 1
+			request.session['country'] = COUNTRY
+			request.session['city'] = CITY
 		except:
-			request.session['currency'] = 'USD'
-			request.session['exchange'] = 1
-		request.session['country'] = COUNTRY
-		request.session['city'] = CITY
+			request.session['country'] = 'global'
+			request.session['city'] = ''
 
 	elif request.session['country']:
 		COUNTRY = request.session['country']
