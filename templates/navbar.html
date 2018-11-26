@@ -6,13 +6,17 @@
             <a class="navbar-item has-background-black" href="{% url 'index' %}">
                 {% url 'index' as home_url %}
                 {% if request.get_full_path == home_url %}
-                    <h2 class="is-marginless is-size-4 is-size-5-mobile has-text-white" style="text-transform: uppercase;">Get Mobile Price</h2>
+                    <h2 class="is-marginless is-size-4 is-size-6-mobile has-text-white" style="text-transform: uppercase;">Get Mobile Price</h2>
                 {% else %}
-                    <h3 class="is-marginless is-size-4 is-size-5-mobile has-text-white" style="text-transform: uppercase;">Get Mobile Price</h3>
+                    <h3 class="is-marginless is-size-4 is-size-6-mobile has-text-white" style="text-transform: uppercase;">Get Mobile Price</h3>
                 {% endif %}
             </a>
             <div class="navbar-item">
-                <a class="button is-white is-outlined is-uppercase select-location">{{request.session.country}}</a>
+                <div class="buttons">
+                    <a class="button is-small is-white is-uppercase select-location">{{request.session.country}}</a>
+                    <a class="button is-small is-white is-uppercase mobile-search">Search</a>
+                </div>
+                
             </div>
             <div class="navbar-burger burger" data-target="navMain">
                 <span></span>
@@ -24,7 +28,6 @@
         <div id="navMain" class="navbar-menu">
 
             <div class="navbar-start">
-                <a class="navbar-item is-uppercase mobile-search">Search By Mobile</a>
                 <a class="navbar-item is-uppercase" href="{% url 'search' %}">Search By Price</a>
                 <div class="navbar-item has-dropdown is-hoverable">
                     <a class="navbar-link is-uppercase">Mobile Brands</a>

@@ -45,23 +45,7 @@
 
     {% include 'navbar.html' %}
 
-    <div id="search-by-phone" class="is-overlay has-background-white is-hidden" style="z-index: 99; position: fixed;">
-        <div style="position: relative;">
-            <div class="container" style="padding: 1.5rem;">
-                <div class="field has-addons">
-                    <div class="control is-expanded">
-                        <input class="input is-large" id="search-by-phone-query" placeholder="Search For Mobile Model">
-                    </div>
-                    <div class="control">
-                        <button id="search-by-phone-btn" class="button is-large is-primary">Close</button>
-                    </div>
-                </div>
-                <div id="search-by-phone-result" class="is-hidden">
-                    <div class="has-text-black"></div>
-                </div>
-            </div>
-        </div>
-    </div>
+    
     
     <div class="columns is-desktop is-paddingless is-marginless">
         <div class="column is-9-desktop is-paddingless is-marginless">
@@ -98,27 +82,46 @@
     <a href="#" class="scrollToTop button is-medium is-primary">TOP</a>
     <div id="select-location" class="modal">
         <div class="modal-background"></div>
-            <div class="modal-content">
-                <div class="section has-background-white">
-                    <form id="countries" action="" method="POST">
-                        {% csrf_token %}
-                        <div class="field">
-                            <div class="control has-text-centered">
-                                <div id="country" class="select is-large is-black">
-                                    <select name="country">
-                                        <option value="choose-location" disabled selected>CHOOSE YOUR COUNTRY</option>
-                                        <option value="global">GLOBAL</option>
-                                        {% for c in countries %}
-                                            <option value="{{c.country_slug}}">{{c.country|upper}}</option>
-                                        {% endfor %}
-                                    </select>
-                                </div>
+        <div class="modal-content">
+            <div class="section has-background-white">
+                <form id="countries" action="" method="POST">
+                    {% csrf_token %}
+                    <div class="field">
+                        <div class="control has-text-centered">
+                            <div id="country" class="select is-large is-primary">
+                                <select name="country">
+                                    <option value="choose-location" disabled selected>CHOOSE YOUR COUNTRY</option>
+                                    <option value="global">GLOBAL</option>
+                                    {% for c in countries %}
+                                        <option value="{{c.country_slug}}">{{c.country|upper}}</option>
+                                    {% endfor %}
+                                </select>
                             </div>
                         </div>
-                    </form>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <button class="modal-close is-large" aria-label="close"></button>
+    </div>
+
+    <div id="search-modal" class="modal">
+        <div class="modal-background"></div>
+        <div class="modal-content">
+            <div id="search-by-phone">
+                <div class="field has-addons">
+                    <div class="control is-expanded">
+                        <input class="input is-large" id="search-by-phone-query" placeholder="Search For Mobile Model">
+                    </div>
+                    <div class="control">
+                        <button id="search-by-phone-btn" class="button is-large is-primary">Close</button>
+                    </div>
+                </div>
+                <div id="search-by-phone-result" class="is-hidden">
+                    <div class="has-text-black"></div>
                 </div>
             </div>
-        <button class="modal-close is-large" aria-label="close"></button>
+        </div>
     </div>
 
     {% block 'below_content' %}{% endblock %}
@@ -167,13 +170,14 @@
             });
 
             $('#search-by-phone-btn').click(function(){
-                $('#search-by-phone').addClass('is-hidden');
+                $('#search-modal').toggleClass('is-active');
                 $('#search-by-phone-result p').empty();
                 $('#search-by-phone-result div').empty();
                 $('#search-by-phone-query').val('');
             });
 
             $('.mobile-search').click(function(){
+                $('#search-modal').toggleClass('is-active');
                 $('#search-by-phone').removeClass('is-hidden');
                 $("#search-by-phone-query").focus();
             })
