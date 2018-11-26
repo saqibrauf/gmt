@@ -17,32 +17,34 @@
 {% block 'content' %}
 	{% for p in phones %}
 
-		<div class="notification">
+		<div class="notification is-marginless is-radiusless">
 			<a href="{% url 'phone' slug=p.phone_model_slug %}">
 				<div class="columns is-mobile">
 					<div class="column is-narrow has-text-centered" style="border-radius: 10px;">
 						<p class="is-marginless"><img class="p-img" itemprop="image" src="{{p.phone_image.url}}" alt="{{p.phone_model|title}}" height="140"></p>
-						<p><span class="tag is-small is-white is-hidden-tablet has-background-grey-lighter">{{p.release|date:'F Y'}}</span></p>
+						<p>
 					</div>
 					<div class="column">
 						<h2 itemprop="name" class="is-size-4 is-size-6-mobile is-size-5-mobile has-text-black">{{p.phone_model|title}} Price</h2>
-						<div class="content is-size-7-mobile item-desc" itemprop="description">{{p.description|truncatewords_html:30|safe}}</div>
-						<div class="tags">
-							<span itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="tag is-medium is-black is-size-7-mobile">USD {{p.price|intcomma}}</span>
-							{% if request.session.country %}
-								{% if request.session.country != 'global' and request.session.currency != 'USD' %}
-									<span class="tag is-medium is-black is-size-7-mobile">{{ request.session.currency }} {% multiply p.price request.session.exchange %}</span>	
-								{% endif %}
-							{% endif %}
-							<meta itemprop="price" content="{{p.price}}" />
-							<meta itemprop="priceCurrency" content="USD" />
-							<span class="tag is-medium is-white is-hidden-mobile has-background-grey-lighter">{{p.release|date:'F Y'}}</span>
-						</div>
+						<div class="content is-size-7-mobile item-desc" itemprop="description">{{p.description|truncatewords_html:40|safe}}</div>
 					</div>
 				</div>
 			</a>
 			<div itemprop="brand" class="is-hidden" itemscope itemtype="http://schema.org/Thing">
 				<p itemprop="name">{{p.brand_name|title}}</p>
+			</div>
+		</div>
+		<div class="notification has-background-grey-lighter is-radiusless" style="padding: .5rem 1rem;">
+			<div class="tags">
+				<span itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="tag is-medium is-primary is-size-7-mobile">USD {{p.price|intcomma}}</span>
+				{% if request.session.country %}
+					{% if request.session.country != 'global' and request.session.currency != 'USD' %}
+						<span class="tag is-medium is-primary is-size-7-mobile">{{ request.session.currency }} {% multiply p.price request.session.exchange %}</span>	
+					{% endif %}
+				{% endif %}
+				<span class="tag is-medium is-dark is-size-7-mobile">{{p.release|date:'F Y'}}</span>
+				<meta itemprop="price" content="{{p.price}}" />
+				<meta itemprop="priceCurrency" content="USD" />
 			</div>
 		</div>
 		

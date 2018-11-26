@@ -3,48 +3,27 @@ html {
 	word-wrap: break-word;
 }
 
-
-a {
-	color: #00d1b2;
+.background {
+	background-image: url(../images/bag.png);
+	background-size: cover;
+	background-position: center;
 }
-
-b, strong {
-	font-weight: 600;
-}
-
-.navbar {
-	box-shadow: 0 1px 3px #cacaca !important;
+.background h1, .background p, .background strong {
+	color: white;	
 }
 
 .p-img {
 	border: 3px solid white;
 	border-radius: 10px;
-	max-height: 170px;
+	max-height: 120px;
+}
+
+.pagination-list li+li {
+	margin-top: 0;
 }
 
 .item-desc, .item-desc p {
 	margin-bottom: .5rem !important;
-}
-
-.sidebar-list {
-	margin-bottom: .5rem !important;
-    background-color: #e4e4e4;
-    padding: .25rem 1rem;
-    border-top-right-radius: 1rem;
-    border-bottom-right-radius: 1rem;
-}
-
-.sidebar-list:hover {
-    background-color: #b7b7b7;
-}
-
-.sidebar-list a {
-	font-weight: 400;
-	color: #000;
-}
-
-.content li + li {
-    margin-top: 0;
 }
 
 .video-container {
@@ -81,25 +60,9 @@ b, strong {
 	background-color: #d8d8d8 !important;
 }
 
-.desc {
-	max-height: 230px;
-	overflow: hidden;
-}
-
-.column .box {
-	margin-bottom: .5rem !important;
-	padding: 1rem !important;
-}
 
 @media screen and (min-width: 1088px) {
-	.container.is-fluid {
-	    margin-left: 0px;
-	    margin-right: 0px;
-	    padding: 0 1rem;
-	}
-	.section {
-		padding: 3rem;
-	}
+
 
 }
 
@@ -107,7 +70,7 @@ b, strong {
 	.p-img {
 		max-height: 100px;
 	}
-	.item-desc p:not(:first-child) {
-		display: none;
+	.section {
+		padding: 3rem 1rem;
 	}
 }

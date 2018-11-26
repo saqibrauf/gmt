@@ -63,32 +63,34 @@
             </div>
         </div>
     </div>
+    
     <div class="columns is-desktop is-paddingless is-marginless">
         <div class="column is-9-desktop is-paddingless is-marginless">
-            
-            <main class="section">    
+            <div class="section background" style="padding: 5rem 3rem;">
                 {% block 'pageheading' %}
-                    <div class="content">
+                   
                         
-                    </div>
-                {% endblock %}                
+                   
+                {% endblock %}  
+            </div> 
+            <main class="section">    
                 {% block 'content' %}{% endblock %}
             </main>
         </div>
         <hr class="is-hidden-desktop is-marginless">
-        <div class="column is-3-desktop is-paddingless is-marginless has-background-light">                 
-            <aside class="section" style="padding: 3rem 2rem;">
+        <div class="column is-3-desktop is-paddingless is-marginless has-background-black">                 
+            <aside class="section">
                 {% block 'sidebar' %}
-                    <h3>Mobile Phone Brands</h2>
-                    <ul class="is-marginless" style="list-style: none;">
+                    <h3 class="has-text-white-ter">Mobile Phone Brands</h2>
+                    <ul>
                         {%for b in all_brands%}
-                            <li class="sidebar-list"><a href="{% url 'brand' slug=b.brand_slug %}">{{b.brand_name|title}} Mobile Prices</a></li>
+                            <li><a class="has-text-grey-lighter is-uppercase" href="{% url 'brand' slug=b.brand_slug %}">{{b.brand_name|title}} Mobile Prices</a></li>
                         {%endfor%}
                     </ul> 
                     <hr>
                     <div class="addthis_inline_share_toolbox"></div>
-                    <h3>Disclaimer</h3>
-                    <p class="is-size-7">We are not responsible for any errors or omissions, or for the results obtained from the use of this information. All information on this site is provided “as is,” with no guarantee of completeness, accuracy, timeliness or the results obtained from the use of this information.</p>
+                    <h3 class="has-text-white-ter">Disclaimer</h3>
+                    <p class="is-size-7 has-text-grey-light">We are not responsible for any errors or omissions, or for the results obtained from the use of this information. All information on this site is provided “as is,” with no guarantee of completeness, accuracy, timeliness or the results obtained from the use of this information.</p>
                 {% endblock %}
             </aside>
         </div>     
@@ -122,16 +124,16 @@
 
     {% block 'below_content' %}{% endblock %}
 
-    <footer id="footer" class="footer has-background-grey-lighter">
+    <footer id="footer" class="footer has-background-black-ter">
         <div class="container content has-text-centered">
             <div class="buttons" style="justify-content: center;">
                 {%for b in all_brands%}
-                      <a class="button is-dark is-small  has-background-grey-light" href="{% url 'brand' slug=b.brand_slug  %}">{{b.brand_name|title}} Mobile Prices</a>
+                      <a class="button is-light is-outlined is-small" href="{% url 'brand' slug=b.brand_slug  %}">{{b.brand_name|title}} Mobile Prices</a>
                 {%endfor%}
             </div>
             <hr class="has-background-grey">
-            <p class="title is-3 has-text-grey"><a class="has-text-grey" href="{% url 'index' %}" style="text-transform: uppercase;">Get Mobile Price</a></p>
-            <p class="subtitle is-6 heading has-text-grey">© 2018 Copyright</p>
+            <p class="title is-3"><a class="has-text-light" href="{% url 'index' %}" style="text-transform: uppercase;">Get Mobile Price</a></p>
+            <p class="subtitle is-6 heading has-text-light">© 2018 Copyright</p>
         </div>
     </footer>
 
