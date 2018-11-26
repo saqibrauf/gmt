@@ -22,7 +22,7 @@
 		</div>
 		<div class="column is-narrow">
 			<div class="box is-radiusless is-marginless has-text-centered">				
-				<img src="{{phone.phone_image.url}}"" alt="{{phone.phone_model|title}}" itemprop="image" height="212">
+				<img src="{{phone.phone_image.url}}" alt="{{phone.phone_model|title}}" itemprop="image" height="212">
 			</div>
 		</div>
 		<div class="column">	
@@ -159,11 +159,12 @@
 			{% if all_phones %}
 				<h2>Other Mobiles From {{brand}}</h2>
 				{% for p in all_phones|slice:':10' %}
-					<div class="notification is-marginless is-radiusless">
-						<a href="{% url 'phone' slug=p.phone_model_slug %}">
+					<div class="box is-marginless is-radiusless">
+						<a class="has-text-black" href="{% url 'phone' slug=p.phone_model_slug %}">
 							<div class="columns is-mobile">
 								<div class="column is-narrow has-text-centered" style="border-radius: 10px;">
-									<p class="is-marginless"><img class="p-img" itemprop="image" src="{{p.phone_image.url}}" alt="{{p.phone_model|title}}" height="140"></p>
+									<p class="is-marginless">
+										<img class="p-img" itemprop="image" src="{{p.phone_image.url}}" alt="{{p.phone_model|title}}" height="140"></p>
 									<p>
 								</div>
 								<div class="column">
@@ -176,7 +177,7 @@
 							<p itemprop="name">{{p.brand_name|title}}</p>
 						</div>
 					</div>
-					<div class="notification has-background-grey-lighter is-radiusless" style="padding: .5rem 1rem;">
+					<div class="box is-radiusless" style="padding: .5rem 1rem;">
 						<div class="tags">
 							<span itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="tag is-medium is-primary is-size-7-mobile">USD {{p.price|intcomma}}</span>
 							{% if request.session.country %}
@@ -189,11 +190,10 @@
 							<meta itemprop="priceCurrency" content="USD" />
 						</div>
 					</div>
-							{% endfor %}
-						{% endif %}			
-					</div>
-				</div>
-	
+				{% endfor %}
+			{% endif %}
+		</div>
+	</div>
 {% endblock %}
 
 {% block 'sidebar' %}

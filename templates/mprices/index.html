@@ -17,8 +17,8 @@
 {% block 'content' %}
 	{% for p in phones %}
 
-		<div class="notification is-marginless is-radiusless">
-			<a href="{% url 'phone' slug=p.phone_model_slug %}">
+		<div class="box is-marginless is-radiusless">
+			<a class="has-text-black" href="{% url 'phone' slug=p.phone_model_slug %}">
 				<div class="columns is-mobile">
 					<div class="column is-narrow has-text-centered" style="border-radius: 10px;">
 						<p class="is-marginless"><img class="p-img" itemprop="image" src="{{p.phone_image.url}}" alt="{{p.phone_model|title}}" height="140"></p>
@@ -34,7 +34,7 @@
 				<p itemprop="name">{{p.brand_name|title}}</p>
 			</div>
 		</div>
-		<div class="notification has-background-grey-lighter is-radiusless" style="padding: .5rem 1rem;">
+		<div class="box is-radiusless" style="padding: .5rem 1rem;">
 			<div class="tags">
 				<span itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="tag is-medium is-primary is-size-7-mobile">USD {{p.price|intcomma}}</span>
 				{% if request.session.country %}
