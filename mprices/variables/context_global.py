@@ -33,7 +33,7 @@ def USER_LOCATION(request):
 
 	elif 'country' not in request.session:
 		g = GeoIP2()
-		ip = request.META.get('HTTP_X_REAL_IP', None)
+		ip = request.META.get('HTTP_X_REAL_IP', None)#This is to retrieve Client IP on PythonAnywhere
 		try:
 			COUNTRY = g.country(ip)['country_name']
 			try:
