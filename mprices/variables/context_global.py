@@ -30,15 +30,11 @@ def USER_LOCATION(request):
 			request.session['currency'] = 'USD'
 			request.session['exchange'] = 1
 		request.session['country'] = COUNTRY.replace('-', ' ')
-		request.session['city'] = ''
 
 	elif 'country' not in request.session:
 		g = GeoIP2()
 		ip = request.META.get('REMOTE_ADDR', None)
-		if ip == '127.0.0.1':
-			ip = '104.131.92.125'
 		try:
-			CITY = g.city(ip)['city']
 			COUNTRY = g.country(ip)['country_name']
 			try:
 				country = Country.objects.get(country__iexact=COUNTRY)
@@ -52,10 +48,8 @@ def USER_LOCATION(request):
 				request.session['currency'] = 'USD'
 				request.session['exchange'] = 1
 			request.session['country'] = COUNTRY
-			request.session['city'] = CITY
 		except:
 			request.session['country'] = 'global'
-			request.session['city'] = ''
 			request.session['currency'] = 'USD'
 			request.session['exchange'] = 1
 
@@ -77,13 +71,11 @@ def USER_LOCATION(request):
 
 		else:
 			request.session['country'] = 'global'
-			request.session['city'] = ''
 			request.session['currency'] = 'USD'
 			request.session['exchange'] = 1
 
 	else:
 		request.session['country'] = 'global'
-		request.session['city'] = ''
 		request.session['currency'] = 'USD'
 		request.session['exchange'] = 1
 

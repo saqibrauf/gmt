@@ -7,8 +7,8 @@
 
 {% block 'pageheading' %}
 	<div class="content">
-		<h1>{{brand.brand_name|title}} Mobiles Prices{% if request.session.city %} in {{request.session.city|title}}{% endif %}</h1>
-		<p>Checkout the latest <strong>{{brand.brand_name|title}} Mobile Prices{% if request.session.city %} in {{request.session.city|title}}{% endif %}</strong>. Latest <strong>{{brand.brand_name|title}} mobiles, {{brand.brand_name|title}} mobiles specification and features.</strong> Updated on daily basis by taking information from online ecommerce stores and retailers{% if request.session.city %} in {{request.session.city|title}}{% endif %}.</strong></p>
+		<h1>{{brand.brand_name|title}} Mobiles Prices</h1>
+		<p class="heading is-size-6">Checkout the latest <strong>{{brand.brand_name|title}} Mobile Prices</strong>. Latest <strong>{{brand.brand_name|title}} mobiles, {{brand.brand_name|title}} mobiles specification and features.</strong> Updated on daily basis by taking information from online ecommerce stores and retailers.</p>
 	</div>
 	{{block.super}}
 {% endblock %}
