@@ -26,8 +26,8 @@
 			</div>
 		</div>
 		<div class="column">	
-			<div class="notification" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
-				<h2 class="is-size-4-desktop is-size-6-mobile">{{ phone.phone_model|title }} Estimated Price</h2>
+			<div class="notification is-danger" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+				<h2 class="is-size-4-desktop is-size-6-mobile has-text-white">{{ phone.phone_model|title }} Estimated Price</h2>
 				<div class="tags is-marginless">
 					<span class="tag is-medium is-black is-size-7-mobile">USD {{phone.price|intcomma}}</span>
 					{% if request.session.country %}
