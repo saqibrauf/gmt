@@ -20,6 +20,7 @@ class Country(models.Model):
 
 	class Meta:
 		ordering = ['country']
+		verbose_name_plural = 'Countries'
 
 
 class Location(models.Model):
@@ -37,6 +38,7 @@ class Location(models.Model):
 
 	class Meta:
 		ordering = ['location_name']
+		verbose_name_plural = 'Locations'
 
 
 class Brand(models.Model):
@@ -56,10 +58,11 @@ class Brand(models.Model):
 
 	class Meta:
 		ordering = ['brand_name']
+		verbose_name_plural = 'Brands'
 
 
 class Phone(models.Model):
-	brand_name = models.ForeignKey(Brand, on_delete=models.CASCADE)
+	brand_name = models.ForeignKey(Brand, on_delete=models.CASCADE, related_name='phones')
 	phone_model = models.CharField(max_length=100, unique=True)
 	price = models.IntegerField(blank=True, default=0)
 	gsm_arena = models.CharField(max_length=255, blank=True)
@@ -117,4 +120,12 @@ class Phone(models.Model):
 
 	class Meta:
 		ordering = ['-release', '-price']
+		verbose_name_plural = 'Phones'
+
+
+
+
+###############################################################################################################
+
+
 

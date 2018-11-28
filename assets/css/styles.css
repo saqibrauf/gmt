@@ -24,6 +24,10 @@ html {
 	margin-bottom: .5rem !important;
 }
 
+.tags {
+	justify-content: space-between;
+}
+
 .video-container {
 	position: relative;
 	padding-bottom: 56.25%;

@@ -55,7 +55,7 @@ def search(request):
 
 def brand(request, slug, location=''):
 	brand = get_object_or_404(Brand, brand_slug=slug)
-	phones = brand.phone_set.all().order_by('-release', '-price')
+	phones = brand.phones.all().order_by('-release', '-price')
 
 	if location:
 		try:

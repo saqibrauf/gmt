@@ -23,6 +23,7 @@ class PhoneAdmin(SummernoteModelAdmin):
     list_display = ('phone_model', 'price', 'release', 'brand_name')
     autocomplete_fields = ['brand_name']
     search_fields = ['phone_model']
+    list_filter = ('brand_name', 'release')
 
 admin.site.register(Country, CountryAdmin)
 admin.site.register(Location, LocatiionAdmin)

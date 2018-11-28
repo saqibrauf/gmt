@@ -1,6 +1,6 @@
 {% load static %}
 
-<nav class="navbar is-primary is-fixed-top">
+<nav class="navbar is-light has-background-white-ter is-fixed-top">
     
         <div class="navbar-brand">
             <a class="navbar-item has-background-black" href="{% url 'index' %}">
@@ -13,8 +13,8 @@
             </a>
             <div class="navbar-item">
                 <div class="buttons">
-                    <a class="button is-light is-uppercase is-size-7-mobile select-location">{{request.session.country}}</a>
-                    <a class="button is-light is-uppercase is-size-7-mobile mobile-search">Search</a>
+                    <a class="button has-text-weight-bold is-dark is-outlined is-uppercase is-size-7-mobile select-location">{{request.session.country}}</a>
+                    <a class="button has-text-weight-bold is-dark is-outlined is-uppercase is-size-7-mobile mobile-search">Search</a>
                 </div>
                 
             </div>
@@ -33,7 +33,7 @@
                     <a class="navbar-link is-uppercase">Mobile Brands</a>
                     <div class="navbar-dropdown is-hidden-touch">
                         {%for b in all_brands%}
-                            <a class="navbar-item is-uppercase" href="{% url 'brand' slug=b.brand_slug %}">{{b.brand_name|title}} Mobile Prices</a>
+                            <a class="navbar-item is-uppercase is-size-7" href="{% url 'brand' slug=b.brand_slug %}">{{b.brand_name|title}} Mobile Prices</a>
                         {%endfor%}
                     </div>
                 </div>

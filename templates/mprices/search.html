@@ -102,13 +102,15 @@
 		</div>
 		<div class="box is-radiusless" style="padding: .5rem 1rem;">
 			<div class="tags">
-				<span itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="tag is-medium is-primary is-size-7-mobile">USD {{p.price|intcomma}}</span>
-				{% if request.session.country %}
-					{% if request.session.country != 'global' and request.session.currency != 'USD' %}
-						<span class="tag is-medium is-primary is-size-7-mobile">{{ request.session.currency }} {% multiply p.price request.session.exchange %}</span>	
+				<p class="is-marginless"><span class="tag is-large is-uppercase is-light is-size-7-mobile">{{p.release|date:'F Y'}}</span></p>
+				<p class="is-marginless">
+					<span itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="tag is-large is-dark is-size-7-mobile has-text-weight-bold">USD {{p.price|intcomma}}</span>
+					{% if request.session.country %}
+						{% if request.session.country != 'global' and request.session.currency != 'USD' %}
+							<span class="tag is-large is-dark is-size-7-mobile has-text-weight-bold">{{ request.session.currency }} {% multiply p.price request.session.exchange %}</span>	
+						{% endif %}
 					{% endif %}
-				{% endif %}
-				<span class="tag is-medium is-dark is-size-7-mobile">{{p.release|date:'F Y'}}</span>
+				</p>
 				<meta itemprop="price" content="{{p.price}}" />
 				<meta itemprop="priceCurrency" content="USD" />
 			</div>
