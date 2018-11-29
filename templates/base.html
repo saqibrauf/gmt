@@ -2,7 +2,7 @@
 {% load static %}
 
 <!DOCTYPE html>
-<html lang="en" class="has-navbar-fixed-top">
+<html lang="en">
 
 <head>
     <meta charset="utf-8">
@@ -61,7 +61,7 @@
             </main>
         </div>
         <hr class="is-hidden-desktop is-marginless">
-        <div class="column is-3-desktop is-paddingless is-marginless has-background-black">                 
+        <div class="column is-3-desktop is-paddingless is-marginless has-background-black-ter">                 
             <aside class="section">
                 {% block 'sidebar' %}
                     <h3 class="has-text-white-ter">Mobile Phone Brands</h2>
@@ -126,16 +126,16 @@
 
     {% block 'below_content' %}{% endblock %}
 
-    <footer id="footer" class="footer has-background-black-ter">
+    <footer id="footer" class="footer has-background-light">
         <div class="container content has-text-centered">
             <div class="buttons" style="justify-content: center;">
                 {%for b in all_brands%}
-                      <a class="button is-light is-outlined is-small" href="{% url 'brand' slug=b.brand_slug  %}">{{b.brand_name|title}} Mobile Prices</a>
+                      <a class="button is-dark is-outlined is-small" href="{% url 'brand' slug=b.brand_slug  %}">{{b.brand_name|title}} Mobile Prices</a>
                 {%endfor%}
             </div>
             <hr class="has-background-grey">
-            <p class="title is-3"><a class="has-text-light" href="{% url 'index' %}" style="text-transform: uppercase;">Get Mobile Price</a></p>
-            <p class="subtitle is-6 heading has-text-light">© 2018 Copyright</p>
+            <p class="title is-3"><a class="has-text-dark" href="{% url 'index' %}" style="text-transform: uppercase;">Get Mobile Price</a></p>
+            <p class="subtitle is-6 heading has-text-dark">© 2018 Copyright</p>
         </div>
     </footer>
 

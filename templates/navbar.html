@@ -1,9 +1,9 @@
 {% load static %}
 
-<nav class="navbar is-light has-background-white-ter is-fixed-top">
+<nav class="navbar is-white">
     
         <div class="navbar-brand">
-            <a class="navbar-item has-background-black" href="{% url 'index' %}">
+            <a class="navbar-item has-background-primary" href="{% url 'index' %}">
                 {% url 'index' as home_url %}
                 {% if request.get_full_path == home_url %}
                     <h2 class="is-marginless is-size-4 is-size-6-mobile has-text-white" style="text-transform: uppercase;">Get Mobile Price</h2>
@@ -13,8 +13,8 @@
             </a>
             <div class="navbar-item">
                 <div class="buttons">
-                    <a class="button has-text-weight-bold is-dark is-outlined is-uppercase is-size-7-mobile select-location">{{request.session.country}}</a>
-                    <a class="button has-text-weight-bold is-dark is-outlined is-uppercase is-size-7-mobile mobile-search">Search</a>
+                    <a class="button has-text-weight-bold is-uppercase is-size-7-mobile select-location">{{request.session.country}}</a>
+                    <a class="button has-text-weight-bold is-uppercase is-size-7-mobile mobile-search">Search</a>
                 </div>
                 
             </div>
