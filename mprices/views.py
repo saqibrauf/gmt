@@ -61,10 +61,13 @@ def brand(request, slug, location=''):
 		try:
 			city = get_object_or_404(Location, location_slug=location)
 			request.session['city'] = city.location_name
+			request.session['city_slug'] = city.location_slug
 		except:
 			request.session['city'] = ''
+			request.session['city_slug'] = ''
 	else:
 		request.session['city'] = ''
+		request.session['city_slug'] = ''
 
 	page = request.GET.get('page', 1)
 	paginator = Paginator(phones, 30)
@@ -90,10 +93,13 @@ def phone(request, slug, location=''):
 		try:
 			city = get_object_or_404(Location, location_slug=location)
 			request.session['city'] = city.location_name
+			request.session['city_slug'] = city.location_slug
 		except:
 			request.session['city'] = ''
+			request.session['city_slug'] = ''
 	else:
 		request.session['city'] = ''
+		request.session['city_slug'] = ''
 
 	context = {
 		'phone' : phone,

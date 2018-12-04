@@ -79,7 +79,7 @@
         </div>     
     </div>
     
-    <a href="#" class="scrollToTop button is-medium is-primary">TOP</a>
+    <a href="#" class="scrollToTop button is-medium is-warning has-text-weight-bold">Back To Top</a>
     <div id="select-location" class="modal">
         <div class="modal-background"></div>
         <div class="modal-content">
@@ -130,7 +130,11 @@
         <div class="container content has-text-centered">
             <div class="buttons" style="justify-content: center;">
                 {%for b in all_brands%}
-                      <a class="button is-dark is-outlined is-small" href="{% url 'brand' slug=b.brand_slug  %}">{{b.brand_name|title}} Mobile Prices</a>
+                    {% if request.session.city %}
+                        <a class="button is-dark is-outlined is-small" href="{% url 'brand' slug=b.brand_slug location=request.session.city_slug %}">{{b.brand_name|title}} Mobile Prices</a>
+                    {% else %}
+                        <a class="button is-dark is-outlined is-small" href="{% url 'brand' slug=b.brand_slug  %}">{{b.brand_name|title}} Mobile Prices</a>
+                    {% endif %}
                 {%endfor%}
             </div>
             <hr class="has-background-grey">

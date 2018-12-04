@@ -164,7 +164,11 @@
 				<h2>Other Mobiles From {{brand}}</h2>
 				{% for p in all_phones|slice:':10' %}
 					<div class="box is-marginless is-radiusless">
-						<a class="has-text-black" href="{% url 'phone' slug=p.phone_model_slug %}">
+						{% if request.session.city %}
+		        			<a class="has-text-black" href="{% url 'phone' slug=p.phone_model_slug location=request.session.city_slug %}">
+		        		{% else %}
+		        			<a class="has-text-black" href="{% url 'phone' slug=p.phone_model_slug %}">
+		        		{% endif %}
 							<div class="columns is-mobile">
 								<div class="column is-narrow has-text-centered" style="border-radius: 10px;">
 									<p class="is-marginless">
@@ -203,10 +207,12 @@
 {% endblock %}
 
 {% block 'sidebar' %}
-    <h3 class="has-text-white-ter">{{brand|title}} Mobiles{% if request.session.city %} in {{request.session.city|title}}{% endif %}</h3>
+    <h3 class="has-text-white-ter">{{brand|title}} Mobiles</h3>
     <ul>
         {%for p in all_phones%}
-        	<li><a class="has-text-grey-lighter is-uppercase" href="{% url 'phone' slug=p.phone_model_slug  %}">{{p.phone_model|title}} Price</a></li>
+        	<li>
+        		<a class="has-text-grey-lighter is-uppercase" href="{% url 'phone' slug=p.phone_model_slug  %}">{{p.phone_model|title}} Price</a>
+        	</li>
         {%endfor%}
     </ul>
     {{ block.super }}
