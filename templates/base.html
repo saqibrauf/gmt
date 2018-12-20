@@ -2,7 +2,7 @@
 {% load static %}
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="has-navbar-fixed-top">
 
 <head>
     <meta charset="utf-8">
@@ -60,14 +60,19 @@
                 {% block 'content' %}{% endblock %}
             </main>
         </div>
-        <hr class="is-hidden-desktop is-marginless">
         <div class="column is-3-desktop is-paddingless is-marginless has-background-black-ter">                 
             <aside class="section">
                 {% block 'sidebar' %}
                     <h3 class="has-text-white-ter">Mobile Phone Brands</h2>
                     <ul>
                         {%for b in all_brands%}
-                            <li><a class="has-text-grey-lighter is-uppercase" href="{% url 'brand' slug=b.brand_slug %}">{{b.brand_name|title}} Mobile Prices</a></li>
+                            <li>
+                                {% if request.session.city %}
+                                    <a class="has-text-grey-lighter is-uppercase" href="{% url 'brand' slug=b.brand_slug location=request.session.city_slug %}">{{b.brand_name|title}} Mobile Prices in {{ request.session.city|title }}</a>
+                                {% else %}
+                                    <a class="has-text-grey-lighter is-uppercase" href="{% url 'brand' slug=b.brand_slug  %}">{{b.brand_name|title}} Mobile Prices</a>
+                                {% endif %}
+                            </li>
                         {%endfor%}
                     </ul> 
                     <hr>
@@ -131,16 +136,12 @@
         <div class="container content has-text-centered">
             <div class="buttons" style="justify-content: center;">
                 {%for b in all_brands%}
-                    {% if request.session.city %}
-                        <a class="button is-dark is-outlined is-small" href="{% url 'brand' slug=b.brand_slug location=request.session.city_slug %}">{{b.brand_name|title}} Mobile Prices</a>
-                    {% else %}
-                        <a class="button is-dark is-outlined is-small" href="{% url 'brand' slug=b.brand_slug  %}">{{b.brand_name|title}} Mobile Prices</a>
-                    {% endif %}
+                    <a class="button is-dark is-outlined is-small" href="{% url 'brand' slug=b.brand_slug  %}">{{b.brand_name|title}} Mobile Prices</a>
                 {%endfor%}
             </div>
             <hr class="has-background-grey">
             <p class="title is-3"><a class="has-text-dark" href="{% url 'index' %}" style="text-transform: uppercase;">Get Mobile Price</a></p>
-            <p class="subtitle is-6 heading has-text-dark">© 2018 Copyright</p>
+            <p class="subtitle is-6 heading has-text-dark">© 2019 Copyright</p>
         </div>
     </footer>
 

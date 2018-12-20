@@ -23,12 +23,15 @@ def USER_LOCATION(request):
 				exch = base * er
 				request.session['currency'] = country.currency
 				request.session['exchange'] = float(exch)
+				request.session['city'] = ''
 			except:
 				request.session['currency'] = 'USD'
 				request.session['exchange'] = 1
+				request.session['city'] = ''
 		else:
 			request.session['currency'] = 'USD'
 			request.session['exchange'] = 1
+			request.session['city'] = ''
 		request.session['country'] = COUNTRY.replace('-', ' ')
 
 	elif 'country' not in request.session:

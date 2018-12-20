@@ -50,6 +50,7 @@ html {
     bottom:15px;
     right:15px;
     display:none;
+    z-index: 99;
 }
 
 #search-by-phone-result p {

@@ -91,7 +91,7 @@
 						<p>
 					</div>
 					<div class="column">
-						<h2 itemprop="name" class="is-size-4 is-size-6-mobile is-size-5-mobile has-text-black">{{p.phone_model|title}} Price</h2>
+						<h2 itemprop="name" class="is-size-4 is-size-6-mobile is-size-5-mobile has-text-black">{{p.phone_model|title}} Price {% if request.session.city %}in {{ request.session.city|title }}{% endif %}</h2>
 						<div class="content is-size-7-mobile item-desc" itemprop="description">{{p.description|truncatewords_html:40|safe}}</div>
 					</div>
 				</div>
