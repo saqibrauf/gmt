@@ -210,7 +210,7 @@
 {% block 'sidebar' %}
     <h3 class="has-text-white-ter">{{brand|title}} Mobiles</h3>
     <ul>
-        {%for p in all_phones%}
+        {% for p in all_phones|slice:':20' %}
         	<li>
         		<a class="has-text-grey-lighter is-uppercase" href="{% url 'phone' slug=p.phone_model_slug  %}">{{p.phone_model|title}} Price</a>
         	</li>
