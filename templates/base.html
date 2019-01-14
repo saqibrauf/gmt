@@ -17,6 +17,7 @@
     <link rel="icon" href="{% static 'images/frame.png' %}" type="image/png">
     <link rel="stylesheet" href="{% static 'css/bulma.css' %}">
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="canonical" href="{{request.build_absolute_uri}}" />
     
     {% if request.META.HTTP_HOST != 'localhost:8000' %}
         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-47699964-5"></script>
