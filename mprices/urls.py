@@ -13,8 +13,8 @@ sitemaps = {
 
 urlpatterns = [
 	#Sitemap
-	path('sitemap.xml/', sm_views.index, {'sitemaps' : sitemaps }, name='django.contrib.sitemaps.views.sitemap'),
-	path('sitemap-<section>.xml/', sm_views.sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
+	path('sitemapgmp.xml/', sm_views.index, {'sitemaps' : sitemaps }, name='django.contrib.sitemaps.views.sitemap'),
+	path('sitemapgmp-<section>.xml/', sm_views.sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
 	#General
     path('', views.index, name='index'),
     path('search/', views.search, name='search'),
